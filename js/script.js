@@ -82,7 +82,7 @@ document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 // SECTION STAGGERS
 const staggerGroups = [
   { root: document.querySelector('#work'), items: '.pf, .pc' },
-  { root: document.querySelector('#certificates'), items: '.ci' },
+  { root: document.querySelector('#certificates'), items: '.wc' },
   { root: document.querySelector('#content'), items: '.wc' },
 ];
 staggerGroups.forEach(group => {
