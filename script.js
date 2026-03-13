@@ -83,7 +83,7 @@ document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 const staggerGroups = [
   { root: document.querySelector('#work'), items: '.pf, .pc' },
   { root: document.querySelector('#certificates'), items: '.ci' },
-  { root: document.querySelector('#writing'), items: '.wc' },
+  { root: document.querySelector('#content'), items: '.wc' },
 ];
 staggerGroups.forEach(group => {
   group.root?.querySelectorAll(group.items).forEach(item => item.classList.add('stagger-item'));
@@ -103,6 +103,47 @@ const staggerObserver = new IntersectionObserver(entries => {
 staggerGroups.forEach(group => {
   if(group.root) staggerObserver.observe(group.root);
 });
+
+function initMobileCarousel(track){
+  const shell = track.closest('.carousel-shell');
+  if(!shell) return;
+
+  const prev = shell.querySelector('[data-carousel-dir="prev"]');
+  const next = shell.querySelector('[data-carousel-dir="next"]');
+
+  const updateArrowState = () => {
+    const mobile = window.innerWidth <= 900;
+    const maxScroll = Math.max(0, track.scrollWidth - track.clientWidth);
+    const atStart = !mobile || track.scrollLeft <= 4;
+    const atEnd = !mobile || track.scrollLeft >= maxScroll - 4;
+
+    prev?.classList.toggle('is-disabled', atStart);
+    next?.classList.toggle('is-disabled', atEnd);
+  };
+
+  const getStep = () => {
+    const firstCard = track.firstElementChild;
+    if(!firstCard) return track.clientWidth * 0.9;
+
+    const styles = window.getComputedStyle(track);
+    const gap = parseFloat(styles.columnGap || styles.gap || 0);
+    return firstCard.getBoundingClientRect().width + gap;
+  };
+
+  const scrollTrack = direction => {
+    if(window.innerWidth > 900) return;
+    track.scrollBy({ left: getStep() * direction, behavior: 'smooth' });
+  };
+
+  prev?.addEventListener('click', () => scrollTrack(-1));
+  next?.addEventListener('click', () => scrollTrack(1));
+  track.addEventListener('scroll', updateArrowState, { passive: true });
+  window.addEventListener('resize', updateArrowState);
+
+  updateArrowState();
+}
+
+document.querySelectorAll('.carousel-track').forEach(initMobileCarousel);
 
 // SKILL BARS
 const so=new IntersectionObserver(e=>{

@@ -345,28 +345,36 @@
   <div class="sec-label rv">03 / Content</div>
   <h2 class="sec-title rv d1">Content.</h2>
   <p class="sec-sub rv d2">I document what I build and share my creative process.</p>
-  <div class="wg rv d3">
-    <div class="wc">
-      <div class="wdate">Jan 12, 2026</div>
-      <div class="wtag">DISTRIBUTED SYSTEMS</div>
-      <div class="wttl">Why your circuit breaker is lying to you</div>
-      <p class="wex">Most implementations count errors by volume. That's wrong. Here's what I use instead.</p>
-      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+  <div class="carousel-shell content-carousel rv d3">
+    <button class="carousel-arrow left" type="button" aria-label="Scroll content left" data-carousel-dir="prev">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
+    <div class="wg carousel-track" id="contentTrack">
+      <div class="wc">
+        <div class="wdate">Jan 12, 2026</div>
+        <div class="wtag">DISTRIBUTED SYSTEMS</div>
+        <div class="wttl">Why your circuit breaker is lying to you</div>
+        <p class="wex">Most implementations count errors by volume. That's wrong. Here's what I use instead.</p>
+        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="wc">
+        <div class="wdate">Nov 28, 2025</div>
+        <div class="wtag">FRONTEND</div>
+        <div class="wttl">The React re-render problem nobody talks about in prod</div>
+        <p class="wex">I traced a 600ms freeze to 11 nested context providers. Here's the fix.</p>
+        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="wc">
+        <div class="wdate">Oct 04, 2025</div>
+        <div class="wtag">ARCHITECTURE</div>
+        <div class="wttl">Stop designing APIs for today's traffic</div>
+        <p class="wex">The API you build at 10k RPM will haunt you at 10M. A practical guide.</p>
+        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
     </div>
-    <div class="wc">
-      <div class="wdate">Nov 28, 2025</div>
-      <div class="wtag">FRONTEND</div>
-      <div class="wttl">The React re-render problem nobody talks about in prod</div>
-      <p class="wex">I traced a 600ms freeze to 11 nested context providers. Here's the fix.</p>
-      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
-    <div class="wc">
-      <div class="wdate">Oct 04, 2025</div>
-      <div class="wtag">ARCHITECTURE</div>
-      <div class="wttl">Stop designing APIs for today's traffic</div>
-      <p class="wex">The API you build at 10k RPM will haunt you at 10M. A practical guide.</p>
-      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-    </div>
+    <button class="carousel-arrow right" type="button" aria-label="Scroll content right" data-carousel-dir="next">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+    </button>
   </div>
 </section>
 
@@ -379,25 +387,33 @@
       <div class="curr-ttl">Selected certificates and training.</div>
       <p class="curr-note">Placeholder credentials for layout preview.</p>
     </div>
-    <div class="curr-r">
-      <div class="ci">
-        <div class="ci-cat">Certificate 01</div>
-        <div class="ci-e"><strong>Distributed Systems Professional</strong><span>Issued by Atlas Institute</span></div>
-        <div class="ci-e"><strong>Date</strong><span>Mar 2026</span></div>
-        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+    <div class="carousel-shell certificates-carousel">
+      <button class="carousel-arrow left" type="button" aria-label="Scroll certificates left" data-carousel-dir="prev">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <div class="curr-r carousel-track" id="certificatesTrack">
+        <div class="ci">
+          <div class="ci-cat">Certificate 01</div>
+          <div class="ci-e"><strong>Distributed Systems Professional</strong><span>Issued by Atlas Institute</span></div>
+          <div class="ci-e"><strong>Date</strong><span>Mar 2026</span></div>
+          <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+        </div>
+        <div class="ci">
+          <div class="ci-cat">Certificate 02</div>
+          <div class="ci-e"><strong>Advanced Cloud Architecture</strong><span>Issued by Meridian Academy</span></div>
+          <div class="ci-e"><strong>Date</strong><span>Jan 2026</span></div>
+          <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+        </div>
+        <div class="ci">
+          <div class="ci-cat">Certificate 03</div>
+          <div class="ci-e"><strong>Secure Platform Operations</strong><span>Issued by Northwind Labs</span></div>
+          <div class="ci-e"><strong>Date</strong><span>Oct 2025</span></div>
+          <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+        </div>
       </div>
-      <div class="ci">
-        <div class="ci-cat">Certificate 02</div>
-        <div class="ci-e"><strong>Advanced Cloud Architecture</strong><span>Issued by Meridian Academy</span></div>
-        <div class="ci-e"><strong>Date</strong><span>Jan 2026</span></div>
-        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
-      </div>
-      <div class="ci">
-        <div class="ci-cat">Certificate 03</div>
-        <div class="ci-e"><strong>Secure Platform Operations</strong><span>Issued by Northwind Labs</span></div>
-        <div class="ci-e"><strong>Date</strong><span>Oct 2025</span></div>
-        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
-      </div>
+      <button class="carousel-arrow right" type="button" aria-label="Scroll certificates right" data-carousel-dir="next">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
   </div>
 </section>
