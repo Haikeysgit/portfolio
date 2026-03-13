@@ -6,7 +6,7 @@
 <title>Haikeys Portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css"/>
+<link rel="stylesheet" href="./css/style.css"/>
 </head>
 <body>
 
@@ -127,60 +127,23 @@
   <!-- Featured -->
   <div class="pf rv d3">
     <div class="pf-img img-nova" id="novaCanvas">
-      <!-- SVG circuit art -->
-      <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55">
-        <defs>
-          <radialGradient id="ng1" cx="35%" cy="50%" r="50%">
-            <stop offset="0%" stop-color="var(--acc)" stop-opacity="0.18"/>
-            <stop offset="100%" stop-color="transparent"/>
-          </radialGradient>
-        </defs>
-        <rect width="400" height="280" fill="url(#ng1)"/>
-        <g stroke="var(--acc)" stroke-opacity="0.2" fill="none" stroke-width="0.8">
-          <line x1="40" y1="60" x2="200" y2="60"/>
-          <line x1="200" y1="60" x2="200" y2="140"/>
-          <line x1="200" y1="140" x2="340" y2="140"/>
-          <line x1="80" y1="120" x2="160" y2="120"/>
-          <line x1="160" y1="120" x2="160" y2="200"/>
-          <line x1="160" y1="200" x2="280" y2="200"/>
-          <line x1="100" y1="80" x2="100" y2="160"/>
-          <line x1="100" y1="160" x2="240" y2="160"/>
-          <line x1="240" y1="160" x2="240" y2="100"/>
-          <line x1="240" y1="100" x2="360" y2="100"/>
-          <line x1="60" y1="180" x2="120" y2="180"/>
-          <line x1="300" y1="80" x2="300" y2="220"/>
-          <line x1="50" y1="220" x2="350" y2="220"/>
-        </g>
-        <g fill="var(--acc)" fill-opacity="0.35">
-          <circle cx="200" cy="60" r="3"/><circle cx="200" cy="140" r="3"/>
-          <circle cx="160" cy="120" r="3"/><circle cx="160" cy="200" r="3"/>
-          <circle cx="100" cy="160" r="3"/><circle cx="240" cy="160" r="3"/>
-          <circle cx="240" cy="100" r="3"/><circle cx="300" cy="80" r="3"/>
-          <circle cx="300" cy="220" r="3"/><circle cx="120" cy="180" r="3"/>
-        </g>
-        <g fill="var(--acc)" fill-opacity="0.12">
-          <circle cx="200" cy="60" r="8"/><circle cx="160" cy="200" r="8"/>
-          <circle cx="240" cy="100" r="8"/><circle cx="300" cy="140" r="8"/>
-        </g>
-        <text x="18" y="250" font-family="'IBM Plex Mono'" font-size="9" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">NOVA PLATFORM - HFT ENGINE</text>
-      </svg>
+      <img src="./assets/images/gafferscore.png" alt="GafferScore preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
     </div>
     <div class="pf-body">
       <div>
-        <div class="pf-top"><span class="pnum">PRJ_01</span><span class="pfbadge">Featured</span></div>
-        <div class="pname">Nova Platform</div>
-        <p class="pdesc">High-frequency trading interface. Custom memory allocator in Rust, Next.js UI, communicating in under 800 nanoseconds end-to-end.</p>
-        <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">Rust</span><span class="ptag">WebSockets</span><span class="ptag">Redis</span><span class="ptag">Kafka</span></div>
+        <div class="pf-top"><span class="pnum">Role: Founding Full Stack Engineer</span><span class="pfbadge">Featured</span></div>
+        <div class="pname">GafferScore</div>
+        <p class="pdesc">Live English Premier League prediction platform. Engineered the live scoring logic, user leaderboards, and the complete interactive frontend experience.</p>
+        <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag">Supabase</span><span class="ptag">PostgreSQL</span></div>
         <div class="plinks" style="opacity:1">
-          <a href="#" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
-          <a href="#" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+          <a href="https://gafferscore.xyz" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
+          <a href="https://github.com/Haikeysgit/gafferscore" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
         </div>
       </div>
       <div class="snip" style="margin-top:20px">
-        <div class="sc">// lock-free order matching engine</div>
-        <div><span class="sk">const</span> engine = <span class="sf">createEngine</span>({</div>
-        <div>&nbsp;&nbsp;allocator: <span class="ss">'arena'</span>, throughput: <span class="ss">'1M_ops_sec'</span>,</div>
-        <div>&nbsp;&nbsp;latency: <span class="ss">'&lt;800ns'</span>, backpressure: <span class="sk">true</span>,</div>
+        <div><span class="sk">const</span> { data, error } = <span class="sk">await</span> supabase.rpc(<span class="ss">"get_leaderboard"</span>, {</div>
+        <div>&nbsp;&nbsp;p_type: type,</div>
+        <div>&nbsp;&nbsp;p_gameweek_id: gameweekId,</div>
         <div>});</div>
       </div>
     </div>
@@ -446,7 +409,7 @@
   <span>Built from scratch</span>
 </footer>
 
-<script src="script.js"></script>
+<script src="./js/script.js"></script>
 </body>
 </html>
 
