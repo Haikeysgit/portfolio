@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Haikeys Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo"><span class="p">&gt;_</span>&nbsp;Haikeys</a>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#work">Work</a>
+    <a href="#expertise">Expertise</a>
+    <a href="#content">Content</a>
+    <a href="#certificates">Certificates</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="nav-r">
+    <button class="toggle desktop-toggle" id="tog" aria-label="Toggle theme"></button>
+    <a href="#" class="resume-btn">Resume &#8599;</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <div class="mobile-menu-inner">
+    <div class="mobile-theme-row">
+      <span class="mobile-theme-label">Theme</span>
+      <button class="toggle mobile-toggle" id="mobileTog" aria-label="Toggle theme"></button>
+    </div>
+    <div class="mobile-nav-links">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#expertise">Expertise</a>
+      <a href="#content">Content</a>
+      <a href="#certificates">Certificates</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section id="hero">
+  <div>
+    <div class="h-status rv"><span class="sdot"></span>Available for roles</div>
+    <h1 class="hero-hed rv d1">
+      I build things<br>
+      <em><span id="tw"></span><span class="tcaret"></span></em>
+    </h1>
+    <p class="hero-sub rv d2">
+      Fault-tolerant microservices, high-throughput APIs, and frontend interfaces engineered for domains that don't forgive mistakes.
+    </p>
+    <div class="hero-btns rv d3">
+      <a href="#work" class="btn-p">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>View Work
+      </a>
+      <a href="#" class="btn-s">
+        <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>Documentation
+      </a>
+    </div>
+  </div>
+  <div class="rv d2">
+    <div class="terminal">
+      <div class="th">
+        <div class="td r"></div><div class="td y"></div><div class="td g"></div>
+        <div class="ttl">haikeys@dev ~ status.check</div>
+      </div>
+      <div class="tb" id="tb"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="si"><div class="sl">Currently based in</div><div class="sv">Nigeria</div></div>
+  <div class="si"><div class="sl">Experience</div><div class="sv">4 yrs core eng</div></div>
+  <div class="si"><div class="sl">Primary focus</div><div class="sv">Full Stack + AI</div></div>
+  <div class="si"><div class="sl">Availability</div><div class="sv ac"><span class="avail-dot">&#9679;</span> Open to roles</div></div>
+</div>
+
+<!-- MARQUEE -->
+<div class="mq"><div class="mq-t" id="mq"></div></div>
+
+<!-- ABOUT -->
+<section id="about" class="sec">
+  <div class="sec-label rv">00 / About</div>
+  <div class="about-grid rv d1">
+    <div class="ab-l">
+      <h2 class="ab-pull">Engineering systems that solve real problems.<br><em>I build for humans.</em></h2>
+      <p class="ab-body">4 years building production-grade tools that solve real problems for real people. I care about shipping reliable systems, creating thoughtful user experiences, and building products that people actually use.</p>
+      <div class="ab-tags">
+        <span class="atag">Full-stack</span>
+        <span class="atag">AI Integration</span>
+        <span class="atag">System Design</span>
+        <span class="atag">Product Engineering</span>
+      </div>
+    </div>
+    <div class="ab-r">
+      <div class="ann">
+        <div class="ann-lbl">// engineering philosophy</div><p class="ann-txt">"Ship the useful thing first. Great engineering is knowing when to stop before over-engineering begins."</p>
+      </div>
+      <div class="ann">
+        <div class="ann-lbl">// on frontend engineering</div><p class="ann-txt">"Fast UIs are not optional. If it feels slow, it is already failing the user."</p>
+      </div>
+      <div class="ann">
+        <div class="ann-lbl">// on what I want</div><p class="ann-txt">"Give me the hard problems that need an engineering touch. That is where I do my best work."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work" class="sec" style="padding-top:0">
+  <div class="sec-label rv">01 / Work</div>
+  <h2 class="sec-title rv d1">Projects that shipped.</h2>
+  <p class="sec-sub rv d2">Real systems. Real scale. No demos.</p>
+
+  <!-- Featured -->
+  <div class="pf rv d3">
+    <div class="pf-img img-nova" id="novaCanvas">
+      <!-- SVG circuit art -->
+      <svg viewBox="0 0 400 280" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.55">
+        <defs>
+          <radialGradient id="ng1" cx="35%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="var(--acc)" stop-opacity="0.18"/>
+            <stop offset="100%" stop-color="transparent"/>
+          </radialGradient>
+        </defs>
+        <rect width="400" height="280" fill="url(#ng1)"/>
+        <g stroke="var(--acc)" stroke-opacity="0.2" fill="none" stroke-width="0.8">
+          <line x1="40" y1="60" x2="200" y2="60"/>
+          <line x1="200" y1="60" x2="200" y2="140"/>
+          <line x1="200" y1="140" x2="340" y2="140"/>
+          <line x1="80" y1="120" x2="160" y2="120"/>
+          <line x1="160" y1="120" x2="160" y2="200"/>
+          <line x1="160" y1="200" x2="280" y2="200"/>
+          <line x1="100" y1="80" x2="100" y2="160"/>
+          <line x1="100" y1="160" x2="240" y2="160"/>
+          <line x1="240" y1="160" x2="240" y2="100"/>
+          <line x1="240" y1="100" x2="360" y2="100"/>
+          <line x1="60" y1="180" x2="120" y2="180"/>
+          <line x1="300" y1="80" x2="300" y2="220"/>
+          <line x1="50" y1="220" x2="350" y2="220"/>
+        </g>
+        <g fill="var(--acc)" fill-opacity="0.35">
+          <circle cx="200" cy="60" r="3"/><circle cx="200" cy="140" r="3"/>
+          <circle cx="160" cy="120" r="3"/><circle cx="160" cy="200" r="3"/>
+          <circle cx="100" cy="160" r="3"/><circle cx="240" cy="160" r="3"/>
+          <circle cx="240" cy="100" r="3"/><circle cx="300" cy="80" r="3"/>
+          <circle cx="300" cy="220" r="3"/><circle cx="120" cy="180" r="3"/>
+        </g>
+        <g fill="var(--acc)" fill-opacity="0.12">
+          <circle cx="200" cy="60" r="8"/><circle cx="160" cy="200" r="8"/>
+          <circle cx="240" cy="100" r="8"/><circle cx="300" cy="140" r="8"/>
+        </g>
+        <text x="18" y="250" font-family="'IBM Plex Mono'" font-size="9" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">NOVA PLATFORM - HFT ENGINE</text>
+      </svg>
+    </div>
+    <div class="pf-body">
+      <div>
+        <div class="pf-top"><span class="pnum">PRJ_01</span><span class="pfbadge">Featured</span></div>
+        <div class="pname">Nova Platform</div>
+        <p class="pdesc">High-frequency trading interface. Custom memory allocator in Rust, Next.js UI, communicating in under 800 nanoseconds end-to-end.</p>
+        <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">Rust</span><span class="ptag">WebSockets</span><span class="ptag">Redis</span><span class="ptag">Kafka</span></div>
+        <div class="plinks" style="opacity:1">
+          <a href="#" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
+          <a href="#" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+        </div>
+      </div>
+      <div class="snip" style="margin-top:20px">
+        <div class="sc">// lock-free order matching engine</div>
+        <div><span class="sk">const</span> engine = <span class="sf">createEngine</span>({</div>
+        <div>&nbsp;&nbsp;allocator: <span class="ss">'arena'</span>, throughput: <span class="ss">'1M_ops_sec'</span>,</div>
+        <div>&nbsp;&nbsp;latency: <span class="ss">'&lt;800ns'</span>, backpressure: <span class="sk">true</span>,</div>
+        <div>});</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Grid of 3 -->
+  <div class="pg rv">
+    <!-- Nexus -->
+    <div class="pc">
+      <div class="pc-img img-nexus">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.5">
+          <defs><radialGradient id="ng2" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="var(--acc)" stop-opacity="0.15"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+          <rect width="300" height="160" fill="url(#ng2)"/>
+          <g stroke="var(--acc)" stroke-opacity="0.2" stroke-width="0.7" fill="none">
+            <line x1="50" y1="80" x2="100" y2="40"/><line x1="50" y1="80" x2="100" y2="120"/>
+            <line x1="100" y1="40" x2="180" y2="30"/><line x1="100" y1="40" x2="180" y2="80"/>
+            <line x1="100" y1="120" x2="180" y2="80"/><line x1="100" y1="120" x2="180" y2="140"/>
+            <line x1="180" y1="30" x2="250" y2="50"/><line x1="180" y1="80" x2="250" y2="80"/>
+            <line x1="180" y1="140" x2="250" y2="120"/>
+            <line x1="50" y1="80" x2="180" y2="80"/>
+          </g>
+          <g fill="var(--acc)" fill-opacity="0.4">
+            <circle cx="50" cy="80" r="4"/><circle cx="100" cy="40" r="3"/><circle cx="100" cy="120" r="3"/>
+            <circle cx="180" cy="30" r="3"/><circle cx="180" cy="80" r="4"/><circle cx="180" cy="140" r="3"/>
+            <circle cx="250" cy="50" r="3"/><circle cx="250" cy="80" r="3"/><circle cx="250" cy="120" r="3"/>
+          </g>
+          <text x="10" y="150" font-family="'IBM Plex Mono'" font-size="7.5" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">GRAPH ENGINE</text>
+        </svg>
+      </div>
+      <div class="pc-body">
+        <div class="pc-top"><span class="pnum">PRJ_02</span>
+          <div class="pclinks">
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+          </div>
+        </div>
+        <div class="pname sm">Nexus Graph Engine</div>
+        <p class="pdesc sm">Distributed analytics. 40B+ edges traversed daily in real-time.</p>
+        <div class="ptags" style="margin-bottom:12px"><span class="ptag">React</span><span class="ptag">D3.js</span><span class="ptag">Go</span><span class="ptag">PostgreSQL</span></div>
+        <div class="pc-snip"><div class="sc">// BFS across shards</div><div><span class="sk">func</span> <span class="sf">Traverse</span>(root Node) {</div><div>&nbsp;&nbsp;<span class="sk">go</span> <span class="sf">bfs</span>(root, <span class="sn">12</span>)</div><div>&nbsp;&nbsp;<span class="sk">return</span> stream.<span class="sf">Pipe</span>(ws)</div><div>}</div></div>
+      </div>
+    </div>
+
+    <!-- Sentinel -->
+    <div class="pc">
+      <div class="pc-img img-sentinel">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.5">
+          <defs><radialGradient id="ng3" cx="50%" cy="40%" r="55%"><stop offset="0%" stop-color="var(--acc)" stop-opacity="0.14"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+          <rect width="300" height="160" fill="url(#ng3)"/>
+          <g stroke="var(--acc)" stroke-opacity="0.2" stroke-width="0.7" fill="none">
+            <circle cx="150" cy="75" r="45"/><circle cx="150" cy="75" r="30"/><circle cx="150" cy="75" r="15"/>
+            <line x1="150" y1="30" x2="150" y2="10"/><line x1="150" y1="120" x2="150" y2="150"/>
+            <line x1="105" y1="75" x2="20" y2="75"/><line x1="195" y1="75" x2="280" y2="75"/>
+            <line x1="118" y1="43" x2="80" y2="20"/><line x1="182" y1="43" x2="220" y2="20"/>
+            <line x1="118" y1="107" x2="80" y2="140"/><line x1="182" y1="107" x2="220" y2="140"/>
+          </g>
+          <circle cx="150" cy="75" r="5" fill="var(--acc)" fill-opacity="0.5"/>
+          <text x="10" y="152" font-family="'IBM Plex Mono'" font-size="7.5" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">API GATEWAY</text>
+        </svg>
+      </div>
+      <div class="pc-body">
+        <div class="pc-top"><span class="pnum">PRJ_03</span>
+          <div class="pclinks">
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+          </div>
+        </div>
+        <div class="pname sm">Sentinel Gateway</div>
+        <p class="pdesc sm">Zero-trust API gateway. 50M+ req/day, &lt;2ms p99 latency.</p>
+        <div class="ptags" style="margin-bottom:12px"><span class="ptag">Go</span><span class="ptag">Kubernetes</span><span class="ptag">Envoy</span><span class="ptag">Terraform</span></div>
+        <div class="pc-snip"><div class="sc">// circuit breaker</div><div><span class="sk">const</span> cb = <span class="sf">Breaker</span>({</div><div>&nbsp;&nbsp;threshold: <span class="sn">0.5</span>, window: <span class="ss">'10s'</span>,</div><div>&nbsp;&nbsp;onOpen: () =&gt; <span class="sf">fallback</span>()</div><div>})</div></div>
+      </div>
+    </div>
+
+    <!-- Chronos -->
+    <div class="pc">
+      <div class="pc-img img-chronos">
+        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.5">
+          <defs><radialGradient id="ng4" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="var(--acc)" stop-opacity="0.14"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
+          <rect width="300" height="160" fill="url(#ng4)"/>
+          <g stroke="var(--acc)" stroke-opacity="0.18" stroke-width="0.7" fill="none">
+            <circle cx="150" cy="75" r="55"/><circle cx="150" cy="75" r="38"/><circle cx="150" cy="75" r="22"/>
+            <line x1="150" y1="75" x2="150" y2="37"/><line x1="150" y1="75" x2="175" y2="60"/>
+            <line x1="150" y1="20" x2="150" y2="14"/><line x1="150" y1="130" x2="150" y2="136"/>
+            <line x1="95" y1="75" x2="89" y2="75"/><line x1="205" y1="75" x2="211" y2="75"/>
+            <line x1="111" y1="36" x2="107" y2="32"/><line x1="189" y1="36" x2="193" y2="32"/>
+            <line x1="111" y1="114" x2="107" y2="118"/><line x1="189" y1="114" x2="193" y2="118"/>
+          </g>
+          <circle cx="150" cy="75" r="4" fill="var(--acc)" fill-opacity="0.55"/>
+          <circle cx="150" cy="37" r="2.5" fill="var(--acc)" fill-opacity="0.4"/>
+          <circle cx="175" cy="60" r="2.5" fill="var(--acc)" fill-opacity="0.4"/>
+          <text x="10" y="152" font-family="'IBM Plex Mono'" font-size="7.5" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">DISTRIBUTED SCHEDULER</text>
+        </svg>
+      </div>
+      <div class="pc-body">
+        <div class="pc-top"><span class="pnum">PRJ_04</span>
+          <div class="pclinks">
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
+            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+          </div>
+        </div>
+        <div class="pname sm">Chronos Scheduler</div>
+        <p class="pdesc sm">Distributed job scheduler. Sub-ms precision across 200+ microservices.</p>
+        <div class="ptags" style="margin-bottom:12px"><span class="ptag">TypeScript</span><span class="ptag">Redis</span><span class="ptag">CRDT</span><span class="ptag">Docker</span></div>
+        <div class="pc-snip"><div class="sc">// CRDT sync</div><div><span class="sk">const</span> clk = <span class="sk">new</span> <span class="sf">HybridLogical</span>()</div><div><span class="sk">await</span> scheduler.<span class="sf">tick</span>({ nodes: <span class="sn">200</span> })</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERTISE -->
+<section id="expertise" class="sec" style="padding-top:0">
+  <div class="sec-label rv">02 / Expertise</div>
+  <h2 class="sec-title rv d1">Full breadth. Zero gaps.</h2>
+  <p class="sec-sub rv d2">Stack proficiencies across the full system.</p>
+  <div class="exp rv d3">
+    <div class="exp-nav">
+      <div class="eni active" data-p="ep1">FRONT_END</div>
+      <div class="eni" data-p="ep2">BACK_END</div>
+      <div class="eni" data-p="ep3">INFRA</div>
+    </div>
+    <div>
+      <div class="ep active" id="ep1">
+        <div class="ep-ttl">Frontend Architecture</div>
+        <p class="ep-desc">Optimized, type-safe interfaces that handle complex state at scale. I treat UI like a systems problem.</p>
+        <div class="sbars">
+          <div class="srow"><div class="smeta"><span>React / Next.js</span><span>95%</span></div><div class="sbg"><div class="sfill" data-f="0.95"></div></div></div>
+          <div class="srow"><div class="smeta"><span>TypeScript</span><span>92%</span></div><div class="sbg"><div class="sfill" data-f="0.92"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Performance / Web Vitals</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Redux / Zustand</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
+        </div>
+        <div class="etags"><span class="etag">Tailwind</span><span class="etag">Framer Motion</span><span class="etag">Radix UI</span><span class="etag">Vitest</span><span class="etag">tRPC</span></div>
+      </div>
+      <div class="ep" id="ep2">
+        <div class="ep-ttl">Backend & Distributed Systems</div>
+        <p class="ep-desc">Fault-tolerant microservices and high-throughput APIs that don't buckle under real load.</p>
+        <div class="sbars">
+          <div class="srow"><div class="smeta"><span>Go</span><span>94%</span></div><div class="sbg"><div class="sfill" data-f="0.94"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Node.js</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
+          <div class="srow"><div class="smeta"><span>PostgreSQL / Redis</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Kafka / gRPC</span><span>85%</span></div><div class="sbg"><div class="sfill" data-f="0.85"></div></div></div>
+        </div>
+        <div class="etags"><span class="etag">Rust</span><span class="etag">System Design</span><span class="etag">CRDT</span><span class="etag">WebSockets</span><span class="etag">GraphQL</span></div>
+      </div>
+      <div class="ep" id="ep3">
+        <div class="ep-ttl">Infrastructure & DevOps</div>
+        <p class="ep-desc">Automated deployments and CI/CD pipelines that let teams ship without fear.</p>
+        <div class="sbars">
+          <div class="srow"><div class="smeta"><span>Kubernetes</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
+          <div class="srow"><div class="smeta"><span>AWS (EC2, S3, RDS)</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Terraform</span><span>85%</span></div><div class="sbg"><div class="sfill" data-f="0.85"></div></div></div>
+          <div class="srow"><div class="smeta"><span>CI/CD Pipelines</span><span>92%</span></div><div class="sbg"><div class="sfill" data-f="0.92"></div></div></div>
+        </div>
+        <div class="etags"><span class="etag">Docker</span><span class="etag">Envoy</span><span class="etag">Prometheus</span><span class="etag">Grafana</span><span class="etag">ArgoCD</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WRITING -->
+<section id="content" class="sec" style="padding-top:0">
+  <div class="sec-label rv">03 / Content</div>
+  <h2 class="sec-title rv d1">Content.</h2>
+  <p class="sec-sub rv d2">I document what I build and share my creative process.</p>
+  <div class="wg rv d3">
+    <div class="wc">
+      <div class="wdate">Jan 12, 2026</div>
+      <div class="wtag">DISTRIBUTED SYSTEMS</div>
+      <div class="wttl">Why your circuit breaker is lying to you</div>
+      <p class="wex">Most implementations count errors by volume. That's wrong. Here's what I use instead.</p>
+      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="wc">
+      <div class="wdate">Nov 28, 2025</div>
+      <div class="wtag">FRONTEND</div>
+      <div class="wttl">The React re-render problem nobody talks about in prod</div>
+      <p class="wex">I traced a 600ms freeze to 11 nested context providers. Here's the fix.</p>
+      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+    <div class="wc">
+      <div class="wdate">Oct 04, 2025</div>
+      <div class="wtag">ARCHITECTURE</div>
+      <div class="wttl">Stop designing APIs for today's traffic</div>
+      <p class="wex">The API you build at 10k RPM will haunt you at 10M. A practical guide.</p>
+      <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- CERTIFICATES -->
+<section id="certificates" class="sec" style="padding-top:0">
+  <div class="sec-label rv">04 / Certificates</div>
+  <div class="curr rv d1">
+    <div class="curr-l">
+      <div class="curr-lbl">Credentials</div>
+      <div class="curr-ttl">Selected certificates and training.</div>
+      <p class="curr-note">Placeholder credentials for layout preview.</p>
+    </div>
+    <div class="curr-r">
+      <div class="ci">
+        <div class="ci-cat">Certificate 01</div>
+        <div class="ci-e"><strong>Distributed Systems Professional</strong><span>Issued by Atlas Institute</span></div>
+        <div class="ci-e"><strong>Date</strong><span>Mar 2026</span></div>
+        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+      </div>
+      <div class="ci">
+        <div class="ci-cat">Certificate 02</div>
+        <div class="ci-e"><strong>Advanced Cloud Architecture</strong><span>Issued by Meridian Academy</span></div>
+        <div class="ci-e"><strong>Date</strong><span>Jan 2026</span></div>
+        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+      </div>
+      <div class="ci">
+        <div class="ci-cat">Certificate 03</div>
+        <div class="ci-e"><strong>Secure Platform Operations</strong><span>Issued by Northwind Labs</span></div>
+        <div class="ci-e"><strong>Date</strong><span>Oct 2025</span></div>
+        <div class="plinks" style="margin-top:16px"><a href="#" class="plnk">View Certificate</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="sec" style="padding-top:0">
+  <div class="ct rv">
+    <div class="ct-l">
+      <div class="ct-ol">05 / Contact</div>
+      <h2 class="ct-ttl">Let's build<br>something <em>hard.</em></h2>
+      <p class="ct-body">Available for new roles and consulting. Bring me the projects where the architecture actually matters.</p>
+    </div>
+    <div class="ct-r">
+      <a href="mailto:engineering@johndoe.dev" class="cemail">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+        engineering@johndoe.dev
+      </a>
+      <div class="socs">
+        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <span>Copyright 2026 Haikeys</span>
+  <span><span class="fdot"></span>All systems operational</span>
+  <span>Built from scratch</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
+
+
+
