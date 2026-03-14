@@ -4,6 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Haikeys Portfolio</title>
+<link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="./css/style.css"/>
@@ -120,108 +121,189 @@
 
 <!-- WORK -->
 <section id="work" class="sec" style="padding-top:0">
-  <div class="sec-label rv">01 / Work</div>
-  <h2 class="sec-title rv d1">Projects that shipped.</h2>
-  <p class="sec-sub rv d2">Real systems. Real scale. No demos.</p>
-
-  <!-- Featured -->
-  <div class="pf rv d3">
-    <div class="pf-img img-nova" id="novaCanvas">
-      <img src="./assets/images/gafferscore.png" alt="GafferScore preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
+  <div class="carousel-header rv">
+    <div>
+      <div class="sec-label" style="margin-bottom:8px">01 / Work</div>
+      <h2 class="sec-title" style="margin-bottom:6px">Projects that shipped.</h2>
+      <p class="sec-sub" style="margin-bottom:0">Real systems. Real scale. No demos.</p>
     </div>
-    <div class="pf-body">
-      <div>
-        <div class="pf-top"><span class="pnum">Role: Founding Full Stack Engineer</span><span class="pfbadge">Featured</span></div>
-        <div class="pname">GafferScore</div>
-        <p class="pdesc">Live English Premier League prediction platform featuring an AI prediction agent. Engineered the whole platform from the live scoring logic, user leaderboards, and the complete interactive frontend experience.</p>
-        <div class="ptags"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag">Supabase</span><span class="ptag">PostgreSQL</span></div>
-        <div class="plinks" style="opacity:1">
-          <a href="https://gafferscore.xyz" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
-          <a href="https://github.com/Haikeysgit/gafferscore" class="plnk"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
-        </div>
-      </div>
-      <div class="snip" style="margin-top:20px">
-        <div><span class="keyword">const</span> { data, error } = <span class="keyword">await</span> supabase.<span class="function">rpc</span>(<span class="string">"get_leaderboard"</span>, {</div>
-        <div>&nbsp;&nbsp;p_type: type,</div>
-        <div>&nbsp;&nbsp;p_gameweek_id: gameweekId,</div>
-        <div>});</div>
-      </div>
+    <div class="carousel-controls">
+      <span class="car-counter" id="carCounter">01 / 04</span>
+      <button class="car-btn" id="carPrev" disabled aria-label="Previous">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn" id="carNext" aria-label="Next">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
     </div>
   </div>
 
-  <!-- Grid of 3 -->
-  <div class="pg rv">
-    <!-- Nexus -->
-    <div class="pc">
-      <div class="pc-img img-nexus">
-        <img src="./assets/images/smartbursar.png" alt="SmartBursar preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
-      </div>
-      <div class="pc-body">
-        <div class="pc-top"><span class="pnum">Role: Founding Full Stack Engineer</span>
-          <div class="pclinks">
-            <a href="https://smartbursar.onrender.com/" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
-          </div>
-        </div>
-        <div class="pname sm">SmartBursar</div>
-        <p class="pdesc sm">AI powered school finance platform automating fee collection and WhatsApp reminders. It uses Vision LLMs to verify bank receipts in real time, currently processing payments for over 500 students across 20 beta schools.</p>
-        <div class="ptags" style="margin-bottom:12px"><span class="ptag">Python</span><span class="ptag">FastAPI</span><span class="ptag">Llama Vision</span><span class="ptag">PostgreSQL</span></div>
-        <div class="pc-snip"><div>pending_txn = db.<span class="function">query</span>(Transaction).<span class="function">join</span>(Student).<span class="function">filter</span>(</div><div>&nbsp;&nbsp;Student.school_id == school.id,</div><div>&nbsp;&nbsp;~Transaction.status.<span class="function">in_</span>([<span class="string">'VERIFIED'</span>, <span class="string">'REJECTED'</span>, <span class="string">'CANCELLED'</span>])</div><div>).<span class="function">order_by</span>(Transaction.created_at.<span class="function">asc</span>()).<span class="function">first</span>()</div></div>
-      </div>
-    </div>
-    <!-- Sentinel -->
-    <div class="pc">
-      <div class="pc-img img-sentinel">
-        <img src="./assets/images/flux.png" alt="Flux preview" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;"/>
-      </div>
-      <div class="pc-body">
-        <div class="pc-top"><span class="pnum">Role: Full Stack Engineer</span>
-          <div class="pclinks">
-            <a href="https://github.com/Haikeysgit/flux" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
-          </div>
-        </div>
-        <div class="pname sm">Flux</div>
-        <p class="pdesc sm">Solana rent recovery tool that monitors Kora sponsored accounts to safely reclaim locked SOL. It automatically identifies idle accounts and safely executes closures to prevent capital leaks.</p>
-        <div class="ptags" style="margin-bottom:12px"><span class="ptag">Next.js</span><span class="ptag">TypeScript</span><span class="ptag">Solana Web3</span><span class="ptag">Prisma</span></div>
-        <div class="pc-snip"><div><span class="keyword">const</span> isSafeToClose = <span class="keyword">async</span> (account) =&gt; {</div><div>&nbsp;&nbsp;<span class="keyword">const</span> info = <span class="keyword">await</span> connection.<span class="function">getAccountInfo</span>(account.pubkey);</div><div>&nbsp;&nbsp;<span class="keyword">return</span> info.lamports === 0 &amp;&amp; info.data.length === 0;</div><div>};</div></div>
-      </div>
-    </div>
+  <div class="carousel-viewport rv d1">
+    <div class="carousel-track" id="carTrack">
 
-    <!-- Chronos -->
-    <div class="pc">
-      <div class="pc-img img-chronos">
-        <svg viewBox="0 0 300 160" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;opacity:0.5">
-          <defs><radialGradient id="ng4" cx="50%" cy="50%" r="55%"><stop offset="0%" stop-color="var(--acc)" stop-opacity="0.14"/><stop offset="100%" stop-color="transparent"/></radialGradient></defs>
-          <rect width="300" height="160" fill="url(#ng4)"/>
-          <g stroke="var(--acc)" stroke-opacity="0.18" stroke-width="0.7" fill="none">
-            <circle cx="150" cy="75" r="55"/><circle cx="150" cy="75" r="38"/><circle cx="150" cy="75" r="22"/>
-            <line x1="150" y1="75" x2="150" y2="37"/><line x1="150" y1="75" x2="175" y2="60"/>
-            <line x1="150" y1="20" x2="150" y2="14"/><line x1="150" y1="130" x2="150" y2="136"/>
-            <line x1="95" y1="75" x2="89" y2="75"/><line x1="205" y1="75" x2="211" y2="75"/>
-            <line x1="111" y1="36" x2="107" y2="32"/><line x1="189" y1="36" x2="193" y2="32"/>
-            <line x1="111" y1="114" x2="107" y2="118"/><line x1="189" y1="114" x2="193" y2="118"/>
-          </g>
-          <circle cx="150" cy="75" r="4" fill="var(--acc)" fill-opacity="0.55"/>
-          <circle cx="150" cy="37" r="2.5" fill="var(--acc)" fill-opacity="0.4"/>
-          <circle cx="175" cy="60" r="2.5" fill="var(--acc)" fill-opacity="0.4"/>
-          <text x="10" y="152" font-family="'IBM Plex Mono'" font-size="7.5" fill="var(--acc)" fill-opacity="0.35" letter-spacing="2">DISTRIBUTED SCHEDULER</text>
-        </svg>
-      </div>
-      <div class="pc-body">
-        <div class="pc-top"><span class="pnum">PRJ_04</span>
-          <div class="pclinks">
-            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Live</a>
-            <a href="#" class="pcl"><svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>Code</a>
+      <div class="ccard">
+        <div class="cc-img">
+          <img src="./assets/images/gafferscore.png" alt="GafferScore preview"/>
+          <div class="cc-feat">Featured</div>
+          <div class="cc-role">Role: Founding Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_01</span></div>
+          <div class="cc-name">GafferScore</div>
+          <p class="cc-desc">Live English Premier League prediction platform featuring an AI prediction agent. Engineered the whole platform from the live scoring logic, user leaderboards, and the complete interactive frontend experience.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Next.js</span>
+            <span class="cc-tag">TypeScript</span>
+            <span class="cc-tag">Supabase</span>
+            <span class="cc-tag">PostgreSQL</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">leaderboard.ts</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sk">const</span> { data, error } = <span class="sk">await</span> supabase.<span class="sf">rpc</span>(<span class="ss">"get_leaderboard"</span>, {</div>
+              <div>&nbsp;&nbsp;p_type: type,</div>
+              <div>&nbsp;&nbsp;p_gameweek_id: gameweekId,</div>
+              <div>});</div>
+            </div>
           </div>
         </div>
-        <div class="pname sm">Chronos Scheduler</div>
-        <p class="pdesc sm">Distributed job scheduler. Sub-ms precision across 200+ microservices.</p>
-        <div class="ptags" style="margin-bottom:12px"><span class="ptag">TypeScript</span><span class="ptag">Redis</span><span class="ptag">CRDT</span><span class="ptag">Docker</span></div>
-        <div class="pc-snip"><div class="sc">// CRDT sync</div><div><span class="sk">const</span> clk = <span class="sk">new</span> <span class="sf">HybridLogical</span>()</div><div><span class="sk">await</span> scheduler.<span class="sf">tick</span>({ nodes: <span class="sn">200</span> })</div></div>
+        <div class="cc-footer">
+          <a href="https://gafferscore.xyz" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+          <a href="https://github.com/Haikeysgit/gafferscore" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+        </div>
       </div>
+
+      <div class="ccard">
+        <div class="cc-img">
+          <img src="./assets/images/smartbursar.png" alt="SmartBursar preview"/>
+          <div class="cc-role">Role: Founding Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_02</span></div>
+          <div class="cc-name">SmartBursar</div>
+          <p class="cc-desc">AI powered school finance platform automating fee collection and WhatsApp reminders. It uses Vision LLMs to verify bank receipts in real time, currently processing payments for over 500 students across 20 beta schools.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Python</span>
+            <span class="cc-tag">FastAPI</span>
+            <span class="cc-tag">Llama Vision</span>
+            <span class="cc-tag">PostgreSQL</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">transactions.py</span>
+            </div>
+            <div class="cc-code-body">
+              <div>pending_txn = db.<span class="sf">query</span>(Transaction).<span class="sf">join</span>(Student).<span class="sf">filter</span>(</div>
+              <div>&nbsp;&nbsp;Student.school_id == school.id,</div>
+              <div>&nbsp;&nbsp;~Transaction.status.<span class="sf">in_</span>([<span class="ss">'VERIFIED'</span>, <span class="ss">'REJECTED'</span>, <span class="ss">'CANCELLED'</span>])</div>
+              <div>).<span class="sf">order_by</span>(Transaction.created_at.<span class="sf">asc</span>()).<span class="sf">first</span>()</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://smartbursar.onrender.com/" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="cc-img">
+          <img src="./assets/images/flux.png" alt="Flux preview"/>
+          <div class="cc-role">Role: Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
+          <div class="cc-name">Flux</div>
+          <p class="cc-desc">Solana rent recovery tool that monitors Kora sponsored accounts to safely reclaim locked SOL. It automatically identifies idle accounts and safely executes closures to prevent capital leaks.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Next.js</span>
+            <span class="cc-tag">TypeScript</span>
+            <span class="cc-tag">Solana Web3</span>
+            <span class="cc-tag">Prisma</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">recovery.ts</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sk">const</span> isSafeToClose = <span class="sk">async</span> (account) =&gt; {</div>
+              <div>&nbsp;&nbsp;<span class="sk">const</span> info = <span class="sk">await</span> connection.<span class="sf">getAccountInfo</span>(account.pubkey);</div>
+              <div>&nbsp;&nbsp;<span class="sk">return</span> info.lamports === <span class="sn">0</span> &amp;&amp; info.data.length === <span class="sn">0</span>;</div>
+              <div>};</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://github.com/Haikeysgit/flux" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="cc-img">
+          <img src="./assets/images/blockchain.png" alt="Updraft Portal preview"/>
+          <div class="cc-role">Role: Frontend Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_04</span></div>
+          <div class="cc-name">Updraft Portal</div>
+          <p class="cc-desc">Responsive landing page promoting Web3 and smart contract education. Engineered a clean, conversion focused UI to drive engagement for blockchain learning platforms.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">HTML5</span>
+            <span class="cc-tag">CSS3</span>
+            <span class="cc-tag">Vanilla JS</span>
+            <span class="cc-tag">Responsive UI</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">main.js</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sk">const</span> handleScroll = () =&gt; {</div>
+              <div>&nbsp;&nbsp;<span class="sk">const</span> nav = document.<span class="sf">querySelector</span>(<span class="ss">".navbar"</span>);</div>
+              <div>&nbsp;&nbsp;nav.classList.<span class="sf">toggle</span>(<span class="ss">"scrolled"</span>, window.scrollY &gt; <span class="sn">50</span>);</div>
+              <div>};</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://blockchaindev2026.netlify.app/" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+          <a href="https://github.com/Haikeysgit/Front-end-blockchain-dev-site" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            Code
+          </a>
+        </div>
+      </div>
+
     </div>
+  </div>
+
+  <div class="carousel-dots" id="carDots">
+    <div class="cdot-ind active" data-i="0"></div>
+    <div class="cdot-ind" data-i="1"></div>
+    <div class="cdot-ind" data-i="2"></div>
+    <div class="cdot-ind" data-i="3"></div>
   </div>
 </section>
-
 <!-- EXPERTISE -->
 <section id="expertise" class="sec" style="padding-top:0">
   <div class="sec-label rv">02 / Expertise</div>
@@ -231,41 +313,40 @@
     <div class="exp-nav">
       <div class="eni active" data-p="ep1">FRONT_END</div>
       <div class="eni" data-p="ep2">BACK_END</div>
-      <div class="eni" data-p="ep3">INFRA</div>
+      <div class="eni" data-p="ep3">AI_ENGINEERING</div>
     </div>
     <div>
       <div class="ep active" id="ep1">
         <div class="ep-ttl">Frontend Architecture</div>
-        <p class="ep-desc">Optimized, type-safe interfaces that handle complex state at scale. I treat UI like a systems problem.</p>
+        <p class="ep-desc">Building robust, type safe user interfaces that scale. I approach UI as a critical piece of the complete system architecture.</p>
         <div class="sbars">
           <div class="srow"><div class="smeta"><span>React / Next.js</span><span>95%</span></div><div class="sbg"><div class="sfill" data-f="0.95"></div></div></div>
           <div class="srow"><div class="smeta"><span>TypeScript</span><span>92%</span></div><div class="sbg"><div class="sfill" data-f="0.92"></div></div></div>
           <div class="srow"><div class="smeta"><span>Performance / Web Vitals</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
           <div class="srow"><div class="smeta"><span>Redux / Zustand</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
         </div>
-        <div class="etags"><span class="etag">Tailwind</span><span class="etag">Framer Motion</span><span class="etag">Radix UI</span><span class="etag">Vitest</span><span class="etag">tRPC</span></div>
+        <div class="etags"><span class="etag">Tailwind</span><span class="etag">Framer Motion</span><span class="etag">tRPC</span></div>
       </div>
       <div class="ep" id="ep2">
-        <div class="ep-ttl">Backend & Distributed Systems</div>
-        <p class="ep-desc">Fault-tolerant microservices and high-throughput APIs that don't buckle under real load.</p>
+        <div class="ep-ttl">Backend & APIs</div>
+        <p class="ep-desc">Designing scalable backend architectures, secure APIs, and reliable database structures that power complex platforms without buckling under pressure.</p>
         <div class="sbars">
-          <div class="srow"><div class="smeta"><span>Go</span><span>94%</span></div><div class="sbg"><div class="sfill" data-f="0.94"></div></div></div>
-          <div class="srow"><div class="smeta"><span>Node.js</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
-          <div class="srow"><div class="smeta"><span>PostgreSQL / Redis</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
-          <div class="srow"><div class="smeta"><span>Kafka / gRPC</span><span>85%</span></div><div class="sbg"><div class="sfill" data-f="0.85"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Node.js / NestJS</span><span>94%</span></div><div class="sbg"><div class="sfill" data-f="0.94"></div></div></div>
+          <div class="srow"><div class="smeta"><span>PostgreSQL / Supabase</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
+          <div class="srow"><div class="smeta"><span>GraphQL / RESTful APIs</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Python</span><span>86%</span></div><div class="sbg"><div class="sfill" data-f="0.86"></div></div></div>
         </div>
-        <div class="etags"><span class="etag">Rust</span><span class="etag">System Design</span><span class="etag">CRDT</span><span class="etag">WebSockets</span><span class="etag">GraphQL</span></div>
+        <div class="etags"><span class="etag">System Design</span><span class="etag">WebSockets</span><span class="etag">Auth0</span></div>
       </div>
       <div class="ep" id="ep3">
-        <div class="ep-ttl">Infrastructure & DevOps</div>
-        <p class="ep-desc">Automated deployments and CI/CD pipelines that let teams ship without fear.</p>
+        <div class="ep-ttl">AI Engineering & Integration</div>
+        <p class="ep-desc">Integrating large language models and vision systems into production applications. I build autonomous agents and intelligent workflows that solve real world business problems.</p>
         <div class="sbars">
-          <div class="srow"><div class="smeta"><span>Kubernetes</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
-          <div class="srow"><div class="smeta"><span>AWS (EC2, S3, RDS)</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
-          <div class="srow"><div class="smeta"><span>Terraform</span><span>85%</span></div><div class="sbg"><div class="sfill" data-f="0.85"></div></div></div>
-          <div class="srow"><div class="smeta"><span>CI/CD Pipelines</span><span>92%</span></div><div class="sbg"><div class="sfill" data-f="0.92"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Prompt Engineering / LLMs</span><span>94%</span></div><div class="sbg"><div class="sfill" data-f="0.94"></div></div></div>
+          <div class="srow"><div class="smeta"><span>Python / Data Processing</span><span>90%</span></div><div class="sbg"><div class="sfill" data-f="0.90"></div></div></div>
+          <div class="srow"><div class="smeta"><span>AI Agent Development</span><span>88%</span></div><div class="sbg"><div class="sfill" data-f="0.88"></div></div></div>
         </div>
-        <div class="etags"><span class="etag">Docker</span><span class="etag">Envoy</span><span class="etag">Prometheus</span><span class="etag">Grafana</span><span class="etag">ArgoCD</span></div>
+        <div class="etags"><span class="etag">AI Architecture</span><span class="etag">Automation</span><span class="etag">RAG</span></div>
       </div>
     </div>
   </div>
@@ -273,39 +354,77 @@
 
 <!-- WRITING -->
 <section id="content" class="sec" style="padding-top:0">
-  <div class="sec-label rv">03 / Content</div>
-  <h2 class="sec-title rv d1">Content.</h2>
-  <p class="sec-sub rv d2">I document what I build and share my creative process.</p>
-  <div class="carousel-shell content-carousel rv d3">
-    <button class="carousel-arrow left" type="button" aria-label="Scroll content left" data-carousel-dir="prev">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
-    </button>
-    <div class="wg carousel-track" id="contentTrack">
+  <div class="carousel-header rv">
+    <div>
+      <div class="sec-label" style="margin-bottom:8px">03 / Content</div>
+      <h2 class="sec-title" style="margin-bottom:6px">Content.</h2>
+      <p class="sec-sub" style="margin-bottom:0">I document what I build and share my creative process.</p>
+    </div>
+    <div class="carousel-controls">
+      <span class="car-counter" id="contentCounter">01 / 06</span>
+      <button class="car-btn" id="contentPrev" disabled aria-label="Previous content">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button class="car-btn" id="contentNext" aria-label="Next content">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="carousel-viewport rv d1">
+    <div class="carousel-track content-track" id="contentTrack">
       <div class="wc">
-        <div class="wdate">Jan 12, 2026</div>
-        <div class="wtag">DISTRIBUTED SYSTEMS</div>
-        <div class="wttl">Why your circuit breaker is lying to you</div>
-        <p class="wex">Most implementations count errors by volume. That's wrong. Here's what I use instead.</p>
-        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">Dec 26, 2025</div>
+        <div class="wtag">WEB3 EDUCATION</div>
+        <div class="wttl">A roadmap for blockchain beginners</div>
+        <p class="wex">Learning blockchain development can be overwhelming. I built a resource discovery platform to fix the noise.</p>
+        <a href="https://x.com/Haikeystweett/status/2004432269306413257?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="wc">
-        <div class="wdate">Nov 28, 2025</div>
-        <div class="wtag">FRONTEND</div>
-        <div class="wttl">The React re-render problem nobody talks about in prod</div>
-        <p class="wex">I traced a 600ms freeze to 11 nested context providers. Here's the fix.</p>
-        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">Jan 23, 2026</div>
+        <div class="wtag">SECURITY / AI</div>
+        <div class="wttl">Security in the era of vibe coding</div>
+        <p class="wex">An exploration of the security implications and best practices when building with AI generation tools.</p>
+        <a href="https://x.com/Haikeystweett/status/2014683846164222058?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="wc">
-        <div class="wdate">Oct 04, 2025</div>
-        <div class="wtag">ARCHITECTURE</div>
-        <div class="wttl">Stop designing APIs for today's traffic</div>
-        <p class="wex">The API you build at 10k RPM will haunt you at 10M. A practical guide.</p>
-        <a href="#" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">Feb 18, 2026</div>
+        <div class="wtag">CAREER / AI</div>
+        <div class="wttl">Will AI replace Web3 developers?</div>
+        <p class="wex">My thoughts on how vibe coding and autonomous AI tools will actually impact the future of Web3 engineering.</p>
+        <a href="https://x.com/Haikeystweett/status/2024163773368443102?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="wc">
+        <div class="wdate">Feb 26, 2026</div>
+        <div class="wtag">PRODUCT LAUNCH</div>
+        <div class="wttl">Shipping GafferScore</div>
+        <p class="wex">Launched a live English Premier League prediction game. Predict scores, earn points, and climb the global leaderboard.</p>
+        <a href="https://x.com/Haikeystweett/status/2026908113077461344?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="wc">
+        <div class="wdate">Mar 03, 2026</div>
+        <div class="wtag">SYSTEM ARCHITECTURE</div>
+        <div class="wttl">Building GafferScore in 4 days</div>
+        <p class="wex">A deep dive into the Next.js, TypeScript, and Supabase stack powering my live sports prediction platform.</p>
+        <a href="https://x.com/Haikeystweett/status/2028718525653610991?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="wc">
+        <div class="wdate">Mar 10, 2026</div>
+        <div class="wtag">AI AGENTS</div>
+        <div class="wttl">Integrating AI into live sports</div>
+        <p class="wex">Joining the 60-day build in public to integrate an autonomous prediction agent into GafferScore to compete against humans.</p>
+        <a href="https://x.com/Haikeystweett/status/2031411414838006257?s=20" class="wread">Explore Content <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
-    <button class="carousel-arrow right" type="button" aria-label="Scroll content right" data-carousel-dir="next">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
-    </button>
+  </div>
+
+  <div class="carousel-dots" id="contentDots">
+    <div class="cdot-ind active" data-i="0"></div>
+    <div class="cdot-ind" data-i="1"></div>
+    <div class="cdot-ind" data-i="2"></div>
+    <div class="cdot-ind" data-i="3"></div>
+    <div class="cdot-ind" data-i="4"></div>
+    <div class="cdot-ind" data-i="5"></div>
   </div>
 </section>
 
@@ -320,25 +439,25 @@
     </button>
     <div class="wg carousel-track" id="certificatesTrack">
       <div class="wc">
-        <div class="wdate">Mar 2026</div>
-        <div class="wtag">Atlas Institute</div>
-        <div class="wttl">Distributed Systems Professional</div>
-        <p class="wex">Credential covering resilient service design, systems tradeoffs, and production-ready architecture patterns.</p>
-        <a href="#" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">2025</div>
+        <div class="wtag">Cyfrin Updraft</div>
+        <div class="wttl">Blockchain Basics</div>
+        <p class="wex">Comprehensive introduction to blockchain technology, cryptographic principles, and decentralized networks.</p>
+        <a href="https://profiles.cyfrin.io/u/haikeys/achievements/blockchain-basics" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="wc">
-        <div class="wdate">Jan 2026</div>
-        <div class="wtag">Meridian Academy</div>
-        <div class="wttl">Advanced Cloud Architecture</div>
-        <p class="wex">Focused on scalable infrastructure planning, workload reliability, and secure application deployment workflows.</p>
-        <a href="#" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">2025</div>
+        <div class="wtag">Cyfrin Updraft</div>
+        <div class="wttl">Solidity 101</div>
+        <p class="wex">Fundamental training in writing, testing, and deploying secure smart contracts on the Ethereum blockchain.</p>
+        <a href="https://profiles.cyfrin.io/u/haikeys/achievements/solidity" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
       <div class="wc">
-        <div class="wdate">Oct 2025</div>
-        <div class="wtag">Northwind Labs</div>
-        <div class="wttl">Secure Platform Operations</div>
-        <p class="wex">Training centered on platform hardening, operational safety, and reducing risk in high-impact systems.</p>
-        <a href="#" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        <div class="wdate">2021</div>
+        <div class="wtag">Udemy</div>
+        <div class="wttl">Python Crash Course</div>
+        <p class="wex">Intensive training covering Python fundamentals, data structures, and foundational programming logic.</p>
+        <a href="https://www.udemy.com/certificate/UC-df895ef9-128c-4a0d-9c15-842dfbf0a9c3/" class="wread">View Certificate <svg width="9" height="9" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
       </div>
     </div>
     <button class="carousel-arrow right" type="button" aria-label="Scroll certificates right" data-carousel-dir="next">
@@ -356,14 +475,25 @@
       <p class="ct-body">Available for new roles and consulting. Bring me the projects where the architecture actually matters.</p>
     </div>
     <div class="ct-r">
-      <a href="mailto:engineering@johndoe.dev" class="cemail">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
-        engineering@johndoe.dev
-      </a>
+      <form class="cform" action="https://formsubmit.co/obasekiimisi5@gmail.com" method="POST">
+        <input type="hidden" name="_captcha" value="false">
+        <div class="cform-head" role="button" tabindex="0" aria-expanded="false">
+          <span class="cemail">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="2,4 12,13 22,4"/></svg>
+            obasekiimisi5@gmail.com
+          </span>
+          <span class="cform-ind" aria-hidden="true">+</span>
+        </div>
+        <div class="cform-body">
+          <input type="email" name="email" placeholder="Your Email" required>
+          <textarea name="message" placeholder="Type your message here..." required></textarea>
+          <button type="submit" class="cform-submit">Send Message</button>
+        </div>
+      </form>
       <div class="socs">
-        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-        <a href="#" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+        <a href="https://github.com/Haikeysgit" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+        <a href="https://www.linkedin.com/in/imisioluwa-obaseki-537298318/" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+        <a href="https://x.com/Haikeystweett" class="soc"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
       </div>
     </div>
   </div>
@@ -378,6 +508,3 @@
 <script src="./js/script.js"></script>
 </body>
 </html>
-
-
-

@@ -81,7 +81,7 @@ document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 // SECTION STAGGERS
 const staggerGroups = [
-  { root: document.querySelector('#work'), items: '.pf, .pc' },
+  { root: document.querySelector('#work'), items: '.ccard' },
   { root: document.querySelector('#certificates'), items: '.wc' },
   { root: document.querySelector('#content'), items: '.wc' },
 ];
@@ -166,5 +166,129 @@ document.querySelectorAll('.eni').forEach(item=>{
       f.style.transform='scaleX(0)';
       setTimeout(()=>{f.style.transform=`scaleX(${parseFloat(f.dataset.f)})`;},50+i*100);
     });
+  });
+});
+
+// CAROUSELS
+function initButtonCarousel({ trackId, prevId, nextId, counterId, dotsRootId, cardSelector }) {
+  const track = document.getElementById(trackId);
+  const prev = document.getElementById(prevId);
+  const next = document.getElementById(nextId);
+  const counter = document.getElementById(counterId);
+  const dotsRoot = document.getElementById(dotsRootId);
+  const dots = dotsRoot ? dotsRoot.querySelectorAll('.cdot-ind') : [];
+
+  if(!track || !prev || !next || !counter) return;
+
+  const cards = track.querySelectorAll(cardSelector);
+  const total = cards.length;
+  let cur = 0;
+
+  function cardW() {
+    return cards[0].getBoundingClientRect().width + 16;
+  }
+
+  function go(i) {
+    cur = Math.max(0, Math.min(i, total - 1));
+    track.style.transform = `translateX(-${cur * cardW()}px)`;
+    counter.textContent = String(cur + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+    prev.disabled = cur === 0;
+    next.disabled = cur === total - 1;
+    dots.forEach((d, j) => d.classList.toggle('active', j === cur));
+  }
+
+  prev.addEventListener('click', () => go(cur - 1));
+  next.addEventListener('click', () => go(cur + 1));
+  dots.forEach(d => d.addEventListener('click', () => go(+d.dataset.i)));
+
+  let tx = 0;
+  track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', e => {
+    const dx = tx - e.changedTouches[0].clientX;
+    if(Math.abs(dx) > 40) go(dx > 0 ? cur + 1 : cur - 1);
+  }, { passive: true });
+
+  window.addEventListener('resize', () => go(cur));
+  go(0);
+
+  return {
+    go,
+    next: () => go(cur + 1),
+    prev: () => go(cur - 1),
+  };
+}
+
+const workCarousel = initButtonCarousel({
+  trackId: 'carTrack',
+  prevId: 'carPrev',
+  nextId: 'carNext',
+  counterId: 'carCounter',
+  dotsRootId: 'carDots',
+  cardSelector: '.ccard',
+});
+
+const contentCarousel = initButtonCarousel({
+  trackId: 'contentTrack',
+  prevId: 'contentPrev',
+  nextId: 'contentNext',
+  counterId: 'contentCounter',
+  dotsRootId: 'contentDots',
+  cardSelector: '.wc',
+});
+
+document.addEventListener('keydown', e => {
+  if(e.key === 'ArrowRight') {
+    workCarousel?.next?.();
+  }
+  if(e.key === 'ArrowLeft') {
+    workCarousel?.prev?.();
+  }
+});
+
+// TRACKPAD HORIZONTAL SWIPE SUPPORT
+document.querySelectorAll('.carousel-viewport').forEach(viewport => {
+  let swipeLocked = false;
+
+  viewport.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+
+    e.preventDefault();
+    if (swipeLocked) return;
+
+    const scope = viewport.closest('section') || viewport.parentElement;
+    if (!scope) return;
+
+    const buttons = scope.querySelectorAll('.car-btn');
+    const prevBtn = buttons[0];
+    const nextBtn = buttons[1];
+
+    if (e.deltaX > 30 && nextBtn) {
+      swipeLocked = true;
+      nextBtn.click();
+      setTimeout(() => { swipeLocked = false; }, 500);
+    } else if (e.deltaX < -30 && prevBtn) {
+      swipeLocked = true;
+      prevBtn.click();
+      setTimeout(() => { swipeLocked = false; }, 500);
+    }
+  }, { passive: false });
+});
+
+// CONTACT FORM EXPANDER
+document.querySelectorAll('.cform').forEach(form => {
+  const header = form.querySelector('.cform-head');
+  if (!header) return;
+
+  const toggleExpanded = () => {
+    const expanded = form.classList.toggle('expanded');
+    header.setAttribute('aria-expanded', String(expanded));
+  };
+
+  header.addEventListener('click', toggleExpanded);
+  header.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      toggleExpanded();
+    }
   });
 });
