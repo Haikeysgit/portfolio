@@ -46,7 +46,7 @@ setTimeout(typeLoop, 900);
 // TERMINAL
 const lines=[
   {t:'cmd',v:'whoami'},
-  {t:'out',v:'Haikeys | Full-stack Developer'},
+  {t:'out',v:'Haikeys | Full-stack Engineer'},
   {t:'cmd',v:'uptime'},
   {t:'out',v:'4 years, 2 months, 18 days'},
   {t:'cmd',v:'cat status.json'},
