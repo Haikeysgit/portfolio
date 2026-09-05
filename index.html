@@ -124,11 +124,10 @@
   <div class="carousel-header rv">
     <div>
       <div class="sec-label" style="margin-bottom:8px">01 / Work</div>
-      <h2 class="sec-title" style="margin-bottom:6px">Projects that shipped.</h2>
-      <p class="sec-sub" style="margin-bottom:0">Real systems. Real scale. No demos.</p>
+      <h2 class="sec-title" style="margin-bottom:0">Projects that shipped.</h2>
     </div>
     <div class="carousel-controls">
-      <span class="car-counter" id="carCounter">01 / 04</span>
+      <span class="car-counter" id="carCounter">01 / 03</span>
       <button class="car-btn" id="carPrev" disabled aria-label="Previous">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
@@ -143,12 +142,50 @@
 
       <div class="ccard">
         <div class="cc-img">
-          <img src="./assets/images/gafferscore.png" alt="GafferScore preview"/>
+          <img src="./assets/images/tektradoor.png" alt="Tektradoor preview"/>
           <div class="cc-feat">Featured</div>
-          <div class="cc-role">Role: Founding Full Stack Engineer</div>
+          <div class="cc-role">Role: Founder &amp; Lead Full Stack Engineer</div>
         </div>
         <div class="cc-body">
           <div class="cc-top"><span class="cc-num">PRJ_01</span></div>
+          <div class="cc-name">Tektradoor</div>
+          <p class="cc-desc">Fully automated crypto futures trading engine. Users connect an account once and it handles the complete trade lifecycle with zero manual intervention. Structural entry gates layered with XGhost, a proprietary XGBoost model that scores every setup before execution.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Python</span>
+            <span class="cc-tag">FastAPI</span>
+            <span class="cc-tag">XGBoost</span>
+            <span class="cc-tag">WebSockets</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">waitlist.py</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sf">@app.post</span>(<span class="ss">"/waitlist"</span>)</div>
+              <div><span class="sk">async def</span> <span class="sf">join_waitlist</span>(entry: WaitlistEntry):</div>
+              <div>&nbsp;&nbsp;<span class="sk">if</span> <span class="sk">await</span> db.<span class="sf">exists</span>(entry.email):</div>
+              <div>&nbsp;&nbsp;&nbsp;&nbsp;<span class="sk">return</span> {<span class="ss">"status"</span>: <span class="ss">"already_joined"</span>}</div>
+              <div>&nbsp;&nbsp;<span class="sk">return</span> <span class="sk">await</span> db.<span class="sf">add</span>(entry)</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://tektradoor.com/" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+          <span class="cc-status"><span class="cc-status-dot"></span>Launching Oct 2026</span>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="cc-img">
+          <img src="./assets/images/gafferscore.png" alt="GafferScore preview"/>
+          <div class="cc-role">Role: Founding Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_02</span></div>
           <div class="cc-name">GafferScore</div>
           <p class="cc-desc">Live English Premier League prediction platform featuring an AI prediction agent. Engineered the whole platform from the live scoring logic, user leaderboards, and the complete interactive frontend experience.</p>
           <div class="cc-tags">
@@ -184,49 +221,13 @@
 
       <div class="ccard">
         <div class="cc-img">
-          <img src="./assets/images/smartbursar.png" alt="SmartBursar preview"/>
-          <div class="cc-role">Role: Founding Full Stack Engineer</div>
-        </div>
-        <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_02</span></div>
-          <div class="cc-name">SmartBursar</div>
-          <p class="cc-desc">AI powered school finance platform automating fee collection and WhatsApp reminders. It uses Vision LLMs to verify bank receipts in real time, currently processing payments for over 500 students across 20 beta schools.</p>
-          <div class="cc-tags">
-            <span class="cc-tag">Python</span>
-            <span class="cc-tag">FastAPI</span>
-            <span class="cc-tag">Llama Vision</span>
-            <span class="cc-tag">PostgreSQL</span>
-          </div>
-          <div class="cc-code">
-            <div class="cc-code-hdr">
-              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
-              <span class="cc-fname">transactions.py</span>
-            </div>
-            <div class="cc-code-body">
-              <div>pending_txn = db.<span class="sf">query</span>(Transaction).<span class="sf">join</span>(Student).<span class="sf">filter</span>(</div>
-              <div>&nbsp;&nbsp;Student.school_id == school.id,</div>
-              <div>&nbsp;&nbsp;~Transaction.status.<span class="sf">in_</span>([<span class="ss">'VERIFIED'</span>, <span class="ss">'REJECTED'</span>, <span class="ss">'CANCELLED'</span>])</div>
-              <div>).<span class="sf">order_by</span>(Transaction.created_at.<span class="sf">asc</span>()).<span class="sf">first</span>()</div>
-            </div>
-          </div>
-        </div>
-        <div class="cc-footer">
-          <a href="https://smartbursar.onrender.com/" class="cc-lnk" target="_blank">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live
-          </a>
-        </div>
-      </div>
-
-      <div class="ccard">
-        <div class="cc-img">
           <img src="./assets/images/flux.png" alt="Flux preview"/>
           <div class="cc-role">Role: Full Stack Engineer</div>
         </div>
         <div class="cc-body">
           <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
           <div class="cc-name">Flux</div>
-          <p class="cc-desc">Solana rent recovery tool that monitors Kora sponsored accounts to safely reclaim locked SOL. It automatically identifies idle accounts and safely executes closures to prevent capital leaks.</p>
+          <p class="cc-desc">Solana rent recovery engine deployed on Devnet that scans wallet transaction history to identify idle accounts and reclaim locked SOL from rent fees. Real time dashboard for wallet analysis and automated fund reclamation.</p>
           <div class="cc-tags">
             <span class="cc-tag">Next.js</span>
             <span class="cc-tag">TypeScript</span>
@@ -254,46 +255,6 @@
         </div>
       </div>
 
-      <div class="ccard">
-        <div class="cc-img">
-          <img src="./assets/images/blockchain.png" alt="Updraft Portal preview"/>
-          <div class="cc-role">Role: Frontend Engineer</div>
-        </div>
-        <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_04</span></div>
-          <div class="cc-name">Updraft Portal</div>
-          <p class="cc-desc">Responsive landing page promoting Web3 and smart contract education. Engineered a clean, conversion focused UI to drive engagement for blockchain learning platforms.</p>
-          <div class="cc-tags">
-            <span class="cc-tag">HTML5</span>
-            <span class="cc-tag">CSS3</span>
-            <span class="cc-tag">Vanilla JS</span>
-            <span class="cc-tag">Responsive UI</span>
-          </div>
-          <div class="cc-code">
-            <div class="cc-code-hdr">
-              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
-              <span class="cc-fname">main.js</span>
-            </div>
-            <div class="cc-code-body">
-              <div><span class="sk">const</span> handleScroll = () =&gt; {</div>
-              <div>&nbsp;&nbsp;<span class="sk">const</span> nav = document.<span class="sf">querySelector</span>(<span class="ss">".navbar"</span>);</div>
-              <div>&nbsp;&nbsp;nav.classList.<span class="sf">toggle</span>(<span class="ss">"scrolled"</span>, window.scrollY &gt; <span class="sn">50</span>);</div>
-              <div>};</div>
-            </div>
-          </div>
-        </div>
-        <div class="cc-footer">
-          <a href="https://blockchaindev2026.netlify.app/" class="cc-lnk" target="_blank">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-            Live
-          </a>
-          <a href="https://github.com/Haikeysgit/Front-end-blockchain-dev-site" class="cc-lnk" target="_blank">
-            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
-            Code
-          </a>
-        </div>
-      </div>
-
     </div>
   </div>
 
@@ -301,7 +262,6 @@
     <div class="cdot-ind active" data-i="0"></div>
     <div class="cdot-ind" data-i="1"></div>
     <div class="cdot-ind" data-i="2"></div>
-    <div class="cdot-ind" data-i="3"></div>
   </div>
 </section>
 <!-- EXPERTISE -->
@@ -501,8 +461,7 @@
 
 <footer>
   <span>Copyright 2026 Haikeys</span>
-  <span><span class="fdot"></span>All systems operational</span>
-  <span>Built from scratch</span>
+  <span>All systems operational</span>
 </footer>
 
 <script src="./js/script.js"></script>
