@@ -4,6 +4,20 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Haikeys Portfolio</title>
+<meta name="description" content="Full stack engineer building fault-tolerant APIs, AI integrations and fast frontend interfaces."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://www.obaseki.dev/"/>
+<meta property="og:site_name" content="Haikeys"/>
+<meta property="og:title" content="Haikeys | Full Stack Engineer"/>
+<meta property="og:description" content="Full stack engineer building fault-tolerant APIs, AI integrations and fast frontend interfaces."/>
+<meta property="og:image" content="https://www.obaseki.dev/assets/images/og-image.png"/>
+<meta property="og:image:width" content="1200"/>
+<meta property="og:image:height" content="630"/>
+<meta property="og:image:alt" content="Haikeys portfolio: I build things that last."/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Haikeys | Full Stack Engineer"/>
+<meta name="twitter:description" content="Full stack engineer building fault-tolerant APIs, AI integrations and fast frontend interfaces."/>
+<meta name="twitter:image" content="https://www.obaseki.dev/assets/images/og-image.png"/>
 <link rel="icon" type="image/svg+xml" href="./assets/images/favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=IBM+Plex+Mono:wght@300;400;500;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -127,7 +141,7 @@
       <h2 class="sec-title" style="margin-bottom:0">Projects that shipped.</h2>
     </div>
     <div class="carousel-controls">
-      <span class="car-counter" id="carCounter">01 / 03</span>
+      <span class="car-counter" id="carCounter">01 / 04</span>
       <button class="car-btn" id="carPrev" disabled aria-label="Previous">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
@@ -221,11 +235,49 @@
 
       <div class="ccard">
         <div class="cc-img">
+          <img src="./assets/images/prador.png" alt="Prador preview"/>
+          <div class="cc-role">Role: Freelance Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
+          <div class="cc-name">Prador</div>
+          <p class="cc-desc">Live booking system for a UK car detailing business. Customers book a slot in seconds with no account, and both the customer and the business get an instant email.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Next.js</span>
+            <span class="cc-tag">TypeScript</span>
+            <span class="cc-tag">Resend</span>
+            <span class="cc-tag">Tailwind</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">route.ts</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sk">const</span> result = <span class="sf">validateBookingPayload</span>(body);</div>
+              <div><span class="sk">if</span> (!result.success) {</div>
+              <div>&nbsp;&nbsp;<span class="sk">return</span> NextResponse.<span class="sf">json</span>({ error: result.error }, { status: <span class="sn">400</span> });</div>
+              <div>}</div>
+              <div><span class="sk">await</span> <span class="sf">sendBookingEmails</span>(result.data);</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://www.prador.co.uk/" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+          <span class="cc-status"><span class="cc-status-dot"></span>Live client project</span>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="cc-img">
           <img src="./assets/images/flux.png" alt="Flux preview"/>
           <div class="cc-role">Role: Full Stack Engineer</div>
         </div>
         <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
+          <div class="cc-top"><span class="cc-num">PRJ_04</span></div>
           <div class="cc-name">Flux</div>
           <p class="cc-desc">Solana rent recovery engine deployed on Devnet that scans wallet transaction history to identify idle accounts and reclaim locked SOL from rent fees. Real time dashboard for wallet analysis and automated fund reclamation.</p>
           <div class="cc-tags">
@@ -262,6 +314,7 @@
     <div class="cdot-ind active" data-i="0"></div>
     <div class="cdot-ind" data-i="1"></div>
     <div class="cdot-ind" data-i="2"></div>
+    <div class="cdot-ind" data-i="3"></div>
   </div>
 </section>
 <!-- EXPERTISE -->
