@@ -138,7 +138,7 @@
       <h2 class="sec-title" style="margin-bottom:0">Projects that shipped.</h2>
     </div>
     <div class="carousel-controls">
-      <span class="car-counter" id="carCounter">01 / 04</span>
+      <span class="car-counter" id="carCounter">01 / 05</span>
       <button class="car-btn" id="carPrev" disabled aria-label="Previous">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
       </button>
@@ -192,11 +192,51 @@
 
       <div class="ccard">
         <div class="cc-img">
+          <img src="./assets/images/hsbyfiona.png" alt="Heavenscented preview"/>
+          <div class="cc-role">Role: Solo Full Stack Engineer</div>
+        </div>
+        <div class="cc-body">
+          <div class="cc-top"><span class="cc-num">PRJ_02</span></div>
+          <div class="cc-name">Heavenscented</div>
+          <div class="cc-kind">Perfume e-commerce</div>
+          <p class="cc-desc">Online perfume store for a Nigerian brand, built solo in a week. Server-verified Paystack payments, delivery priced by road distance, automatic PDF receipts and an owner dashboard run from a phone.</p>
+          <div class="cc-tags">
+            <span class="cc-tag">Astro</span>
+            <span class="cc-tag">TypeScript</span>
+            <span class="cc-tag">Convex</span>
+            <span class="cc-tag">Paystack</span>
+            <span class="cc-tag">Cloudflare Workers</span>
+          </div>
+          <div class="cc-code">
+            <div class="cc-code-hdr">
+              <div class="cdot r"></div><div class="cdot y"></div><div class="cdot g"></div>
+              <span class="cc-fname">order-flow.md</span>
+            </div>
+            <div class="cc-code-body">
+              <div><span class="sn">1.</span> Server re-prices the cart, creates unpaid order</div>
+              <div><span class="sn">2.</span> Customer pays on <span class="sf">Paystack</span></div>
+              <div><span class="sn">3.</span> <span class="sk">HMAC-signed</span> webhook confirms the exact total</div>
+              <div><span class="sn">4.</span> Marked paid once, stock goes down</div>
+              <div><span class="sn">5.</span> <span class="ss">PDF receipt</span> emailed to customer + owner</div>
+            </div>
+          </div>
+        </div>
+        <div class="cc-footer">
+          <a href="https://hsbyfiona.com" class="cc-lnk" target="_blank">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Live
+          </a>
+          <span class="cc-status"><span class="cc-status-dot"></span>Live, taking real payments</span>
+        </div>
+      </div>
+
+      <div class="ccard">
+        <div class="cc-img">
           <img src="./assets/images/gafferscore.png" alt="GafferScore preview"/>
           <div class="cc-role">Role: Founding Full Stack Engineer</div>
         </div>
         <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_02</span></div>
+          <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
           <div class="cc-name">GafferScore</div>
           <p class="cc-desc">Live English Premier League prediction platform featuring an AI prediction agent. Engineered the whole platform from the live scoring logic, user leaderboards, and the complete interactive frontend experience.</p>
           <div class="cc-tags">
@@ -236,7 +276,7 @@
           <div class="cc-role">Role: Freelance Full Stack Engineer</div>
         </div>
         <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_03</span></div>
+          <div class="cc-top"><span class="cc-num">PRJ_04</span></div>
           <div class="cc-name">Prador</div>
           <p class="cc-desc">Live booking system for a UK car detailing business. Customers book a slot in seconds with no account, and both the customer and the business get an instant email.</p>
           <div class="cc-tags">
@@ -274,7 +314,7 @@
           <div class="cc-role">Role: Full Stack Engineer</div>
         </div>
         <div class="cc-body">
-          <div class="cc-top"><span class="cc-num">PRJ_04</span></div>
+          <div class="cc-top"><span class="cc-num">PRJ_05</span></div>
           <div class="cc-name">Flux</div>
           <p class="cc-desc">Solana rent recovery engine deployed on Devnet that scans wallet transaction history to identify idle accounts and reclaim locked SOL from rent fees. Real time dashboard for wallet analysis and automated fund reclamation.</p>
           <div class="cc-tags">
@@ -312,6 +352,7 @@
     <div class="cdot-ind" data-i="1"></div>
     <div class="cdot-ind" data-i="2"></div>
     <div class="cdot-ind" data-i="3"></div>
+    <div class="cdot-ind" data-i="4"></div>
   </div>
 </section>
 <!-- EXPERTISE -->
