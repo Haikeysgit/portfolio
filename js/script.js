@@ -33,7 +33,7 @@ if(menuBtn && mobileMenu){
 }
 
 // TYPEWRITER
-const words = ['that scale.','that last.','that ship.','at 800ns.','without excuses.'];
+const words = ['that scale.','that last.','that ship.','at 800ns.'];
 let wi=0,ci=0,del=false;
 const tw = document.getElementById('tw');
 function typeLoop(){
@@ -56,7 +56,7 @@ const lines=[
   {t:'kv',k:'uptime_pct',v:'"99.97%"',c:'tg'},
   {t:'kv',k:'last_incident',v:'"none this quarter"',c:'tg'},
   {t:'cmd',v:'echo $READY'},
-  {t:'outg',v:'> ready to build something hard'},
+  {t:'outg',v:'> ready for the next project'},
 ];
 const tb=document.getElementById('tb'); let li=0;
 function renderLine(){
