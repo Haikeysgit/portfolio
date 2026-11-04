@@ -1,0 +1,38 @@
+.bh { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); min-height: 560px; font-size: 15px; }
+.bh-main { padding: 20px; display: flex; flex-direction: column; gap: 16px; border-right: 1px solid var(--br); }
+.bh-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.bh-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); margin: 0; }
+.bh-bal { display: flex; flex-wrap: wrap; gap: 6px 18px; align-items: baseline; margin-top: 6px; }
+.bh-bal strong { font-size: 26px; font-weight: 800; letter-spacing: -.02em; }
+.bh-cap { font-size: 13px; color: var(--dim); }
+.bh-ghost { font: inherit; font-weight: 700; padding: 8px 14px; border-radius: 8px; border: 1px solid var(--br); background: transparent; color: var(--ink); cursor: pointer; }
+.bh-ghost:hover { border-color: var(--acc); }
+.bh-label { font-size: 13px; font-weight: 600; color: var(--dim); margin: 0 0 6px; display: block; }
+.bh-picks { display: flex; flex-direction: column; }
+.bh-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.bh-chips button { font: inherit; font-size: 14px; font-weight: 600; padding: 8px 12px; border-radius: 999px; border: 1px solid var(--br); background: var(--bg1); color: var(--ink); cursor: pointer; }
+.bh-chips button:hover { border-color: var(--acc); }
+.bh-form { display: grid; gap: 8px; }
+.bh-form textarea { font: inherit; color: var(--ink); background: var(--bg1); border: 1px solid var(--br); border-radius: 10px; padding: 10px 12px; resize: vertical; }
+.bh-form textarea:focus { outline: 2px solid var(--acc); outline-offset: 1px; }
+.bh-btn { font: inherit; font-weight: 700; justify-self: start; padding: 10px 18px; border-radius: 10px; border: 1px solid var(--acc); background: var(--acc); color: var(--bg); cursor: pointer; }
+.bh-btn:disabled { opacity: .45; cursor: not-allowed; }
+.bh-msg { margin: 0; padding: 12px 14px; border-left: 3px solid var(--acc); background: var(--bg1); border-radius: 0 10px 10px 0; color: var(--dim); font-size: 14px; line-height: 1.5; }
+.bh-side { padding: 20px; background: var(--bg1); display: flex; flex-direction: column; gap: 12px; }
+.bh-stages { list-style: none; margin: 0; padding: 0; display: grid; gap: 22px; }
+.bh-stages li { position: relative; display: flex; flex-direction: column; gap: 2px; padding: 12px 14px; border-radius: 10px; border: 1px solid var(--br); background: var(--bg); }
+.bh-stages li + li::before { content: '↓'; position: absolute; top: -20px; left: 18px; color: var(--dim); }
+.bh-stages li.is-pass { border-color: var(--acc); }
+.bh-stages li.is-block { border-color: var(--ink); background: var(--bg2); }
+.bh-stages li.is-idle { opacity: .6; }
+.bh-k { font-weight: 800; }
+.bh-t { font-size: 14px; color: var(--dim); line-height: 1.45; }
+.bh-stages li.is-block .bh-t { color: var(--ink); font-weight: 600; }
+.bh-sub { margin: 0; font-size: 13.5px; color: var(--dim); }
+.bh-note { margin: auto 0 0; font-size: 13px; color: var(--dim); border-top: 1px solid var(--br); padding-top: 12px; }
+@media (max-width: 767px) {
+  .bh { grid-template-columns: 1fr; min-height: 0; }
+  .bh-main { border-right: 0; border-bottom: 1px solid var(--br); padding: 14px; }
+  .bh-side { padding: 14px; }
+  .bh-bal strong { font-size: 22px; }
+}
