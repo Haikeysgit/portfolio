@@ -26,7 +26,14 @@ interface Props {
 const { project, prev, next } = Astro.props;
 const { Content } = await render(project);
 ---
-<Base title={`${project.data.name} | Obaseki`} description={project.data.summary} image={project.data.cover}>
+<Base title={`${project.data.name} | Obaseki`} description={project.data.summary} image={`/images/projects/${project.id}/og.jpg`}>
+  <nav class="pbar" aria-label="Project navigation">
+    <div class="wrap pbar-in">
+      <a href="/#projects" class="pbar-back">← All projects</a>
+      <span class="pbar-name">{project.data.name}</span>
+      <a href={`/projects/${next.id}`} class="pbar-next" aria-label={`Next project: ${next.name}`}>Next →</a>
+    </div>
+  </nav>
   <div class="wrap">
     <ProjectHeader project={project} />
     <section class="ui" aria-label="Project UI"><DemoSlot project={project} /></section>
@@ -35,6 +42,13 @@ const { Content } = await render(project);
   </div>
 </Base>
 <style>
+  .pbar { position: sticky; top: 64px; z-index: 45; background: color-mix(in srgb, var(--bg) 92%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--br); }
+  .pbar-in { display: flex; align-items: center; gap: 12px; height: 48px; }
+  .pbar a { text-decoration: none; font-weight: 700; font-size: 15px; padding: 8px 12px; margin: 0 -12px; border-radius: 8px; }
+  .pbar a:hover { color: var(--acc); }
+  .pbar-back { color: var(--ink); }
+  .pbar-name { margin-inline: auto; font-weight: 800; font-size: 15px; color: var(--dim); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .pbar-next { color: var(--dim); }
   .ui { margin: 24px 0 64px; }
   .prose { max-width: 760px; }
   .prose :global(h2) { font-size: 28px; font-weight: 800; letter-spacing: -.02em; margin: 48px 0 14px; }

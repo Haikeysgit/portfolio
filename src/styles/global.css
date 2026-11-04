@@ -57,3 +57,14 @@ button { font: inherit; color: inherit; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
 }
+
+/* Tap feel: instant press feedback, no grey tap flash, no double-tap zoom delay. */
+a, button, [role='button'], summary, label { -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+button, .btn, .pcard, [data-press] {
+  transition: transform .16s cubic-bezier(.2, .8, .2, 1), background-color .2s, border-color .2s, color .2s, box-shadow .2s, opacity .2s;
+}
+button:active:not(:disabled), .btn:active, [data-press]:active { transform: scale(.96); transition-duration: .06s; }
+.pcard:active { transform: scale(.985); transition-duration: .06s; }
+@media (prefers-reduced-motion: reduce) {
+  button:active:not(:disabled), .btn:active, .pcard:active, [data-press]:active { transform: none; }
+}

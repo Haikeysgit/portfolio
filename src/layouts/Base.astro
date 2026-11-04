@@ -45,6 +45,16 @@ const ogImage = new URL(image, Astro.site);
     <Header />
     <main id="main"><slot /></main>
     <Footer />
+    <script>
+      // A short buzz on demo buttons for touch phones that support it (Android). Silent everywhere else.
+      const touch = window.matchMedia('(pointer: coarse)').matches;
+      if (touch && 'vibrate' in navigator) {
+        document.addEventListener('pointerdown', (e) => {
+          const el = (e.target as Element | null)?.closest('[data-haptic] button:not(:disabled)');
+          if (el) navigator.vibrate(8);
+        }, { passive: true });
+      }
+    </script>
   </body>
 </html>
 <style>

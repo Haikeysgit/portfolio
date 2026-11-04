@@ -20,7 +20,7 @@ const label =
   : 'Interactive demo · not real money';
 ---
 {hasDemo ? (
-  <div class="demo">
+  <div class="demo" data-haptic>
     <p class="label note">{label}</p>
     <DeviceFrame kind="auto">
       {p.demo === 'squadjar' && <SquadjarDemo client:visible />}
