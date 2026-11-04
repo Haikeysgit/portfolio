@@ -10,8 +10,11 @@ links:
 order: 6
 cover: "/images/projects/gafferscore-agent/cover.webp"
 shots:
+  - { src: "/images/projects/gafferscore-agent/desktop-record.webp", alt: "The Gaffer's record for gameweek 9: 37.5% top-3 hit rate over 8 finished matches", device: desktop }
+  - { src: "/images/projects/gafferscore-agent/desktop-analysis.webp", alt: "Gaffer match cards with win, draw and loss probabilities and a predicted score", device: desktop }
   - { src: "/images/projects/gafferscore-agent/desktop-repo.webp", alt: "gaffer-engine repository: the weekly match analysis pipeline", device: desktop }
-  - { src: "/images/projects/gafferscore-agent/mobile-repo.webp", alt: "gaffer-engine repository: the weekly match analysis pipeline", device: mobile }
+  - { src: "/images/projects/gafferscore-agent/mobile-record.webp", alt: "The Gaffer's record for gameweek 9 on a phone", device: mobile }
+  - { src: "/images/projects/gafferscore-agent/mobile-analysis.webp", alt: "Gaffer match card with probabilities and a predicted score on a phone", device: mobile }
 ---
 
 import Flow from '../../components/Flow.astro';
@@ -49,5 +52,6 @@ I built the engine behind the Gaffer, `gaffer-engine`, a weekly Python pipeline:
 ## Results
 
 - Runs weekly, and its insights go to players inside [GafferScore](https://gafferscore.xyz).
+- Gameweek 9 record: a 37.5% top-3 hit rate across 8 finished matches.
 - Code: [gaffer-engine on GitHub](https://github.com/Haikeysgit/gaffer-engine).
-{/* TODO(verify): the reasons under Key decisions are inferred from the code, not stated by Obaseki. CatBoost's exact role is a guess from catboost_model.py. Pipeline step order and "runs on a schedule" are read from the script names and the .github folder in gaffer-engine; confirm. Also need a logged-in screenshot of /gaffer. */}
+{/* TODO(verify): the reasons under Key decisions are inferred from the code, not stated by Obaseki. CatBoost's exact role is a guess from catboost_model.py. Pipeline step order and "runs on a schedule" are read from the script names and the .github folder in gaffer-engine; confirm. */}

@@ -7,11 +7,9 @@ Each item is marked in the project's MDX file as a hidden `{/* TODO(verify) */}`
 | Kedge | "Two startups contacted me about using it" | Stated in chat; no written source. |
 | Kedge | Trimming CI logs keeps the agent's context focused | The reason is inferred from the code (`gitgh.py`), not from your notes. |
 | Bulkhead | The reasons for "the contract builds the transaction" and "one asset per tier" | Taken from the spec and handoff notes; confirm they match your thinking. |
-| Hsbyfiona | "Built solo in a week" | Carried over from the old portfolio copy. |
 | GafferScore AI agent | The key decisions (Poisson base, lineup adjustment, weekly schedule) and CatBoost's role | Inferred from `gaffer-engine` script names and the `.github` folder. |
-| GafferScore AI agent | Screenshot of the Gaffer view | `/gaffer` needs a logged-in account. The page shows the repo page until you send a screenshot. |
 | Prador | The whole page | No repo or notes were available; the page only uses the old portfolio copy. |
-| Tektradoor | tektradoor.com says "Runs autonomously on your Bybit account" | May not match the rebuild. |
+| Tektradoor | tektradoor.com itself still says "Runs autonomously on your Bybit account" | You no longer connect to exchanges. The portfolio screenshots hide that line, but the live site needs updating. |
 
 ## Not on the site yet
 

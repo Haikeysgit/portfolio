@@ -23,16 +23,16 @@ for (const [slug, pages] of Object.entries(all)) {
         await page.waitForTimeout(1500);
         if (hideText) {
           // Hide every short row whose text mentions hideText (e.g. a commit line naming a co-author).
-          await page.evaluate((t) => {
+          await page.evaluate((terms) => {
             const hits = [...document.querySelectorAll('body *')].filter(
-              (e) => e.children.length === 0 && e.textContent?.toLowerCase().includes(t),
+              (e) => e.children.length === 0 && terms.some((t) => e.textContent?.toLowerCase().includes(t)),
             );
             for (const el of hits) {
               let row = el;
               while (row.parentElement && row.parentElement.getBoundingClientRect().height < 90) row = row.parentElement;
               row.style.visibility = 'hidden';
             }
-          }, hideText.toLowerCase());
+          }, [hideText].flat().map((t) => t.toLowerCase()));
         }
         const file = `${dir}/${device}-${name}.png`;
         await page.screenshot({ path: file });

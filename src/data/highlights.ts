@@ -9,7 +9,7 @@ export const highlights = [
     track: 'Apps',
     slug: 'hsbyfiona',
     strong: 'Hsbyfiona is live and taking real payments.',
-    rest: 'I built the store solo in a week.',
+    rest: 'I built it solo, from the storefront to the owner dashboard.',
   },
   {
     track: 'Blockchain',

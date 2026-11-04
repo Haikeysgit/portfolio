@@ -69,7 +69,11 @@
   "tektradoor": [
     {
       "url": "https://tektradoor.com/",
-      "name": "home"
+      "name": "home",
+      "hideText": [
+        "bybit",
+        "more exchanges"
+      ]
     },
     {
       "url": "https://tektradoor.com/engine",
