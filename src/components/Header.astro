@@ -1,0 +1,35 @@
+---
+import ThemeToggle from './ThemeToggle.astro';
+const links = [
+  { href: '/#projects', label: 'Projects' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/#writing', label: 'Writing' },
+  { href: '/#contact', label: 'Contact' },
+];
+---
+<header class="hdr">
+  <div class="wrap row">
+    <a href="/" class="name">Obaseki</a>
+    <nav aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <div class="right">
+      <ThemeToggle />
+      <a class="btn btn-primary resume" href="/Obaseki_Resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </div>
+</header>
+<style>
+  .hdr { position: sticky; top: 0; z-index: 50; background: color-mix(in srgb, var(--bg) 88%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--br); }
+  .row { display: flex; align-items: center; gap: 24px; height: 64px; }
+  .name { font-weight: 800; font-size: 18px; text-decoration: none; letter-spacing: -.01em; }
+  nav { display: flex; gap: 24px; margin-left: auto; }
+  nav a { text-decoration: none; color: var(--dim); font-size: 15px; font-weight: 500; }
+  nav a:hover { color: var(--ink); }
+  .right { display: flex; gap: 10px; align-items: center; }
+  .resume { padding: 9px 16px; font-size: 14px; }
+  @media (max-width: 767px) {
+    nav { display: none; }
+    .right { margin-left: auto; }
+  }
+</style>

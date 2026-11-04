@@ -32,46 +32,8 @@ if(menuBtn && mobileMenu){
   });
 }
 
-// TYPEWRITER
-const words = ['that scale.','that last.','that ship.','at 800ns.'];
-let wi=0,ci=0,del=false;
-const tw = document.getElementById('tw');
-function typeLoop(){
-  const w=words[wi];
-  if(!del){ tw.textContent=w.slice(0,ci+1); ci++; if(ci===w.length){setTimeout(()=>{del=true;typeLoop()},1900);return;} setTimeout(typeLoop,68); }
-  else { tw.textContent=w.slice(0,ci-1); ci--; if(ci===0){del=false;wi=(wi+1)%words.length;setTimeout(typeLoop,300);return;} setTimeout(typeLoop,36); }
-}
-setTimeout(typeLoop, 900);
-
-// TERMINAL
-const lines=[
-  {t:'cmd',v:'whoami'},
-  {t:'out',v:'Obaseki | Full-stack Engineer'},
-  {t:'cmd',v:'uptime'},
-  {t:'out',v:'4 years, 2 months, 18 days'},
-  {t:'cmd',v:'cat status.json'},
-  {t:'kv',k:'available',v:'true',c:'tg'},
-  {t:'kv',k:'focus',v:'"full stack + ai"'},
-  {t:'kv',k:'commits',v:'41,293'},
-  {t:'kv',k:'uptime_pct',v:'"99.97%"',c:'tg'},
-  {t:'kv',k:'last_incident',v:'"none this quarter"',c:'tg'},
-  {t:'cmd',v:'echo $READY'},
-  {t:'outg',v:'> ready for the next project'},
-];
-const tb=document.getElementById('tb'); let li=0;
-function renderLine(){
-  if(li>=lines.length) return;
-  const l=lines[li++]; const d=document.createElement('div'); d.className='tal';
-  if(l.t==='cmd') d.innerHTML=`<div class="trow"><span class="tp">\u276F</span><span class="tc">${l.v}</span></div>`;
-  else if(l.t==='out') d.innerHTML=`<div class="to">${l.v}</div>`;
-  else if(l.t==='outg') d.innerHTML=`<div class="to tg">${l.v}</div>`;
-  else if(l.t==='kv') d.innerHTML=`<div class="to"><span class="tk">"${l.k}"</span>: <span class="${l.c||'tv'}">${l.v}</span></div>`;
-  tb.appendChild(d); setTimeout(renderLine, l.t==='cmd'?200:80);
-}
-setTimeout(renderLine, 700);
-
 // MARQUEE
-const stack=['Full-stack','AI Integration','System Design','Frontend','Backend'];
+const stack=['Web apps','AI agents','Smart contracts','TypeScript','Python','Solidity','Rust'];
 const mq=document.getElementById('mq');
 [...stack,...stack,...stack,...stack].forEach(s=>{ const sp=document.createElement('span'); sp.className='mqi'; sp.textContent=s; mq.appendChild(sp); });
 
@@ -81,7 +43,7 @@ document.querySelectorAll('.rv').forEach(el=>ro.observe(el));
 
 // SECTION STAGGERS
 const staggerGroups = [
-  { root: document.querySelector('#work'), items: '.ccard' },
+  { root: document.querySelector('#work'), items: '.wk' },
   { root: document.querySelector('#certificates'), items: '.wc' },
   { root: document.querySelector('#content'), items: '.wc' },
 ];
@@ -145,26 +107,28 @@ function initMobileCarousel(track){
 
 document.querySelectorAll('.carousel-track').forEach(initMobileCarousel);
 
-// SKILL BARS
-const so=new IntersectionObserver(e=>{
-  e.forEach(x=>{if(x.isIntersecting){
-    x.target.querySelectorAll('.sfill').forEach((f,i)=>{ const p=parseFloat(f.dataset.f); setTimeout(()=>{f.style.transform=`scaleX(${p})`;},i*100); });
-    so.unobserve(x.target);
-  }});
-},{threshold:0.2});
-document.querySelectorAll('.ep').forEach(c=>so.observe(c));
-
 // EXPERTISE TABS
 document.querySelectorAll('.eni').forEach(item=>{
   item.addEventListener('click',()=>{
     document.querySelectorAll('.eni').forEach(i=>i.classList.remove('active'));
     document.querySelectorAll('.ep').forEach(p=>p.classList.remove('active'));
     item.classList.add('active');
-    const panel=document.getElementById(item.dataset.p);
-    panel.classList.add('active');
-    panel.querySelectorAll('.sfill').forEach((f,i)=>{
-      f.style.transform='scaleX(0)';
-      setTimeout(()=>{f.style.transform=`scaleX(${parseFloat(f.dataset.f)})`;},50+i*100);
+    document.getElementById(item.dataset.p).classList.add('active');
+  });
+});
+
+// WORK FILTER
+const workCards = document.querySelectorAll('#wgrid .wk');
+document.querySelectorAll('.wf-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const f = btn.dataset.f;
+    document.querySelectorAll('.wf-btn').forEach(b => {
+      const on = b === btn;
+      b.classList.toggle('active', on);
+      b.setAttribute('aria-pressed', String(on));
+    });
+    workCards.forEach(card => {
+      card.hidden = f !== 'all' && !card.dataset.t.split(' ').includes(f);
     });
   });
 });
@@ -218,15 +182,6 @@ function initButtonCarousel({ trackId, prevId, nextId, counterId, dotsRootId, ca
   };
 }
 
-const workCarousel = initButtonCarousel({
-  trackId: 'carTrack',
-  prevId: 'carPrev',
-  nextId: 'carNext',
-  counterId: 'carCounter',
-  dotsRootId: 'carDots',
-  cardSelector: '.ccard',
-});
-
 const contentCarousel = initButtonCarousel({
   trackId: 'contentTrack',
   prevId: 'contentPrev',
@@ -234,15 +189,6 @@ const contentCarousel = initButtonCarousel({
   counterId: 'contentCounter',
   dotsRootId: 'contentDots',
   cardSelector: '.wc',
-});
-
-document.addEventListener('keydown', e => {
-  if(e.key === 'ArrowRight') {
-    workCarousel?.next?.();
-  }
-  if(e.key === 'ArrowLeft') {
-    workCarousel?.prev?.();
-  }
 });
 
 // TRACKPAD HORIZONTAL SWIPE SUPPORT

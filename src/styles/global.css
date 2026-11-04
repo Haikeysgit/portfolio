@@ -1,0 +1,59 @@
+@import "./tokens.css";
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.65;
+  overflow-x: hidden;
+  transition: background-color .3s, color .3s;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--acc); outline-offset: 3px; border-radius: 4px; }
+button { font: inherit; color: inherit; }
+
+.wrap { width: min(1160px, 100% - 32px); margin-inline: auto; }
+.label {
+  font-family: var(--mono);
+  font-size: 12.5px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--acc);
+}
+.h2 { font-size: clamp(28px, 4vw, 40px); font-weight: 800; letter-spacing: -.02em; line-height: 1.15; }
+.lead { color: var(--dim); font-size: 18px; max-width: 640px; }
+.section { padding: 88px 0; }
+.section-head { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-weight: 700; font-size: 15px; text-decoration: none;
+  padding: 12px 20px; border-radius: 8px; border: 1px solid var(--br);
+  background: transparent; cursor: pointer;
+  transition: transform .15s, background-color .2s, border-color .2s;
+}
+.btn:hover { transform: translateY(-1px); border-color: var(--acc); }
+.btn-primary { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+.btn-primary:hover { opacity: .92; }
+
+.tag {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .04em;
+  color: var(--dim); background: var(--bg2); border-radius: 4px; padding: 3px 9px;
+}
+.track {
+  font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase;
+  color: var(--acc); background: var(--acc-bg); border-radius: 4px; padding: 3px 9px;
+}
+
+@media (max-width: 767px) {
+  body { font-size: 16px; }
+  .section { padding: 64px 0; }
+  .lead { font-size: 17px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; animation: none !important; scroll-behavior: auto !important; }
+}

@@ -1858,3 +1858,215 @@ footer {
 }
 
 
+
+/* HERO SUB + HIGHLIGHTS */
+.hero-sub {
+  max-width: 520px;
+  font-size: 15.5px;
+  font-weight: 300;
+  line-height: 1.7;
+  color: var(--dim);
+  margin: -14px 0 30px;
+}
+
+.proof {
+  background: var(--bg1);
+  border: 1px solid var(--br);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+.proof-hd {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9.5px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--dim2);
+  padding: 12px 20px;
+  border-bottom: 1px solid var(--br);
+}
+
+.proof-row {
+  display: grid;
+  grid-template-columns: 82px 1fr;
+  gap: 16px;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--br);
+  text-decoration: none;
+  color: var(--dim);
+  font-size: 13.5px;
+  line-height: 1.6;
+  transition: background .18s;
+}
+
+.proof-row:last-child { border-bottom: none; }
+.proof-row:hover { background: var(--acc-bg); }
+.proof-row strong { color: var(--ink); font-weight: 500; }
+
+.proof-trk {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--acc);
+  padding-top: 3px;
+}
+
+/* WORK GRID */
+.work-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 28px;
+}
+
+.wf {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.wf-btn {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: var(--dim);
+  background: var(--bg1);
+  border: 1px solid var(--br);
+  border-radius: 3px;
+  padding: 8px 13px;
+  cursor: pointer;
+  transition: color .18s, border-color .18s, background .18s;
+}
+
+.wf-btn:hover { color: var(--ink); border-color: var(--dim2); }
+
+.wf-btn.active {
+  color: var(--acc);
+  background: var(--acc-bg);
+  border-color: var(--acc-br);
+}
+
+.wgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+}
+
+.wk {
+  display: flex;
+  flex-direction: column;
+  background: var(--bg1);
+  border: 1px solid var(--br);
+  border-radius: 8px;
+  padding: 22px 22px 18px;
+  transition: border-color .2s;
+}
+
+.wk[hidden] { display: none; }
+.wk:hover { border-color: var(--acc-br); }
+
+.wk-trk {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.wk-trk span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--acc);
+  background: var(--acc-bg);
+  border: 1px solid var(--acc-br);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+.wk-name {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  line-height: 1.1;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+.wk-desc {
+  font-size: 13px;
+  font-weight: 300;
+  line-height: 1.65;
+  color: var(--dim);
+  margin-bottom: 12px;
+}
+
+.wk-proof {
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--ink);
+  border-left: 2px solid var(--acc);
+  padding-left: 10px;
+  margin-bottom: 12px;
+}
+
+.wk-role {
+  font-size: 12.5px;
+  font-weight: 300;
+  line-height: 1.6;
+  color: var(--dim);
+  margin-bottom: 14px;
+}
+
+.wk-role b { font-weight: 500; color: var(--ink); }
+
+.wk-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: auto;
+  margin-bottom: 14px;
+}
+
+.wk-tags span {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 8.5px;
+  letter-spacing: .04em;
+  color: var(--dim2);
+  background: var(--dim3);
+  border: 1px solid var(--br);
+  border-radius: 2px;
+  padding: 3px 8px;
+}
+
+.wk-links {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  padding-top: 12px;
+  border-top: 1px solid var(--br);
+}
+
+.wk-links a,
+.wk-status {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 10px;
+  letter-spacing: .06em;
+  color: var(--dim);
+  text-decoration: none;
+}
+
+.wk-links a:hover { color: var(--acc); }
+.wk-status { color: var(--dim2); }
+
+@media (max-width: 900px) {
+  .hero-sub { margin-top: -18px; font-size: 14.5px; }
+  .wgrid { grid-template-columns: 1fr; }
+  .proof-row { grid-template-columns: 1fr; gap: 4px; }
+}
