@@ -91,7 +91,7 @@ const Icon = {
   history: <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 7.5V12l3 2" /></svg>,
 };
 
-export default function SquadjarDemo() {
+export default function SquadjarDemo({ onReset }: { onReset?: () => void }) {
   const [s, dispatch] = useReducer(squadReducer, initialSquad);
   const [w, wallet] = useReducer(walletReducer, initialWallet);
   const [screen, setScreen] = useState<Screen>('landing');
@@ -139,6 +139,7 @@ export default function SquadjarDemo() {
   }, [s.round, s.phase]);
 
   const restart = () => {
+    if (onReset) return onReset();
     dispatch({ type: 'RESET' });
     wallet({ type: 'RESET' });
     setScreen('landing');
@@ -146,6 +147,7 @@ export default function SquadjarDemo() {
     setBusy(false);
   };
   const confirmPay = () => {
+    if (s.phase !== 'confirm') return;
     wallet({ type: 'PAID_ROUND', amount: s.contribution, round: s.round });
     dispatch({ type: 'CONFIRM', txHash: randomHash() });
   };

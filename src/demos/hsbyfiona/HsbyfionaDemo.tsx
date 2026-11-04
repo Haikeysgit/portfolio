@@ -10,7 +10,7 @@ const naira = (n: number) => '₦' + n.toLocaleString('en-NG');
 const FILTERS = ['All', 'Perfumes', 'Oils'] as const;
 const VIBES = ['Sweet', 'Fresh', 'Soft & musky'];
 
-export default function HsbyfionaDemo() {
+export default function HsbyfionaDemo({ onReset }: { onReset?: () => void }) {
   const [s, dispatch] = useReducer(shopReducer, initialShop);
   const [view, setView] = useState<View>('intro');
   const [pid, setPid] = useState(PRODUCTS[0].id);
@@ -41,6 +41,7 @@ export default function HsbyfionaDemo() {
     if (!paying) return;
     const t = setTimeout(() => {
       dispatch({ type: 'PAY_SUCCESS', ref: 'HS-' + Math.floor(100000 + Math.random() * 900000) });
+      setView('track');
       setPaying(false);
     }, 1200);
     return () => clearTimeout(t);
@@ -56,10 +57,12 @@ export default function HsbyfionaDemo() {
     setToast({ id: Date.now(), text: `${product.name} added to cart` });
   };
   const goTab = (v: View) => {
+    if (s.phase === 'paid' && v !== 'track') return restart();
     if (s.phase !== 'paid') dispatch({ type: 'BROWSE' });
     setView(v);
   };
   const restart = () => {
+    if (onReset) return onReset();
     setPaying(false);
     setQuiz({});
     dispatch({ type: 'RESET' });
@@ -97,7 +100,7 @@ export default function HsbyfionaDemo() {
         {toast && <div key={toast.id} className="hs-toast" role="status">{toast.text}</div>}
 
         <main className="hs-main hs-screen" key={s.phase === 'paid' ? 'order' : checkingOut ? 'checkout' : view + pid}>
-          {s.phase === 'paid' && s.order ? (
+          {s.phase === 'paid' && s.order && (view === 'track' || view === 'shop' || view === 'product' || view === 'scent') ? (
             <section className="hs-order">
               <p className="hs-eyebrow">Order confirmed</p>
               <h2 className="hs-h">Thank you. It's on its way to you.</h2>

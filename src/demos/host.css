@@ -1,0 +1,5 @@
+.dh-bar { display: flex; align-items: center; gap: 8px; padding: 8px 12px; background: var(--bg1); border-bottom: 1px solid var(--br); font-family: var(--font); }
+.dh-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 0 3px var(--acc-bg); }
+.dh-t { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); }
+.dh-reset { margin-left: auto; border: 1px solid var(--br); background: var(--bg); color: var(--ink); border-radius: 999px; padding: 6px 14px; font-weight: 700; font-size: 13.5px; cursor: pointer; }
+.dh-reset:hover { border-color: var(--acc); }

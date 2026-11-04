@@ -49,7 +49,7 @@ function Strip({ frames, shown, run }: { frames: Frame[]; shown: number; run: 0 
   );
 }
 
-export default function KedgeDemo() {
+export default function KedgeDemo({ onReset }: { onReset?: () => void }) {
   const [s, dispatch] = useReducer(kedgeReducer, initialKedge);
   const done = s.shown >= FRAME_COUNT;
 
@@ -61,7 +61,7 @@ export default function KedgeDemo() {
 
   const header = (
     <header className="kd-head">
-      <button type="button" className="kd-mark" onClick={() => dispatch({ type: 'RESET' })} aria-label="Kedge home">
+      <button type="button" className="kd-mark" onClick={() => (onReset ? onReset() : dispatch({ type: 'RESET' }))} aria-label="Kedge home">
         KEDGE <span>built for #neatHack</span>
       </button>
       <nav className="kd-nav">

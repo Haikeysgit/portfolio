@@ -1,4 +1,4 @@
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useReducer, useRef, useState } from 'react';
 import { ATTACKS, FIREWALL_RULES } from './rules';
 import { arenaReducer, checkApi, initialArena, type Verdict } from './state';
 import './bulkhead.css';
@@ -31,7 +31,7 @@ function stagesFor(v: Verdict | undefined, tier: number): Stage[] {
   return [fw, agent, contract];
 }
 
-export default function BulkheadDemo() {
+export default function BulkheadDemo({ onReset }: { onReset?: () => void }) {
   const [s, dispatch] = useReducer(arenaReducer, initialArena);
   const [view, setView] = useState<View>('landing');
   const [tier, setTier] = useState(0);
@@ -51,8 +51,15 @@ export default function BulkheadDemo() {
     return () => timers.forEach(clearTimeout);
   }, [s.log.length]);
 
-  const send = (prompt: string, request: 0 | 'round' | 'all') => dispatch({ type: 'SUBMIT', tier, prompt, requestUsd: request });
+  // One attempt at a time: a double tap must not fire a second attempt before the first result shows.
+  const lockUntil = useRef(0);
+  const send = (prompt: string, request: 0 | 'round' | 'all') => {
+    if (performance.now() < lockUntil.current) return;
+    lockUntil.current = performance.now() + 1300;
+    dispatch({ type: 'SUBMIT', tier, prompt, requestUsd: request });
+  };
   const restart = () => {
+    if (onReset) return onReset();
     dispatch({ type: 'RESET' });
     setView('landing');
     setText('');
@@ -65,7 +72,7 @@ export default function BulkheadDemo() {
         <div className="bh-landing bh-screen">
           <img src="/images/projects/bulkhead/wordmark.svg" alt="Bulkhead" className="bh-wordmark" width="240" height="45" />
           <h1 className="bh-display">When your AI agent gets tricked, only one compartment floods.</h1>
-          <p className="bh-lead">A firewall and a contract-enforced spending cap for agents that hold money. Proven in Drain Me: three agents guard real BTC and USDC, and anyone can try to talk them into paying out.</p>
+          <p className="bh-lead">A firewall and a contract-enforced spending cap for agents that hold money. It's being built around Drain Me, an arena where three agents guard BTC and USDC and anyone can try to talk them into paying out. Testnet only for now.</p>
           <div className="bh-ctas">
             <button type="button" className="bh-btn" onClick={() => setView('arena')}>Enter Drain Me</button>
             <button type="button" className="bh-btn bh-btn-line" onClick={() => setView('api')}>Try the firewall API</button>

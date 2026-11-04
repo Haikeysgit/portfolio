@@ -2,10 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import DeviceFrame from './DeviceFrame.astro';
 import Gallery from './Gallery.astro';
-import SquadjarDemo from '../demos/squadjar/SquadjarDemo';
-import KedgeDemo from '../demos/kedge/KedgeDemo';
-import HsbyfionaDemo from '../demos/hsbyfiona/HsbyfionaDemo';
-import BulkheadDemo from '../demos/bulkhead/BulkheadDemo';
+import DemoHost from '../demos/DemoHost';
 
 interface Props {
   project: CollectionEntry<'projects'>;
@@ -29,10 +26,7 @@ const extra =
       </p>
     </div>
     <DeviceFrame kind="auto">
-      {p.demo === 'squadjar' && <SquadjarDemo client:visible />}
-      {p.demo === 'kedge' && <KedgeDemo client:visible />}
-      {p.demo === 'hsbyfiona' && <HsbyfionaDemo client:visible />}
-      {p.demo === 'bulkhead' && <BulkheadDemo client:visible />}
+      {p.demo && <DemoHost demo={p.demo} client:visible />}
     </DeviceFrame>
   </div>
 ) : (

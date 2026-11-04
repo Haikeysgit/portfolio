@@ -163,7 +163,7 @@ All four run entirely in the browser with fake data. They make no network reques
 | Prador | Apps | Screenshots |
 | Tektradoor | Apps | Screenshots |
 
-Screenshots come from the live sites, or from running local copies in `C:\Users\user\Documents\` when there is no live site.
+Screenshots come from the live sites, or from running local copies in `~/Documents/` when there is no live site.
 
 ## Testing and checks
 
