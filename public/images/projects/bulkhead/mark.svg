@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 0 64 64" role="img" aria-label="Bulkhead">
+  <title>Bulkhead</title><style>.s{stroke:#0E1A24}</style>
+  <path d="M15 32H40C47 32 51 37 51 43C51 50 47 55 40 55H15Z" fill="#FF4F00"/>
+  <path d="M15 9H37C44 9 48 13 48 20C48 27 44 32 37 32H40C47 32 51 37 51 43C51 50 47 55 40 55H15ZM15 32H37" fill="none" stroke-width="6" stroke-linejoin="miter" stroke-miterlimit="4" class="s"/>
+</svg>

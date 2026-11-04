@@ -14,14 +14,20 @@ const p = Astro.props.project.data;
 // Demos that exist so far. A project whose demo is not built yet falls back to its screenshots.
 const built = ['squadjar', 'kedge', 'hsbyfiona', 'bulkhead'];
 const hasDemo = p.demo !== undefined && built.includes(p.demo);
-const label =
-  p.demo === 'kedge' ? 'Interactive demo · simulated run'
-  : p.demo === 'bulkhead' ? 'Interactive demo · simulation of a project in development'
-  : 'Interactive demo · not real money';
+const extra =
+  p.demo === 'kedge' ? 'The runs it replays are real.'
+  : p.demo === 'bulkhead' ? 'The project itself is still in development.'
+  : 'No real money moves.';
 ---
 {hasDemo ? (
   <div class="demo" data-haptic>
-    <p class="label note">{label}</p>
+    <div class="note">
+      <p class="label">Interactive demo</p>
+      <p class="note-t">
+        A small demo to give you a feel for {p.name}. It's not an exact copy of the app, so feel free to click around.
+        {extra}
+      </p>
+    </div>
     <DeviceFrame kind="auto">
       {p.demo === 'squadjar' && <SquadjarDemo client:visible />}
       {p.demo === 'kedge' && <KedgeDemo client:visible />}
@@ -33,5 +39,6 @@ const label =
   <Gallery shots={p.shots} />
 )}
 <style>
-  .note { text-align: center; margin-bottom: 14px; }
+  .note { text-align: center; margin: 0 auto 18px; max-width: 620px; display: grid; gap: 6px; }
+  .note-t { color: var(--dim); font-size: 15.5px; line-height: 1.55; margin: 0; }
 </style>
