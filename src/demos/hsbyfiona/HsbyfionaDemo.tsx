@@ -1,6 +1,7 @@
 import { useEffect, useReducer, useState } from 'react';
 import { PLACES, PRODUCTS, initialShop, lineId, priceOf, productOf, recommend, shopReducer, subtotal, type Product } from './state';
 import { SAMPLE_BANDS, feeForDistance } from './pricing';
+import HsIntro from './HsIntro';
 import './hsbyfiona.css';
 
 // A replica of hsbyfiona.com in the store's own branding (plum and blush, Cormorant Garamond + Jost), on demo data.
@@ -27,11 +28,6 @@ export default function HsbyfionaDemo({ onReset }: { onReset?: () => void }) {
   const cartOpen = s.phase === 'cart';
   const checkingOut = s.phase === 'address' || s.phase === 'pay';
 
-  useEffect(() => {
-    if (view !== 'intro') return;
-    const t = setTimeout(() => setView('shop'), 2600);
-    return () => clearTimeout(t);
-  }, [view]);
   useEffect(() => {
     if (!toast) return;
     const t = setTimeout(() => setToast(null), 2000);
@@ -73,12 +69,7 @@ export default function HsbyfionaDemo({ onReset }: { onReset?: () => void }) {
   if (view === 'intro') {
     return (
       <div className="hsj">
-        <button type="button" className="hs-intro" onClick={() => setView('shop')} aria-label="Enter the shop">
-          <span className="hs-intro-k">Welcome to</span>
-          <span className="hs-intro-t">Heavenscented</span>
-          <span className="hs-intro-by">by Fiona</span>
-          <span className="hs-intro-tap">Tap to enter</span>
-        </button>
+        <HsIntro onShop={() => setView('shop')} onScent={() => setView('scent')} />
       </div>
     );
   }

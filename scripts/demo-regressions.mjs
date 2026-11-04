@@ -28,10 +28,10 @@ for (const slug of ['squadjar', 'kedge', 'hsbyfiona', 'bulkhead']) {
 // Hsbyfiona: Reset clears the shop filter.
 await guard('hsbyfiona: filter back to All after reset', async () => {
   const p = await page('/projects/hsbyfiona');
-  await p.getByRole('button', { name: 'Enter the shop' }).click({ timeout: 4000 });
+  await p.getByRole('button', { name: 'Start shopping' }).click({ timeout: 9000 });
   await p.getByRole('button', { name: 'Oils', exact: true }).click();
   await resetBtn(p).click().catch(() => {});
-  await p.getByRole('button', { name: 'Enter the shop' }).click({ timeout: 4000 });
+  await p.getByRole('button', { name: 'Start shopping' }).click({ timeout: 9000 });
   const pressed = await p.getByRole('button', { name: 'All', exact: true }).getAttribute('aria-pressed');
   check('hsbyfiona: filter back to All after reset', pressed === 'true');
   await p.close();

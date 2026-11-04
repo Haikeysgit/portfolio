@@ -1,0 +1,79 @@
+/* Ported from hs-by-fiona src/components/Intro.astro. Viewport units become container units,
+   and fixed positioning becomes absolute, so it plays inside the demo frame. */
+.hs-introbox {
+  position: relative; min-height: 640px; display: flex; overflow: hidden;
+  background: radial-gradient(60% 45% at 28% 36%, var(--panel) 0%, transparent 70%), var(--page);
+  transition: opacity .4s ease;
+}
+.hs-introbox.intro-leaving { opacity: 0; }
+.hs-introbox .intro-mist { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.hs-introbox .intro-flier {
+  position: absolute; left: 0; top: 0; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%;
+  z-index: 3; pointer-events: none; opacity: 0; transition: opacity .25s;
+  background: radial-gradient(circle, #fff3f6 0%, var(--glow) 45%, transparent 72%); box-shadow: 0 0 18px 6px rgb(232 180 196 / .55);
+}
+.hs-introbox p, .hs-introbox h1 { margin: 0; }
+.hs-introbox .intro-stage { position: relative; z-index: 2; display: flex; flex-direction: column; width: 100%; min-height: 640px; padding: 14px 20px 18px; }
+.hs-introbox .intro-top { display: flex; align-items: center; justify-content: space-between; }
+.hs-introbox .intro-mark { height: 34px; aspect-ratio: 2010 / 1214; background-color: var(--plum); -webkit-mask: url(/images/projects/hsbyfiona/emblem.svg) center / contain no-repeat; mask: url(/images/projects/hsbyfiona/emblem.svg) center / contain no-repeat; }
+.hs-introbox .intro-main { display: flex; flex: 1; flex-direction: column; justify-content: center; gap: 14px; width: 100%; max-width: 480px; margin: 0 auto; padding-top: 4px; }
+.hs-introbox .intro-scene { display: flex; justify-content: flex-start; }
+.hs-introbox .intro-figure { width: min(60cqi, 220px); transition: opacity .9s ease, transform .9s cubic-bezier(.2, .7, .2, 1); }
+.hs-introbox .intro-figure svg { display: block; width: 100%; height: auto; overflow: hidden; }
+.hs-introbox .intro-arm { transition: transform 1s cubic-bezier(.2, .7, .2, 1) .3s, opacity .8s ease .3s; }
+.hs-introbox .intro-pump, .hs-introbox .intro-finger { transition: transform .14s ease; }
+.hs-introbox .intro-press .intro-pump { transform: translateY(2px); }
+.hs-introbox .intro-press .intro-finger { transform: translateY(3px); }
+.hs-introbox .intro-eye-closed { opacity: 0; }
+.hs-introbox .intro-eye-open, .hs-introbox .intro-eye-closed { transition: opacity .35s ease; }
+.hs-introbox .intro-bliss .intro-eye-open { opacity: 0; }
+.hs-introbox .intro-bliss .intro-eye-closed { opacity: 1; }
+
+.hs-introbox .intro-copy { display: flex; flex-direction: column; gap: 6px; }
+.hs-introbox .intro-eyebrow { font-size: 12px; font-weight: 500; letter-spacing: .28em; text-transform: uppercase; color: var(--plum); }
+.hs-introbox .intro-name { font-family: var(--display); font-weight: 600; font-size: clamp(38px, 12.5cqi, 64px); line-height: .95; letter-spacing: -.01em; color: var(--ink); }
+.hs-introbox .intro-word { display: inline-block; white-space: nowrap; }
+.hs-introbox .intro-ch { display: inline-block; transition: opacity .9s ease, filter .9s ease, transform .9s ease; transition-delay: calc(var(--i) * 55ms); }
+.hs-introbox .intro-by { font-family: var(--display); font-style: italic; font-weight: 500; font-size: clamp(22px, 6cqi, 28px); line-height: 1.1; color: var(--plum); }
+.hs-introbox .intro-l2 { margin-top: 8px; font-size: 12.5px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+.hs-introbox .intro-l2 span { color: var(--rose); }
+.hs-introbox .intro-l3 { margin-top: 8px; font-family: var(--display); font-style: italic; font-weight: 500; font-size: clamp(20px, 6cqi, 26px); line-height: 1.2; text-wrap: balance; }
+.hs-introbox .intro-ctas { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.hs-introbox .intro-btn { display: flex; height: 52px; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; font-size: 16px; font-weight: 500; transition: opacity .7s ease, transform .7s ease; border: 0; cursor: pointer; font-family: var(--body); }
+.hs-introbox .intro-primary { background: var(--plum); color: var(--page); }
+.hs-introbox .intro-primary.intro-landed { animation: hsd-pulse 2.4s ease-out infinite; }
+.hs-introbox .intro-secondary { background: transparent; color: var(--ink); border: 1px solid var(--ink); }
+.hs-introbox .intro-secondary svg { color: var(--rose); }
+@keyframes hsd-pulse { 0% { box-shadow: 0 0 0 0 rgb(179 92 122 / .45); } 70% { box-shadow: 0 0 0 14px rgb(179 92 122 / 0); } 100% { box-shadow: 0 0 0 0 rgb(179 92 122 / 0); } }
+
+/* Hidden states while the sequence plays; each step class reveals the next part. */
+.hs-introbox .intro-play .intro-figure { opacity: 0; transform: translateY(28px); }
+.hs-introbox .intro-play .intro-arm { opacity: 0; transform: translateY(60px); }
+.hs-introbox .intro-play.s-scene .intro-figure, .hs-introbox .intro-play.s-scene .intro-arm { opacity: 1; transform: none; }
+.hs-introbox .intro-play .intro-eyebrow, .hs-introbox .intro-play .intro-by, .hs-introbox .intro-play .intro-l2, .hs-introbox .intro-play .intro-l3 {
+  opacity: 0; transform: translateY(8px); filter: blur(6px); transition: opacity .9s ease, transform .9s ease, filter .9s ease;
+}
+.hs-introbox .intro-play .intro-ch { opacity: 0; filter: blur(10px); transform: translateY(6px) scale(1.04); }
+.hs-introbox .intro-play.s-l1 .intro-eyebrow, .hs-introbox .intro-play.s-l1 .intro-by, .hs-introbox .intro-play.s-l1 .intro-ch,
+.hs-introbox .intro-play.s-l2 .intro-l2, .hs-introbox .intro-play.s-l3 .intro-l3 { opacity: 1; filter: none; transform: none; }
+.hs-introbox .intro-play.s-l1 .intro-by { transition-delay: .75s; }
+.hs-introbox .intro-play .intro-ctas .intro-btn { opacity: 0; transform: translateY(14px); }
+.hs-introbox .intro-play.s-cta .intro-ctas .intro-btn { opacity: 1; transform: none; }
+.hs-introbox .intro-play.s-cta .intro-secondary { transition-delay: .12s; }
+
+/* Wide frames: the woman fills the left half from the bottom edge, the words sit centred on the right. */
+@container (min-width: 720px) {
+  .hs-introbox .intro-stage { padding: 22px clamp(28px, 5cqi, 64px) 0; }
+  .hs-introbox .intro-main { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; column-gap: clamp(28px, 5cqi, 80px); max-width: 1280px; padding-top: 0; }
+  .hs-introbox .intro-scene { align-items: flex-end; justify-content: center; }
+  .hs-introbox .intro-figure { width: min(100%, 470px); }
+  .hs-introbox .intro-copy { align-self: center; padding-bottom: 5%; }
+  .hs-introbox .intro-name { font-size: clamp(56px, 7cqi, 96px); }
+  .hs-introbox .intro-by { font-size: clamp(26px, 2.8cqi, 38px); }
+  .hs-introbox .intro-l3 { font-size: clamp(24px, 2.4cqi, 30px); }
+  .hs-introbox .intro-ctas { flex-direction: row; max-width: 560px; margin-top: 22px; }
+  .hs-introbox .intro-btn { flex: 1; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hs-introbox *, .hs-introbox { transition: none !important; animation: none !important; }
+}

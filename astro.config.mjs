@@ -5,4 +5,9 @@ import mdx from '@astrojs/mdx';
 export default defineConfig({
   site: 'https://www.obaseki.dev',
   integrations: [react(), mdx()],
+  vite: {
+    // Pre-bundle React's JSX runtimes up front. Without this, adding a dependency while the dev
+    // server runs can leave a stale cache and the demos fail with "jsxDEV is not a function".
+    optimizeDeps: { include: ['react', 'react-dom', 'react-dom/client', 'react/jsx-runtime', 'react/jsx-dev-runtime'] },
+  },
 });
