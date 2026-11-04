@@ -13,7 +13,7 @@ let failed = false;
 for (const theme of ['dark', 'light']) {
   for (const width of widths) {
     const ctx = await browser.newContext({ viewport: { width, height: 900 } });
-    await ctx.addInitScript((t) => { try { localStorage.setItem('theme', t); } catch {} }, theme);
+    await ctx.addInitScript((t) => { try { localStorage.setItem('theme-choice', t); } catch {} }, theme);
     const page = await ctx.newPage();
     const errors = [];
     page.on('console', (m) => { if (m.type() === 'error') errors.push(m.text()); });

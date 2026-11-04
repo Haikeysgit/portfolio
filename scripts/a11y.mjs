@@ -7,7 +7,7 @@ const b = await chromium.launch();
 let bad = 0;
 for (const theme of ['dark', 'light']) {
   const ctx = await b.newContext({ viewport: { width: 1280, height: 900 } });
-  await ctx.addInitScript((t) => { try { localStorage.setItem('theme', t); } catch {} }, theme);
+  await ctx.addInitScript((t) => { try { localStorage.setItem('theme-choice', t); } catch {} }, theme);
   const p = await ctx.newPage();
   for (const path of paths) {
     await p.goto(base + path, { waitUntil: 'networkidle' });

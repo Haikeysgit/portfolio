@@ -91,8 +91,9 @@ import { highlights } from '../data/highlights';
   /* Phones: the same words, with room to breathe between every block. */
   @media (max-width: 600px) {
     .hero { gap: 56px; padding: 44px 0 24px; }
-    h1 { font-size: 34px; line-height: 1.08; }
-    .copy { gap: 18px; margin-top: 30px; }
+    /* Phones open on the copy, not the title. The h1 stays in the page for screen readers and search engines. */
+    h1 { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; }
+    .copy { gap: 18px; margin-top: 0; }
     .copy p { font-size: 16px; line-height: 1.65; }
     .ctas { flex-wrap: nowrap; gap: 8px; margin-top: 36px; }
     .ctas > .btn, .resume { flex: 1 1 auto; }

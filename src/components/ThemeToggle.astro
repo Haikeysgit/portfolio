@@ -14,7 +14,7 @@
   document.querySelectorAll('[data-theme-toggle]').forEach((b) =>
     b.addEventListener('click', () => {
       root.dataset.theme = root.dataset.theme === 'light' ? 'dark' : 'light';
-      try { localStorage.setItem('theme', root.dataset.theme); } catch { /* storage blocked */ }
+      try { localStorage.setItem('theme-choice', root.dataset.theme); } catch { /* storage blocked */ }
       sync();
     }));
   sync();

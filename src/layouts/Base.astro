@@ -43,7 +43,8 @@ const ogImage = new URL(image, Astro.site);
       // Mirrors getInitialTheme in src/lib/theme.ts: a toggled choice wins, else laptops open light and phones dark.
       (function () {
         var stored = null;
-        try { stored = localStorage.getItem('theme'); } catch (e) {}
+        // Key renamed from "theme" so choices saved under the old dark-everywhere default are dropped.
+        try { stored = localStorage.getItem('theme-choice'); } catch (e) {}
         var phone = window.matchMedia('(max-width: 767px)').matches;
         var theme = stored === 'light' || stored === 'dark' ? stored : (phone ? 'dark' : 'light');
         document.documentElement.dataset.theme = theme;
