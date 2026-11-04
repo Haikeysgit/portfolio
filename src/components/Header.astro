@@ -20,7 +20,7 @@ import { SOCIALS } from '../data/socials';
       </svg>
     </nav>
     <div class="right">
-      <span class="desk-only"><ThemeToggle /></span>
+      <span class="hdr-toggle"><ThemeToggle /></span>
       <a class="btn btn-primary resume desk-only" href="/Obaseki_Resume.pdf" target="_blank" rel="noopener">Resume</a>
       <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mmenu" data-menu-open>
         <span></span><span></span>
@@ -160,6 +160,8 @@ import { SOCIALS } from '../data/socials';
   @media (max-width: 767px) {
     .row { grid-template-columns: 1fr auto; }
     .desk-nav, .desk-only { display: none !important; }
+    /* Theme switch stays in the bar on phones, sized to match the menu button. */
+    .hdr-toggle :global(.toggle) { width: 44px; height: 44px; border-radius: 12px; }
     .menu-btn { display: grid; gap: 6px; place-content: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--br); background: var(--bg1); cursor: pointer; }
     .menu-btn span { display: block; width: 20px; height: 2px; border-radius: 2px; background: var(--ink); transition: transform .3s; }
     .menu-btn span:last-child { width: 13px; justify-self: end; }
