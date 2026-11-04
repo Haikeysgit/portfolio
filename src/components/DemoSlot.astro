@@ -2,21 +2,22 @@
 import type { CollectionEntry } from 'astro:content';
 import DeviceFrame from './DeviceFrame.astro';
 import Gallery from './Gallery.astro';
+import SquadjarDemo from '../demos/squadjar/SquadjarDemo';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 const p = Astro.props.project.data;
-// Demos are added here one by one (Tasks 7-10). Until a project's demo exists, its screenshots show.
-const demos: Record<string, boolean> = {};
-const hasDemo = p.demo !== undefined && demos[p.demo];
+// Demos that exist so far. A project whose demo is not built yet falls back to its screenshots.
+const built = ['squadjar'];
+const hasDemo = p.demo !== undefined && built.includes(p.demo);
 const label = p.demo === 'kedge' ? 'Interactive demo · simulated run' : 'Interactive demo · not real money';
 ---
 {hasDemo ? (
   <div class="demo">
     <p class="label note">{label}</p>
     <DeviceFrame kind="auto">
-      <div class="demo-host"></div>
+      {p.demo === 'squadjar' && <SquadjarDemo client:visible />}
     </DeviceFrame>
   </div>
 ) : (
