@@ -13,7 +13,7 @@
 .kdj button:active:not(:disabled) { transform: scale(.965); transition-duration: .08s; }
 .kd-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 22px; }
 .kd-mark { display: inline-flex; align-items: baseline; gap: 10px; border: 2px solid var(--ink); background: var(--print); padding: 4px 10px; font-weight: 900; font-size: 20px; letter-spacing: .06em; color: var(--ink); }
-.kd-mark span { font-family: var(--hand); font-weight: 400; font-size: 13px; letter-spacing: 0; color: var(--marker); }
+.kd-mark span { font-family: var(--hand); font-weight: 400; font-size: 13px; letter-spacing: 0; color: var(--marker-ink); }
 .kd-nav { display: flex; gap: 6px; }
 .kd-nav button { border: 0; background: none; color: var(--ink-2); font-size: 14px; padding: 8px 10px; border-radius: 999px; }
 .kd-nav button[aria-current='page'] { color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--ink); }
