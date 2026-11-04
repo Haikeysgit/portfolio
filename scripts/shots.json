@@ -1,0 +1,86 @@
+{
+  "kedge": [
+    {
+      "url": "http://localhost:4400/",
+      "name": "site"
+    }
+  ],
+  "squadjar": [
+    {
+      "url": "https://squadjar.vercel.app/",
+      "name": "home"
+    }
+  ],
+  "hsbyfiona": [
+    {
+      "url": "https://hsbyfiona.com/",
+      "name": "home"
+    },
+    {
+      "url": "https://hsbyfiona.com/perfumes/qissa-pink",
+      "name": "product"
+    },
+    {
+      "url": "https://hsbyfiona.com/scent-match",
+      "name": "scent-match"
+    }
+  ],
+  "chog-buddy": [
+    {
+      "url": "https://chogbuddy.vercel.app/",
+      "name": "home"
+    },
+    {
+      "url": "https://chogbuddy.vercel.app/park",
+      "name": "park"
+    },
+    {
+      "url": "https://chogbuddy.vercel.app/focus",
+      "name": "focus"
+    }
+  ],
+  "gafferscore-agent": [
+    {
+      "url": "https://github.com/Haikeysgit/gaffer-engine",
+      "name": "repo",
+      "hideText": "claude"
+    }
+  ],
+  "gafferscore": [
+    {
+      "url": "https://www.gafferscore.xyz/",
+      "name": "home"
+    },
+    {
+      "url": "https://www.gafferscore.xyz/rules",
+      "name": "rules"
+    }
+  ],
+  "prador": [
+    {
+      "url": "https://www.prador.co.uk/",
+      "name": "home"
+    },
+    {
+      "url": "https://www.prador.co.uk/#booking",
+      "name": "booking"
+    }
+  ],
+  "tektradoor": [
+    {
+      "url": "https://tektradoor.com/",
+      "name": "home"
+    },
+    {
+      "url": "https://tektradoor.com/engine",
+      "name": "engine"
+    }
+  ],
+  "tektradoor-agent": [
+    {
+      "url": "https://github.com/Haikeysgit/tektradoor-judge",
+      "name": "repo",
+      "hideText": "claude"
+    }
+  ]
+}
