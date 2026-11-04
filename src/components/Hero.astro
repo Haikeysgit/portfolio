@@ -79,23 +79,29 @@ import { highlights } from '../data/highlights';
     .hero { grid-template-columns: 1fr; gap: 28px; padding: 16px 0 40px; }
     .stage { width: min(100%, 420px); }
   }
+  /* Phones: calmer type, room between blocks, compact buttons, and a clean photo with the facts listed below it. */
   @media (max-width: 600px) {
-    .stage { aspect-ratio: 1 / 1.12; }
-    .portrait { inset: 2% 16% 0; }
-    .fact { max-width: 168px; padding: 9px 11px; border-radius: 12px; }
+    .hero { gap: 36px; padding: 28px 0 8px; }
+    h1 { font-size: 32px; line-height: 1.1; margin-bottom: 14px; }
+    .lead { font-size: 15px; line-height: 1.65; max-width: 36ch; }
+    .ctas { flex-wrap: nowrap; gap: 8px; margin-top: 24px; }
+    .ctas .btn { padding: 9px 12px; font-size: 13px; border-radius: 8px; white-space: nowrap; }
+    .resume-view { border-radius: 8px 0 0 8px !important; }
+    .resume-dl { border-radius: 0 8px 8px 0 !important; padding: 9px 10px !important; }
+    .resume-dl svg { width: 15px; height: 15px; }
+
+    .stage { width: 100%; aspect-ratio: auto; display: grid; gap: 14px; }
+    .glow { inset: 0 10% 30%; }
+    .portrait { position: relative; inset: auto; width: 100%; aspect-ratio: 4 / 4.4; border-radius: 22px; }
+    .portrait img { object-position: 50% 14%; }
+    .fact {
+      position: relative; inset: auto; max-width: none; animation: none; transform: none;
+      display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 12px; box-shadow: none;
+      background: var(--bg1);
+    }
     .fact strong { font-size: 14px; }
     .fact .note { display: none; }
-    .fact .track { font-size: 10px; }
-    .fact-1 { top: 6%; left: 0; }
-    .fact-2 { top: 44%; right: 0; }
-    .fact-3 { bottom: 4%; left: 2%; }
-  }
-  /* Phones: See projects, View resume and Contact stay on one line; text and padding scale with the screen. */
-  @media (max-width: 600px) {
-    .ctas { flex-wrap: nowrap; gap: 6px; margin-top: 22px; }
-    .ctas .btn { padding: 11px clamp(8px, 2.6vw, 14px); font-size: clamp(12.5px, 3.6vw, 15px); white-space: nowrap; }
-    .resume-dl { padding: 11px clamp(8px, 2.2vw, 11px); }
-    .resume-dl svg { width: 16px; height: 16px; }
+    .fact .track { font-size: 10px; flex-shrink: 0; }
   }
   @media (max-width: 339px) { .ctas { flex-wrap: wrap; } }
   @media (prefers-reduced-motion: reduce) { .fact { animation: none; } }
