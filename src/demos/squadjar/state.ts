@@ -8,11 +8,12 @@ export type SquadState = {
   members: Member[];
   payoutOrder: string[];
   you: string;
-  phase: 'overview' | 'confirm' | 'pending' | 'settled';
+  phase: 'landing' | 'overview' | 'confirm' | 'pending' | 'settled';
   txHash: string | null;
   received: { round: number; to: string }[];
 };
 export type SquadAction =
+  | { type: 'START' }
   | { type: 'PAY' }
   | { type: 'CONFIRM'; txHash: string }
   | { type: 'CANCEL' }
@@ -30,16 +31,23 @@ export const initialSquad: SquadState = {
   members: names.map((name) => ({ id: name.toLowerCase(), name, paid: name !== 'You' })),
   payoutOrder: names.map((n) => n.toLowerCase()),
   you: 'you',
-  phase: 'overview',
+  phase: 'landing',
   txHash: null,
   received: [],
 };
+
+/** Held back from a payout in round r of an n-member squad: (n − r) · c · (100 − allowance) / 100 (Squad._settle). */
+export function heldFor(round: number, members: number, contribution: number, allowancePct: number): number {
+  return ((members - round) * contribution * (100 - allowancePct)) / 100;
+}
 
 export const collectorOf = (s: SquadState) => s.payoutOrder[s.round - 1];
 const youPaid = (s: SquadState) => s.members.some((m) => m.id === s.you && m.paid);
 
 export function squadReducer(s: SquadState, a: SquadAction): SquadState {
   switch (a.type) {
+    case 'START':
+      return s.phase === 'landing' ? { ...s, phase: 'overview' } : s;
     case 'PAY':
       return s.phase === 'overview' && !youPaid(s) ? { ...s, phase: 'confirm' } : s;
     case 'CANCEL':

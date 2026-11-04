@@ -1,141 +1,232 @@
 import { useEffect, useReducer, useState } from 'react';
-import { collectorOf, initialSquad, squadReducer } from './state';
+import { collectorOf, heldFor, initialSquad, squadReducer, type SquadState } from './state';
 import './squadjar.css';
+
+// A replica of the Squadjar app (its own design system: manila paper, ledger rules, stamp ink), running on fake data.
 
 const naira = (n: number) => '₦' + n.toLocaleString('en-NG');
 const randomHash = () =>
   '0x' + Array.from(crypto.getRandomValues(new Uint8Array(32)), (b) => b.toString(16).padStart(2, '0')).join('');
-const short = (h: string) => `${h.slice(0, 8)}…${h.slice(-6)}`;
+const short = (h: string) => `${h.slice(0, 6)}…${h.slice(-4)}`;
+const initials = (name: string) => name.slice(0, 2).toUpperCase();
+const tilt = (id: string, r: number) => ((id.charCodeAt(0) * 7 + r * 13) % 17) - 8;
+
+function Stamp({ id, name, round, fresh }: { id: string; name: string; round: number; fresh?: boolean }) {
+  return (
+    <span
+      role="img"
+      aria-label={`${name} paid round ${round}`}
+      className={`sq-stamp${fresh ? ' is-fresh' : ''}`}
+      style={{ ['--tilt' as string]: `${tilt(id, round)}deg` }}
+    >
+      {initials(name)}
+    </span>
+  );
+}
+
+function StampCard({ s, fresh }: { s: SquadState; fresh: boolean }) {
+  const rounds = Array.from({ length: s.totalRounds }, (_, i) => i + 1);
+  return (
+    <div className="sq-card">
+      <div className="sq-card-scroll">
+        <table className="sq-ledger">
+          <caption className="sq-sr">Contribution card for Hostel 4B</caption>
+          <thead>
+            <tr>
+              <th scope="col" className="sq-sticky">Turn</th>
+              {rounds.map((r) => (
+                <th key={r} scope="col" className={r === s.round ? 'is-now' : ''}>R{r}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {s.payoutOrder.map((id, i) => {
+              const m = s.members.find((x) => x.id === id)!;
+              const mine = id === s.you;
+              return (
+                <tr key={id}>
+                  <th scope="row" className={`sq-sticky${mine ? ' is-me' : ''}`}>
+                    <span className="sq-turn">{i + 1}</span>
+                    {m.name}
+                  </th>
+                  {rounds.map((r) => {
+                    const collected = r === i + 1 && (r < s.round || (r === s.round && s.phase === 'settled'));
+                    const paid = r < s.round || (r === s.round && m.paid);
+                    return (
+                      <td key={r} className={r === s.round ? 'is-now' : ''}>
+                        {collected ? (
+                          <span className="sq-paidout">PAID OUT</span>
+                        ) : paid ? (
+                          <Stamp id={id} name={m.name} round={r} fresh={fresh && mine && r === s.round} />
+                        ) : (
+                          <span className="sq-box" role="img" aria-label={r > s.round ? `Round ${r} not due yet` : `${m.name} hasn't paid round ${r}`} />
+                        )}
+                      </td>
+                    );
+                  })}
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
 
 export default function SquadjarDemo() {
   const [s, dispatch] = useReducer(squadReducer, initialSquad);
-  const [log, setLog] = useState<string[]>(['Squad "Hostel 4B" is active. The contract holds the jar.']);
+  const [showPayout, setShowPayout] = useState(false);
   const pot = s.contribution * s.members.length;
   const collector = s.members.find((m) => m.id === collectorOf(s))!;
   const youCollect = collector.id === s.you;
   const youPaid = s.members.find((m) => m.id === s.you)!.paid;
-  const add = (line: string) => setLog((l) => [...l, line]);
+  const othersPaid = s.members.filter((m) => m.id !== s.you).every((m) => m.paid);
+  const held = heldFor(s.round, s.members.length, s.contribution, 0);
 
-  // After your payment lands, the round settles on its own (the last contribute() settles it).
+  // The last contribute() settles the round in the same transaction.
   useEffect(() => {
     if (s.phase !== 'pending') return;
     const t = setTimeout(() => {
       dispatch({ type: 'SETTLE' });
-      add(`Round ${s.round} settled: ${naira(pot)} paid to ${youCollect ? 'you' : collector.name}.`);
-    }, 1200);
+      if (youCollect) setShowPayout(true);
+    }, 1300);
     return () => clearTimeout(t);
   }, [s.phase]);
 
-  // At the start of a new round, the other members pay in.
+  // A new round opens: the rest of the squad pays in.
   useEffect(() => {
     if (s.phase !== 'overview' || s.round === initialSquad.round || s.members.some((m) => m.paid)) return;
-    const t = setTimeout(() => {
-      dispatch({ type: 'OTHERS_PAY' });
-      add(`Round ${s.round}: 5 members paid ${naira(s.contribution)} each.`);
-    }, 900);
+    const t = setTimeout(() => dispatch({ type: 'OTHERS_PAY' }), 900);
     return () => clearTimeout(t);
   }, [s.round, s.phase]);
 
-  const confirm = () => {
-    const h = randomHash();
-    dispatch({ type: 'CONFIRM', txHash: h });
-    add(`You called contribute(): ${naira(s.contribution)} moved from your wallet into the jar. Tx ${short(h)}.`);
-  };
-  const reset = () => {
+  const restart = () => {
+    setShowPayout(false);
     dispatch({ type: 'RESET' });
-    setLog(['Squad "Hostel 4B" is active. The contract holds the jar.']);
   };
+
+  if (s.phase === 'landing') {
+    return (
+      <div className="sqj">
+        <div className="sq-page">
+          <header className="sq-head">
+            <span className="sq-logo">Squadjar</span>
+            <span className="sq-login">Log in</span>
+          </header>
+          <section className="sq-hero">
+            <div>
+              <h1 className="sq-display">Ajo with your squad. Nobody holds the jar.</h1>
+              <p className="sq-lead">Everyone pays in each round, one person collects, and the jar pays out on time by itself.</p>
+              <button type="button" className="sq-btn-ink" onClick={() => dispatch({ type: 'START' })}>
+                Open the demo squad
+              </button>
+            </div>
+            <figure className="sq-fig">
+              <div className="sq-tilt"><StampCard s={{ ...s, phase: 'overview' }} fresh={false} /></div>
+              <figcaption>An example squad card: 6 classmates, ₦5,000 a week. Every box is stamped when someone pays.</figcaption>
+            </figure>
+          </section>
+        </div>
+      </div>
+    );
+  }
+
+  if (showPayout) {
+    return (
+      <div className="sqj">
+        <div className="sq-page sq-narrow">
+          <h1 className="sq-moment">Your turn landed.</h1>
+          <p className="sq-money-hero">{naira(pot - held)}</p>
+          <p className="sq-mono">
+            <b>{naira(pot - held)}</b> now · <b>{naira(held)}</b> waits in the jar
+          </p>
+          <p className="sq-mono sq-muted">Hostel 4B · Round {s.round}</p>
+          <p className="sq-small">You still owe the rounds after your turn, so part of your payout waits in the jar. It comes back to you at the end.</p>
+          <div className="sq-receipt">
+            <span className="sq-collected" aria-hidden="true">COLLECTED</span>
+            <dl>
+              <div><dt>Sent to</dt><dd>Your balance</dd></div>
+              <div><dt>Waits in the jar</dt><dd>{naira(held)}</dd></div>
+              <div><dt>Tx</dt><dd>{s.txHash ? short(s.txHash) : '—'}</dd></div>
+            </dl>
+          </div>
+          <div className="sq-actions">
+            <button type="button" className="sq-btn-ink" onClick={() => setShowPayout(false)}>Back to squad</button>
+            <button type="button" className="sq-btn-ghost" onClick={restart}>Start over</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
-    <div className="sj">
-      <div className="sj-app">
-        <header className="sj-top">
-          <div>
-            <p className="sj-kicker">Squad · Hostel 4B</p>
-            <h4 className="sj-round">Round {s.round} of {s.totalRounds}</h4>
-          </div>
-          <button type="button" className="sj-ghost" onClick={reset}>Reset</button>
+    <div className="sqj">
+      <div className="sq-page sq-narrow">
+        <header className="sq-bar">
+          <button type="button" className="sq-icon" aria-label="Back to the landing page" onClick={restart}>←</button>
+          <span className="sq-mono sq-muted">Squad</span>
+          <span />
         </header>
+        <h2 className="sq-headline">Hostel 4B</h2>
+        <p className="sq-mono sq-muted">Round {s.round} of {s.totalRounds} · {naira(s.contribution)} a week</p>
 
-        <div className="sj-pot">
+        <div className="sq-pot">
           <div>
-            <span className="sj-muted">This round's pot</span>
-            <strong>{naira(pot)}</strong>
+            <span className="sq-label">This round</span>
+            <span className="sq-money">{naira(pot)}</span>
           </div>
           <div>
-            <span className="sj-muted">Collects this round</span>
-            <strong>{youCollect ? 'You' : collector.name}</strong>
+            <span className="sq-label">Collects</span>
+            <span className="sq-who">{youCollect ? 'You' : collector.name}</span>
           </div>
         </div>
 
-        <ol className="sj-members" aria-label="Members in payout order">
-          {s.payoutOrder.map((id, i) => {
-            const m = s.members.find((x) => x.id === id)!;
-            const turn = i + 1;
-            return (
-              <li key={id} className={turn === s.round ? 'is-turn' : turn < s.round ? 'is-done' : ''}>
-                <span className="sj-num">{turn}</span>
-                <span className="sj-name">{m.name}</span>
-                {turn < s.round && <span className="sj-tag">collected</span>}
-                {turn === s.round && <span className="sj-tag sj-tag-acc">collecting</span>}
-                <span className={m.paid ? 'sj-paid' : 'sj-due'}>{m.paid ? 'Paid' : 'Due'}</span>
-              </li>
-            );
-          })}
-        </ol>
+        <StampCard s={s} fresh={s.phase === 'pending' || s.phase === 'settled'} />
 
-        <div className="sj-action">
+        <div className="sq-actionbar">
           {s.phase === 'overview' && !youPaid && (
-            <button type="button" className="sj-btn" onClick={() => dispatch({ type: 'PAY' })} disabled={!s.members.filter((m) => m.id !== s.you).every((m) => m.paid)}>
-              Pay {naira(s.contribution)} for round {s.round}
-            </button>
+            <>
+              <button type="button" className="sq-btn-primary" disabled={!othersPaid} onClick={() => dispatch({ type: 'PAY' })}>
+                {othersPaid ? `Pay ${naira(s.contribution)}` : 'Waiting for the squad…'}
+              </button>
+              <p className="sq-small">The jar pays automatically when everyone has paid, or when the round closes.</p>
+            </>
           )}
-          {s.phase === 'pending' && <p className="sj-status">Confirming on chain…</p>}
+          {s.phase === 'pending' && (
+            <div className="sq-paidlabel">You've paid round {s.round}. <span className="sq-mono">tx {s.txHash && short(s.txHash)}</span></div>
+          )}
           {s.phase === 'settled' && (
-            <div className="sj-done">
-              <p>
-                <strong>{naira(pot)}</strong> went to {youCollect ? 'you' : collector.name}. Nobody pressed a button: the
-                contract paid out when the last member paid.
-              </p>
+            <>
+              <div className="sq-paidlabel">
+                The jar paid {youCollect ? 'you' : collector.name} <b className="sq-money-sm">{naira(youCollect ? pot - held : pot)}</b>. Nobody pressed a button.
+              </div>
               {s.round < s.totalRounds ? (
-                <button type="button" className="sj-btn" onClick={() => dispatch({ type: 'NEXT_ROUND' })}>
-                  Next round
-                </button>
+                <button type="button" className="sq-btn-ink" onClick={() => dispatch({ type: 'NEXT_ROUND' })}>Next round</button>
               ) : (
-                <p className="sj-muted">Everyone has collected once. The squad is complete.</p>
+                <button type="button" className="sq-btn-ghost" onClick={restart}>Squad complete · Start over</button>
               )}
-            </div>
+            </>
           )}
         </div>
-
-        {s.phase === 'confirm' && (
-          <div className="sj-sheet" role="dialog" aria-modal="true" aria-label="Confirm payment">
-            <div className="sj-sheet-in">
-              <p className="sj-kicker">Demo wallet</p>
-              <h5>Confirm contribution</h5>
-              <dl>
-                <div><dt>Contract</dt><dd>Squad · Hostel 4B</dd></div>
-                <div><dt>Function</dt><dd><code>contribute()</code></dd></div>
-                <div><dt>Amount</dt><dd>{naira(s.contribution)} sNGN</dd></div>
-                <div><dt>Network</dt><dd>EVM testnet (simulated)</dd></div>
-              </dl>
-              <div className="sj-row">
-                <button type="button" className="sj-ghost" onClick={() => dispatch({ type: 'CANCEL' })}>Cancel</button>
-                <button type="button" className="sj-btn" onClick={confirm}>Confirm</button>
-              </div>
-            </div>
-          </div>
-        )}
       </div>
 
-      <aside className="sj-log" aria-live="polite">
-        <p className="sj-kicker">What the contract did</p>
-        <ol>{log.map((l, i) => <li key={i}>{l}</li>)}</ol>
-        <p className="sj-note">
-          In the real app, part of an early payout is held back until that member has paid every round, and a missed payment
-          becomes a debt to whoever was paid short.
-        </p>
-      </aside>
+      {s.phase === 'confirm' && (
+        <div className="sq-scrim" role="dialog" aria-modal="true" aria-label="Confirm payment">
+          <div className="sq-sheet">
+            <span className="sq-grab" aria-hidden="true" />
+            <p className="sq-label">Demo wallet · test money</p>
+            <p className="sq-money-hero sq-sheet-amt">{naira(s.contribution)}</p>
+            <dl>
+              <div><dt>To</dt><dd>Hostel 4B jar</dd></div>
+              <div><dt>Calls</dt><dd className="sq-mono">contribute()</dd></div>
+              <div><dt>Network</dt><dd>EVM testnet</dd></div>
+            </dl>
+            <button type="button" className="sq-btn-primary" onClick={() => dispatch({ type: 'CONFIRM', txHash: randomHash() })}>Confirm</button>
+            <button type="button" className="sq-btn-ghost" onClick={() => dispatch({ type: 'CANCEL' })}>Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

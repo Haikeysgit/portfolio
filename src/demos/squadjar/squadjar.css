@@ -1,51 +1,98 @@
-.sj { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 0; min-height: 560px; font-size: 15px; }
-.sj-app { position: relative; padding: 24px; display: flex; flex-direction: column; gap: 18px; border-right: 1px solid var(--br); }
-.sj-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
-.sj-kicker { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); margin: 0; }
-.sj-round { font-size: 24px; font-weight: 800; margin: 4px 0 0; letter-spacing: -.02em; }
-.sj-muted { color: var(--dim); font-size: 13.5px; }
-.sj-pot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.sj-pot > div { background: var(--bg1); border: 1px solid var(--br); border-radius: 12px; padding: 12px 14px; display: flex; flex-direction: column; gap: 2px; }
-.sj-pot strong { font-size: 20px; font-weight: 800; }
-.sj-members { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
-.sj-members li { display: grid; grid-template-columns: 28px 1fr auto auto; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; background: var(--bg1); border: 1px solid var(--br); }
-.sj-members li.is-turn { border-color: var(--acc); background: var(--acc-bg); }
-.sj-members li.is-done { opacity: .7; }
-.sj-num { font-family: var(--mono); font-size: 12.5px; color: var(--dim); }
-.sj-name { font-weight: 700; }
-.sj-tag { font-family: var(--mono); font-size: 11.5px; color: var(--dim); }
-.sj-tag-acc { color: var(--acc); }
-.sj-paid, .sj-due { font-size: 12.5px; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
-.sj-paid { background: var(--acc-bg); color: var(--acc); }
-.sj-due { background: var(--bg2); color: var(--dim); }
-.sj-action { margin-top: auto; }
-.sj-btn, .sj-ghost { font: inherit; font-weight: 700; border-radius: 10px; cursor: pointer; padding: 12px 16px; }
-.sj-btn { width: 100%; background: var(--acc); color: var(--bg); border: 1px solid var(--acc); }
-.sj-btn:disabled { opacity: .45; cursor: not-allowed; }
-.sj-ghost { background: transparent; color: var(--ink); border: 1px solid var(--br); padding: 8px 14px; }
-.sj-ghost:hover { border-color: var(--acc); }
-.sj-status { text-align: center; color: var(--dim); font-weight: 600; margin: 0; padding: 12px; }
-.sj-done { display: grid; gap: 12px; }
-.sj-done p { margin: 0; }
-.sj-sheet { position: absolute; inset: 0; background: rgba(0, 0, 0, .55); display: flex; align-items: flex-end; justify-content: center; padding: 16px; }
-.sj-sheet-in { width: 100%; max-width: 380px; background: var(--bg1); border: 1px solid var(--br); border-radius: 16px; padding: 18px; display: grid; gap: 12px; }
-.sj-sheet-in h5 { font-size: 19px; font-weight: 800; margin: 0; }
-.sj-sheet-in dl { margin: 0; display: grid; gap: 6px; }
-.sj-sheet-in dl div { display: flex; justify-content: space-between; gap: 12px; font-size: 14px; }
-.sj-sheet-in dt { color: var(--dim); }
-.sj-sheet-in dd { margin: 0; font-weight: 600; text-align: right; }
-.sj-row { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; }
-.sj-row .sj-ghost { padding: 12px; }
-.sj-log { padding: 24px; display: flex; flex-direction: column; gap: 12px; background: var(--bg1); }
-.sj-log ol { margin: 0; padding-left: 18px; display: grid; gap: 8px; color: var(--dim); font-size: 14px; line-height: 1.5; }
-.sj-log li:last-child { color: var(--ink); }
-.sj-note { margin: auto 0 0; font-size: 13px; color: var(--dim); border-top: 1px solid var(--br); padding-top: 12px; }
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Instrument+Sans:wght@400;600;700&family=JetBrains+Mono:wght@400;500&family=Zilla+Slab:wght@700&display=swap');
 
-@media (max-width: 767px) {
-  .sj { grid-template-columns: 1fr; min-height: 0; }
-  .sj-app { border-right: 0; border-bottom: 1px solid var(--br); padding: 16px; min-height: 600px; }
-  .sj-log { padding: 16px; }
-  .sj-round { font-size: 21px; }
-  .sj-members li { grid-template-columns: 22px 1fr auto; }
-  .sj-members .sj-tag { display: none; }
+/* Squadjar's own design system (DESIGN.md in the Squadjar repo). Scoped to the demo. */
+.sqj {
+  --manila: #f2eadb; --paper: #fffaf1; --ink: #1c1915; --muted: #6f6253; --rule: #e2d6c0;
+  --primary: #e4572e; --primary-press: #c9461f; --stamp: #2b3cc4; --palm: rgba(46, 125, 79, .1);
+  --display: 'Bricolage Grotesque', system-ui, sans-serif; --money: 'Zilla Slab', Georgia, serif;
+  --body: 'Instrument Sans', system-ui, sans-serif; --mono: 'JetBrains Mono', ui-monospace, monospace;
+  container-type: inline-size; position: relative; -webkit-user-select: none; user-select: none; background: var(--manila); color: var(--ink);
+  font-family: var(--body); font-size: 16px; line-height: 1.5; min-height: 600px;
+}
+.sqj button { font-family: inherit; cursor: pointer; }
+.sq-page { padding: 18px 20px 24px; display: flex; flex-direction: column; gap: 14px; min-height: 600px; }
+.sq-narrow { max-width: 480px; margin-inline: auto; }
+.sq-head { display: flex; justify-content: space-between; align-items: center; height: 48px; }
+.sq-logo { font-family: var(--display); font-weight: 800; font-size: 20px; letter-spacing: -.03em; }
+.sq-login { font-weight: 600; text-decoration: underline; text-decoration-color: var(--rule); text-decoration-thickness: 2px; text-underline-offset: 3px; }
+.sq-hero { display: grid; gap: 28px; padding: 12px 0 8px; align-items: center; }
+.sq-display { font-family: var(--display); font-weight: 800; font-size: clamp(2.2rem, 9cqi, 3.6rem); line-height: .95; letter-spacing: -.04em; margin: 0; }
+.sq-lead { color: var(--muted); font-size: 18px; max-width: 36ch; margin: 16px 0 24px; }
+.sq-fig { margin: 0; min-width: 0; }
+.sq-fig figcaption { margin-top: 10px; font-size: 14px; color: var(--muted); }
+.sq-tilt { transform: rotate(-1deg); }
+@container (min-width: 720px) {
+  .sq-hero { grid-template-columns: 1.05fr 1fr; gap: 40px; padding-top: 28px; }
+}
+
+/* Buttons: 56px, 14px radius, pressed state like the app. */
+.sq-btn-primary, .sq-btn-ink, .sq-btn-ghost { min-height: 56px; border-radius: 14px; padding: 0 24px; font-weight: 600; font-size: 17px; width: 100%; border: 0; }
+.sq-hero .sq-btn-ink { width: auto; }
+.sq-btn-primary { background: var(--primary); color: #fff; font-family: var(--money); font-weight: 700; font-size: 20px; }
+.sq-btn-primary:active:not(:disabled) { background: var(--primary-press); }
+.sq-btn-primary:disabled { background: var(--rule); color: var(--muted); cursor: not-allowed; font-family: var(--body); font-size: 16px; }
+.sq-btn-ink { background: var(--ink); color: var(--manila); }
+.sq-btn-ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--ink); min-height: 52px; }
+.sqj button:active:not(:disabled) { transform: scale(.98); }
+
+.sq-bar { display: grid; grid-template-columns: 44px 1fr 44px; align-items: center; text-align: center; }
+.sq-icon { width: 44px; height: 44px; border-radius: 12px; border: 0; background: transparent; font-size: 22px; color: var(--ink); }
+.sq-headline { font-family: var(--display); font-weight: 800; font-size: 1.9rem; letter-spacing: -.03em; line-height: 1.1; margin: 0; }
+.sq-mono { font-family: var(--mono); font-size: 13px; font-variant-numeric: tabular-nums; margin: 0; }
+.sq-muted { color: var(--muted); }
+.sq-label { font-size: 12px; font-weight: 600; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; }
+.sq-small { font-size: 14px; color: var(--muted); margin: 0; }
+.sq-pot { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sq-pot > div { background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 12px 14px; display: flex; flex-direction: column; }
+.sq-money { font-family: var(--money); font-weight: 700; font-size: 26px; font-variant-numeric: tabular-nums; }
+.sq-money-sm { font-family: var(--money); }
+.sq-who { font-family: var(--display); font-weight: 800; font-size: 24px; letter-spacing: -.02em; }
+
+/* The contribution card: ruled ledger, stamps in ink. */
+.sq-card { background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; overflow: hidden; }
+.sq-card-scroll { overflow-x: auto; }
+.sq-ledger { border-collapse: separate; border-spacing: 0; width: max-content; min-width: 100%; font-size: 14px; }
+.sq-ledger th, .sq-ledger td { height: 42px; border-bottom: 1px solid var(--rule); }
+.sq-ledger tr:last-child th, .sq-ledger tr:last-child td { border-bottom: 0; }
+.sq-ledger thead th { font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--muted); width: 46px; }
+.sq-ledger td { text-align: center; }
+.sq-ledger .is-now { background: var(--palm); color: var(--ink); }
+.sq-sticky { position: sticky; left: 0; z-index: 1; background: var(--paper); text-align: left; padding: 0 12px; font-weight: 600; white-space: nowrap; }
+thead .sq-sticky { font-family: var(--mono); }
+.sq-sticky.is-me { font-weight: 800; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.sq-turn { display: inline-block; width: 16px; margin-right: 8px; font-family: var(--mono); font-size: 11px; font-weight: 400; color: var(--muted); }
+.sq-stamp { display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--stamp); color: var(--stamp); font-family: var(--mono); font-size: 9px; font-weight: 500; opacity: .92; transform: rotate(var(--tilt)); }
+.sq-stamp.is-fresh { animation: sq-thunk .5s cubic-bezier(.2, 1.5, .4, 1) both; }
+@keyframes sq-thunk { from { transform: scale(1.9) rotate(-24deg); opacity: 0; } to { transform: scale(1) rotate(var(--tilt)); opacity: .92; } }
+.sq-box { display: inline-block; width: 28px; height: 28px; border-radius: 4px; border: 1.5px dashed rgba(111, 98, 83, .7); }
+.sq-paidout { display: inline-block; transform: rotate(-6deg); border: 2px solid var(--stamp); color: var(--stamp); font-family: var(--mono); font-size: 8px; font-weight: 500; padding: 1px 4px; letter-spacing: .04em; white-space: nowrap; }
+.sq-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+
+.sq-actionbar { margin-top: auto; display: grid; gap: 10px; padding-top: 8px; }
+.sq-paidlabel { min-height: 56px; display: block; text-align: center; border-radius: 14px; background: var(--paper); border: 1px solid var(--rule); color: var(--muted); padding: 10px 14px; font-weight: 600; }
+.sq-paidlabel b { color: var(--ink); }
+
+/* Wallet sheet */
+.sq-scrim { position: absolute; inset: 0; background: rgba(28, 25, 21, .5); display: flex; align-items: flex-end; justify-content: center; animation: sq-fade .2s ease-out; }
+.sq-sheet { width: 100%; max-width: 480px; background: var(--paper); border-radius: 22px 22px 0 0; padding: 10px 20px 22px; display: grid; gap: 12px; animation: sq-up .32s cubic-bezier(.2, .9, .3, 1); }
+.sq-grab { justify-self: center; width: 40px; height: 5px; border-radius: 3px; background: var(--rule); }
+.sq-sheet-amt { font-size: 56px !important; margin: 0; }
+.sq-sheet dl, .sq-receipt dl { margin: 0; display: grid; }
+.sq-sheet dl div, .sq-receipt dl div { display: flex; justify-content: space-between; gap: 12px; padding: 8px 0; border-bottom: 1px dashed var(--rule); font-size: 14px; }
+.sq-sheet dt, .sq-receipt dt { color: var(--muted); }
+.sq-sheet dd, .sq-receipt dd { margin: 0; font-weight: 600; }
+@keyframes sq-up { from { transform: translateY(100%); } to { transform: none; } }
+@keyframes sq-fade { from { opacity: 0; } to { opacity: 1; } }
+
+/* Payout moment */
+.sq-moment { font-family: var(--display); font-weight: 800; font-size: clamp(2.6rem, 12cqi, 3.2rem); line-height: .95; letter-spacing: -.04em; margin: 28px 0 0; }
+.sq-money-hero { font-family: var(--money); font-weight: 700; font-size: clamp(3.4rem, 19cqi, 5rem); line-height: 1; margin: 6px 0 0; font-variant-numeric: tabular-nums; animation: sq-count .6s cubic-bezier(.2, .9, .3, 1); }
+@keyframes sq-count { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.sq-receipt { position: relative; background: var(--paper); border: 1px solid var(--rule); border-radius: 14px; padding: 6px 16px 56px; font-family: var(--mono); font-size: 13px; }
+.sq-collected { position: absolute; right: 16px; bottom: 14px; border: 3px solid var(--stamp); color: var(--stamp); padding: 2px 10px; font-size: 17px; letter-spacing: .08em; opacity: .88; transform: rotate(-12deg); animation: sq-thunk2 .55s .25s cubic-bezier(.2, 1.5, .4, 1) both; }
+@keyframes sq-thunk2 { from { transform: scale(2.2) rotate(-26deg); opacity: 0; } to { transform: rotate(-12deg); opacity: .88; } }
+.sq-actions { display: grid; gap: 10px; margin-top: auto; padding-top: 12px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sq-stamp.is-fresh, .sq-collected, .sq-sheet, .sq-scrim, .sq-money-hero { animation: none; }
 }

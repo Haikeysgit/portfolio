@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { initialSquad, squadReducer, type SquadAction, type SquadState } from './state';
+import { heldFor, initialSquad, squadReducer, type SquadAction, type SquadState } from './state';
 
-const run = (...actions: SquadAction[]) => actions.reduce<SquadState>(squadReducer, initialSquad);
+const started = squadReducer(initialSquad, { type: 'START' });
+const run = (...actions: SquadAction[]) => actions.reduce<SquadState>(squadReducer, started);
 const you = (s: SquadState) => s.members.find((m) => m.id === s.you)!;
 
 describe('squadReducer', () => {
@@ -11,6 +12,12 @@ describe('squadReducer', () => {
     expect(initialSquad.members.filter((m) => m.paid)).toHaveLength(5);
     expect(you(initialSquad).paid).toBe(false);
   });
+
+  it('opens on the landing page', () => expect(initialSquad.phase).toBe('landing'));
+
+  it('PAY on the landing page is a no-op', () => expect(squadReducer(initialSquad, { type: 'PAY' })).toBe(initialSquad));
+
+  it('START opens the squad', () => expect(started.phase).toBe('overview'));
 
   it('PAY opens the wallet confirm sheet', () => expect(run({ type: 'PAY' }).phase).toBe('confirm'));
 
@@ -39,7 +46,7 @@ describe('squadReducer', () => {
   });
 
   it('SETTLE before everyone has paid is a no-op', () => {
-    expect(squadReducer(initialSquad, { type: 'SETTLE' })).toBe(initialSquad);
+    expect(squadReducer(started, { type: 'SETTLE' })).toBe(started);
   });
 
   it('NEXT_ROUND moves the rotation on and clears who paid', () => {
@@ -57,7 +64,7 @@ describe('squadReducer', () => {
   });
 
   it('NEXT_ROUND after the last round is a no-op', () => {
-    let s = initialSquad;
+    let s = started;
     for (let r = 3; r <= 6; r++) {
       s = [{ type: 'OTHERS_PAY' }, { type: 'PAY' }, { type: 'CONFIRM', txHash: '0x' + r }, { type: 'SETTLE' }].reduce<SquadState>(
         (acc, a) => squadReducer(acc, a as SquadAction),
@@ -74,4 +81,10 @@ describe('squadReducer', () => {
     const s = run({ type: 'PAY' }, { type: 'CONFIRM', txHash: '0xabc' }, { type: 'RESET' });
     expect(s).toEqual(initialSquad);
   });
+});
+
+describe('heldFor (the jar keeps back what a collector still owes)', () => {
+  it('a New member collecting round 4 of 6 leaves 2 rounds held', () => expect(heldFor(4, 6, 5000, 0)).toBe(10000));
+  it('a Reliable member has half of it held', () => expect(heldFor(4, 6, 5000, 50)).toBe(5000));
+  it('the last turn holds nothing', () => expect(heldFor(6, 6, 5000, 0)).toBe(0));
 });
