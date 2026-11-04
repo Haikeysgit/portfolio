@@ -1,5 +1,9 @@
 ---
+import * as icons from 'simple-icons';
 import { skills } from '../data/skills';
+
+// Logos are inlined at build time, so the browser loads no icon files.
+const pathOf = (slug: string) => (icons as unknown as Record<string, { path: string } | undefined>)[slug]?.path;
 ---
 <section id="skills" class="wrap section">
   <div class="section-head">
@@ -10,17 +14,33 @@ import { skills } from '../data/skills';
     {skills.map((g) => (
       <div class="col">
         <h3>{g.title}</h3>
-        <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+        <ul class="tools">
+          {g.tools.map((t) => (
+            <li>
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d={pathOf(t.icon)} /></svg>
+              <span>{t.name}</span>
+            </li>
+          ))}
+        </ul>
+        {g.also.length > 0 && (
+          <p class="also"><span>Also</span> {g.also.join(' · ')}</p>
+        )}
       </div>
     ))}
   </div>
 </section>
 <style>
   .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-  .col { background: var(--bg1); border: 1px solid var(--br); border-radius: 14px; padding: 22px; }
-  h3 { font-size: 18px; font-weight: 800; margin-bottom: 14px; }
-  ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-  li { font-family: var(--mono); font-size: 13px; color: var(--ink); background: var(--bg2); border-radius: 6px; padding: 5px 10px; }
+  .col { background: var(--bg1); border: 1px solid var(--br); border-radius: 14px; padding: 22px; display: flex; flex-direction: column; gap: 14px; }
+  h3 { font-size: 18px; font-weight: 800; }
+  .tools { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  .tools li { display: flex; align-items: center; gap: 9px; background: var(--bg2); border: 1px solid transparent; border-radius: 10px; padding: 8px 12px 8px 10px; font-weight: 600; font-size: 14.5px; transition: border-color .2s, transform .2s; }
+  .tools li:hover { border-color: var(--acc); transform: translateY(-1px); }
+  .tools li span { white-space: nowrap; }
+  .tools svg { width: 20px; height: 20px; flex-shrink: 0; fill: var(--ink); transition: fill .2s; }
+  .tools li:hover svg { fill: var(--acc); }
+  .also { margin-top: auto; font-size: 14px; color: var(--dim); line-height: 1.55; }
+  .also span { font-family: var(--mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--acc); margin-right: 4px; }
   @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
   @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
 </style>
