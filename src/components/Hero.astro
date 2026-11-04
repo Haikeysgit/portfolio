@@ -4,11 +4,11 @@ import { highlights } from '../data/highlights';
 <section class="hero wrap" id="top">
   <div class="intro">
     <h1>Full stack &amp; blockchain engineer.</h1>
-    <p class="lead lead-full">
-      I build web apps, AI agents and smart contracts. Four years in: client stores that take real payments, agent
-      tooling that placed at a hackathon, and Solidity contracts on Ethereum, Base and other EVM chains.
-    </p>
-    <p class="lead lead-short">I build web apps, AI agents and Solidity smart contracts. Four years shipping real products.</p>
+    <div class="copy">
+      <p>I build web apps, AI agents and smart contracts.</p>
+      <p>Client stores that take real payments. AI agents that run on their own, start to finish.</p>
+      <p>And Solidity contracts on Ethereum, Base and other EVM chains, reviewed for security and fuzz-tested before they touch a cent.</p>
+    </div>
     <div class="ctas">
       <a class="btn btn-primary" href="#projects">See projects</a>
       <span class="resume">
@@ -45,10 +45,11 @@ import { highlights } from '../data/highlights';
 </section>
 <style>
   .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 20px 0 56px; }
-  h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 800; line-height: 1.04; letter-spacing: -.03em; margin: 0 0 20px; }
-  .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
-
-  .lead-short { display: none; }
+  h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 800; line-height: 1.04; letter-spacing: -.03em; margin: 0; }
+  .copy { display: grid; gap: 14px; margin-top: 22px; max-width: 540px; }
+  .copy p { color: var(--dim); font-size: 17.5px; line-height: 1.6; }
+  .copy p:first-child { color: var(--ink); font-weight: 600; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 32px; }
 
   /* View resume + download, joined like one control. */
   .resume { display: inline-flex; }
@@ -78,24 +79,29 @@ import { highlights } from '../data/highlights';
   .fact-3 { bottom: 6%; left: -2%; }
   @keyframes float { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-10px) rotate(.6deg); } }
 
+  /* Small laptops: keep the floating cards inside the screen. */
+  @media (max-width: 1180px) {
+    .fact-1 { left: -2%; }
+    .fact-2 { right: -2%; }
+  }
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; gap: 28px; padding: 16px 0 40px; }
+    .hero { grid-template-columns: 1fr; gap: 48px; padding: 28px 0 40px; }
     .stage { width: min(100%, 420px); }
   }
-  /* Phones: calmer type, room between blocks, compact buttons, and a clean photo with the facts listed below it. */
+  /* Phones: the same words, with room to breathe between every block. */
   @media (max-width: 600px) {
-    .hero { gap: 36px; padding: 28px 0 24px; }
-    h1 { font-size: 32px; line-height: 1.12; margin-bottom: 18px; }
-    .lead { font-size: 15.5px; line-height: 1.7; max-width: 32ch; }
-    .lead-full { display: none; }
-    .lead-short { display: block; }
-    .ctas { flex-wrap: nowrap; gap: 8px; margin-top: 28px; }
-    .ctas .btn { padding: 9px 12px; font-size: 13px; border-radius: 8px; white-space: nowrap; }
-    .resume-view { border-radius: 8px 0 0 8px !important; }
-    .resume-dl { border-radius: 0 8px 8px 0 !important; padding: 9px 10px !important; }
+    .hero { gap: 56px; padding: 44px 0 24px; }
+    h1 { font-size: 34px; line-height: 1.08; }
+    .copy { gap: 18px; margin-top: 30px; }
+    .copy p { font-size: 16px; line-height: 1.65; }
+    .ctas { flex-wrap: nowrap; gap: 8px; margin-top: 36px; }
+    .ctas > .btn, .resume { flex: 1 1 auto; }
+    .ctas .btn { justify-content: center; padding: 11px 10px; font-size: 13.5px; border-radius: 8px; white-space: nowrap; }
+    .resume-view { flex: 1 1 auto; border-radius: 8px 0 0 8px !important; }
+    .resume-dl { border-radius: 0 8px 8px 0 !important; padding: 11px 10px !important; }
     .resume-dl svg { width: 15px; height: 15px; }
 
-    /* Photo and floating fun facts: unchanged from before, just sized for phones. */
+    /* Photo and floating fun facts, sized for phones. */
     .stage { aspect-ratio: 1 / 1.12; }
     .portrait { inset: 2% 16% 0; }
     .fact { max-width: 168px; padding: 9px 11px; border-radius: 12px; }
