@@ -1,0 +1,26 @@
+---
+import { skills } from '../data/skills';
+---
+<section id="skills" class="wrap section">
+  <div class="section-head">
+    <p class="label">Skills</p>
+    <h2 class="h2">What I build with</h2>
+  </div>
+  <div class="grid">
+    {skills.map((g) => (
+      <div class="col">
+        <h3>{g.title}</h3>
+        <ul>{g.items.map((i) => <li>{i}</li>)}</ul>
+      </div>
+    ))}
+  </div>
+</section>
+<style>
+  .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .col { background: var(--bg1); border: 1px solid var(--br); border-radius: 14px; padding: 22px; }
+  h3 { font-size: 18px; font-weight: 800; margin-bottom: 14px; }
+  ul { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
+  li { font-family: var(--mono); font-size: 13px; color: var(--ink); background: var(--bg2); border-radius: 6px; padding: 5px 10px; }
+  @media (max-width: 1000px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .grid { grid-template-columns: 1fr; } }
+</style>

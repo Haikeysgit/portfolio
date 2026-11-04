@@ -1,0 +1,33 @@
+---
+const filters = [
+  { id: 'all', label: 'All' },
+  { id: 'ai', label: 'AI agents' },
+  { id: 'blockchain', label: 'Blockchain' },
+  { id: 'app', label: 'Apps' },
+];
+---
+<div class="filter" role="group" aria-label="Filter projects">
+  {filters.map((f, i) => (
+    <button type="button" data-filter={f.id} aria-pressed={i === 0 ? 'true' : 'false'}>{f.label}</button>
+  ))}
+</div>
+<script>
+  import { matchesFilter, type Filter, type Track } from '../lib/projects';
+  const buttons = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('.pcard');
+  buttons.forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter as Filter;
+      buttons.forEach((b) => b.setAttribute('aria-pressed', String(b === btn)));
+      cards.forEach((c) => {
+        c.hidden = !matchesFilter((c.dataset.tracks ?? '').split(' ') as Track[], f);
+      });
+    }),
+  );
+</script>
+<style>
+  .filter { display: flex; flex-wrap: wrap; gap: 8px; }
+  button { font-weight: 600; font-size: 15px; padding: 9px 16px; border-radius: 999px; border: 1px solid var(--br); background: var(--bg1); color: var(--dim); cursor: pointer; }
+  button:hover { color: var(--ink); border-color: var(--acc); }
+  button[aria-pressed='true'] { background: var(--acc); border-color: var(--acc); color: var(--bg); }
+</style>

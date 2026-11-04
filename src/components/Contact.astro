@@ -1,0 +1,35 @@
+<section id="contact" class="wrap section">
+  <div class="box">
+    <div>
+      <p class="label">Contact</p>
+      <h2 class="h2">Get in touch</h2>
+      <p class="lead">Open to full-time roles and contract work in web apps, AI agents and blockchain engineering.</p>
+      <a class="mail" href="mailto:imisiolwa@obaseki.dev">imisiolwa@obaseki.dev</a>
+      <ul class="socs">
+        <li><a href="https://github.com/Haikeysgit" target="_blank" rel="noopener">GitHub</a></li>
+        <li><a href="https://www.linkedin.com/in/imisioluwa-obaseki-537298318/" target="_blank" rel="noopener">LinkedIn</a></li>
+        <li><a href="https://x.com/Haikeystweett" target="_blank" rel="noopener">X</a></li>
+      </ul>
+    </div>
+    <form action="https://formsubmit.co/imisiolwa@obaseki.dev" method="POST">
+      <input type="hidden" name="_captcha" value="false" />
+      <label>Your email<input type="email" name="email" required autocomplete="email" /></label>
+      <label>Message<textarea name="message" rows="5" required></textarea></label>
+      <button class="btn btn-primary" type="submit">Send message</button>
+    </form>
+  </div>
+</section>
+<style>
+  .box { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; background: var(--bg1); border: 1px solid var(--br); border-radius: 18px; padding: 44px; }
+  .h2 { margin: 10px 0 12px; }
+  .mail { display: inline-block; margin-top: 22px; font-size: 20px; font-weight: 800; color: var(--acc); text-decoration: none; word-break: break-all; }
+  .socs { list-style: none; display: flex; gap: 18px; margin-top: 16px; }
+  .socs a { color: var(--dim); font-weight: 600; text-decoration: none; }
+  .socs a:hover { color: var(--ink); }
+  form { display: flex; flex-direction: column; gap: 16px; }
+  label { display: flex; flex-direction: column; gap: 6px; font-weight: 600; font-size: 15px; }
+  input, textarea { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--br); border-radius: 8px; padding: 12px 14px; }
+  input:focus, textarea:focus { outline: 2px solid var(--acc); outline-offset: 1px; }
+  button { align-self: flex-start; }
+  @media (max-width: 900px) { .box { grid-template-columns: 1fr; padding: 28px 22px; gap: 32px; } }
+</style>

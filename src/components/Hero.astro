@@ -1,0 +1,27 @@
+---
+import Highlights from './Highlights.astro';
+---
+<section class="hero wrap">
+  <div class="intro">
+    <p class="label">Available for roles</p>
+    <h1>Full stack &amp; blockchain engineer.</h1>
+    <p class="lead">
+      I build web apps, AI agents and smart contracts. Four years in: client stores that take real payments, agent
+      tooling that placed at a hackathon, and Solidity contracts on Ethereum, Base and other EVM chains.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-primary" href="#projects">See projects</a>
+      <a class="btn" href="/Obaseki_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+      <a class="btn" href="#contact">Contact</a>
+    </div>
+  </div>
+  <Highlights />
+</section>
+<style>
+  .hero { display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center; padding: 96px 0 72px; }
+  h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 800; line-height: 1.04; letter-spacing: -.03em; margin: 14px 0 20px; }
+  .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; gap: 40px; padding: 56px 0 48px; }
+  }
+</style>

@@ -1,6 +1,39 @@
 ---
+import { getCollection } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import ProjectFilter from '../components/ProjectFilter.astro';
+import Skills from '../components/Skills.astro';
+import WritingList from '../components/WritingList.astro';
+import Contact from '../components/Contact.astro';
+import { sortByOrder } from '../lib/projects';
+
+const projects = sortByOrder(await getCollection('projects'));
 ---
-<Base title="Obaseki | Full Stack & Blockchain Engineer" description="Full stack and blockchain engineer.">
-  <section class="wrap section"><h1 class="h2">Full stack &amp; blockchain engineer</h1></section>
+<Base
+  title="Obaseki | Full Stack & Blockchain Engineer"
+  description="Full stack and blockchain engineer. I build web apps, AI agents and Solidity smart contracts, from client stores that take real payments to agent tooling and contracts on Ethereum, Base and other EVM chains."
+>
+  <Hero />
+  <section id="projects" class="wrap section">
+    <div class="head">
+      <div class="section-head">
+        <p class="label">Projects</p>
+        <h2 class="h2">What I've built</h2>
+      </div>
+      <ProjectFilter />
+    </div>
+    <div class="grid">
+      {projects.map((p) => <ProjectCard project={p} />)}
+    </div>
+  </section>
+  <Skills />
+  <WritingList />
+  <Contact />
 </Base>
+<style>
+  .head { display: flex; justify-content: space-between; align-items: flex-end; gap: 20px; flex-wrap: wrap; margin-bottom: 32px; }
+  .head .section-head { margin-bottom: 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); gap: 20px; }
+</style>

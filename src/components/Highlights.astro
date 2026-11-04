@@ -1,0 +1,21 @@
+---
+import { highlights } from '../data/highlights';
+---
+<div class="hl" aria-label="Highlights">
+  <p class="label hd">Highlights</p>
+  {highlights.map((h) => (
+    <a class="row" href={`/projects/${h.slug}`}>
+      <span class="track">{h.track}</span>
+      <span class="txt"><strong>{h.strong}</strong> {h.rest}</span>
+    </a>
+  ))}
+</div>
+<style>
+  .hl { background: var(--bg1); border: 1px solid var(--br); border-radius: 14px; overflow: hidden; box-shadow: var(--shadow); }
+  .hd { padding: 16px 22px; border-bottom: 1px solid var(--br); color: var(--dim); }
+  .row { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 20px 22px; text-decoration: none; border-bottom: 1px solid var(--br); transition: background-color .2s; }
+  .row:last-child { border-bottom: 0; }
+  .row:hover { background: var(--acc-bg); }
+  .txt { color: var(--dim); font-size: 16px; line-height: 1.55; }
+  strong { color: var(--ink); font-weight: 700; }
+</style>
