@@ -8,7 +8,8 @@ body {
   font-family: var(--font);
   font-size: 17px;
   line-height: 1.65;
-  overflow-x: hidden;
+  /* clip, not hidden: hidden makes body a scroll container on phones, which breaks the sticky header. */
+  overflow-x: clip;
   transition: background-color .3s, color .3s;
 }
 img { max-width: 100%; display: block; }
