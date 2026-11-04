@@ -4,13 +4,14 @@ import DeviceFrame from './DeviceFrame.astro';
 import Gallery from './Gallery.astro';
 import SquadjarDemo from '../demos/squadjar/SquadjarDemo';
 import KedgeDemo from '../demos/kedge/KedgeDemo';
+import HsbyfionaDemo from '../demos/hsbyfiona/HsbyfionaDemo';
 
 interface Props {
   project: CollectionEntry<'projects'>;
 }
 const p = Astro.props.project.data;
 // Demos that exist so far. A project whose demo is not built yet falls back to its screenshots.
-const built = ['squadjar', 'kedge'];
+const built = ['squadjar', 'kedge', 'hsbyfiona'];
 const hasDemo = p.demo !== undefined && built.includes(p.demo);
 const label = p.demo === 'kedge' ? 'Interactive demo · simulated run' : 'Interactive demo · not real money';
 ---
@@ -20,6 +21,7 @@ const label = p.demo === 'kedge' ? 'Interactive demo · simulated run' : 'Intera
     <DeviceFrame kind="auto">
       {p.demo === 'squadjar' && <SquadjarDemo client:visible />}
       {p.demo === 'kedge' && <KedgeDemo client:visible />}
+      {p.demo === 'hsbyfiona' && <HsbyfionaDemo client:visible />}
     </DeviceFrame>
   </div>
 ) : (
