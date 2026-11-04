@@ -16,3 +16,46 @@ shots:
   - { src: "/images/projects/squadjar/mobile-home.webp", alt: "Squadjar home page explaining ajo savings where nobody holds the jar", device: mobile }
 demo: squadjar
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+Ajo is a rotating savings group. Everyone pays in each round and one person takes the whole pot, until everyone has collected once. Millions of Nigerians use it, and it runs on trust in one person: the collector who holds the money. When that person disappears, or a member stops paying after collecting early, there is no recourse.
+
+Squadjar replaces the collector with a contract. The group's money sits in a contract that pays each member on schedule, and nobody can take it out, not even the person who created the squad.
+
+## What I built
+
+Squadjar was built with my teammate Farouk for Monad Metropolis (Consumer Products and Payments track). He designed the product and built the app. I built the smart contracts: `Squad`, `SquadFactory`, `TrustRegistry` and the `sNGN` test token, with their Foundry tests, deploy scripts and verified testnet deployments.
+
+The first contract plan came from Farouk. I implemented it, then made the calls below as the build went on.
+
+<Flow
+  steps={[
+    { label: 'Squadjar app', note: 'create, join, pay, auto-pay' },
+    { label: 'SquadFactory', note: 'deploys one Squad per group', mine: true },
+    { label: 'Squad', note: 'the jar: turn order, payouts, held money, debt', mine: true },
+    { label: 'TrustRegistry', note: 'payment history that survives redeploys', mine: true },
+  ]}
+  caption="Each group gets its own contract. Nothing is pooled across groups."
+/>
+
+## Key decisions
+
+- **An encrypted keystore for every deploy.** The plan I started from deployed with a private key in a `.env` file. I changed that: deploys sign with an encrypted Foundry keystore, and the deploy script refuses to broadcast without one. It costs a password prompt on every deploy, so nothing deploys unattended.
+- **A security review before any money logic merged.** It found two timing problems. An organizer could set the first deadline years away, and the last person to join could leave round one only seconds long. I capped the first deadline at 60 days and guaranteed every round at least half its length.
+- **Turning off an old version can never lock anyone's money.** A review of my pull requests found that switching off an old factory made the trust registry revert inside payments, which would freeze every jar from that factory. I changed the registry to ignore writes from switched-off squads instead of reverting. I rejected wrapping the call in try/catch, because a caller could pass just enough gas to make it fail silently.
+- **Redeploys keep people's balances and history.** The deploy script can reuse the live token and registry, so fixing the contracts doesn't wipe anyone's naira or payment record.
+- **Trust earns more of your payout early, never all of it.** The first version let the most trusted members collect their full payout early with nothing held back. I flagged that someone could collect and walk away, and proposed options. We settled on holding back part of an early payout by trust tier: 100%, 75% or 50% of what the member still owes.
+- **A miss becomes a debt to the person who was paid short.** A member's held money only covers their own misses, never someone else's. Whatever's left becomes a debt they can pay back at any time, even after the squad ends, and the money goes straight to the members who were paid short.
+
+## What went wrong
+
+The original design asked members for a deposit up front. Collecting first in a 10-person group at ₦5,000 a week would have locked ₦45,000, which shuts out the people ajo is for. We dropped deposits and moved to the held-money model above. That meant a redeploy, so the deploy script had to keep the existing token and trust history.
+
+## Results
+
+- Contracts deployed and verified on Monad testnet, an EVM chain.
+- 73 Foundry tests, including 3 invariant tests that run 1,000 random sequences of paying, missing, settling and paying back. They check that the jar always holds exactly what its books say, and that total debt always equals total credit. To prove they catch real bugs, I broke the debt bookkeeping on purpose and two of them failed.
+- [Try the live app](https://squadjar.vercel.app).

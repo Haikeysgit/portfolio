@@ -18,3 +18,42 @@ shots:
   - { src: "/images/projects/hsbyfiona/mobile-scent-match.webp", alt: "Hsbyfiona scent match quiz asking what the shopper is looking for", device: mobile }
 demo: hsbyfiona
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+HS by Fiona is a perfume brand in Akure, Nigeria. The owner needed an online store that takes payment properly, prices delivery across Akure, and that she can run from her phone. It had to be ready for a launch promo, with bulk orders expected.
+
+## What I built
+
+I built the whole store myself, in a week:
+
+- **The shop.** Product pages with sizes and decants, search, a scent-match quiz for people who don't know what they want, and a cart and checkout.
+- **Payments that can't be faked.** Checkout goes through Paystack, and an order only counts as paid when the payment is confirmed server-side for the exact total.
+- **Delivery priced by road distance.** The customer picks their place in Akure, the server measures the road distance, and the fee comes from distance bands the owner sets herself.
+- **Receipts.** Every paid order gets a PDF receipt emailed to the customer, and the owner gets a new-order alert.
+- **An owner dashboard for her phone.** Products, stock, prices, delivery bands and orders. Stock counts are visible to her but hidden from customers.
+
+<Flow
+  steps={[
+    { label: 'Checkout', note: 'cart and delivery details' },
+    { label: 'Server re-prices', note: 'checks stock, creates an unpaid order', mine: true },
+    { label: 'Paystack', note: 'customer pays on Paystack' },
+    { label: 'Confirm the total', note: 'signed webhook or redirect check', mine: true },
+    { label: 'Paid once', note: 'stock drops, PDF receipt emailed', mine: true },
+  ]}
+/>
+
+## Key decisions
+
+- **The browser never sets a price.** The cart a customer sends is only a list of items. The server re-prices everything, checks stock and creates the order. Editing the page can't change what anyone pays.
+- **Paid means paid once, for the exact amount.** Paystack's webhook is signature-checked, and the redirect back also asks Paystack to confirm. Whichever arrives first marks the order paid, but only if the amount matches exactly, and only once. A replayed webhook can't double-count stock.
+- **Plain HTML first, JavaScript only where you tap.** Pages render on the server. Only the cart, checkout, size picker and search ship JavaScript, so the store loads fast on mobile data.
+- **The owner sets her own delivery prices.** Fees come from distance bands she edits in the dashboard (for example, up to 6 km is ₦1,500). The rules are validated and unit tested.
+
+## Results
+
+- Live at [hsbyfiona.com](https://hsbyfiona.com) and taking real payments.
+- Built solo in a week, launched alongside the brand's sales promo.
+{/* TODO(verify): "built solo in a week" — carried over from the previous portfolio copy; confirm the timeline. */}

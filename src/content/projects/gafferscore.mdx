@@ -16,3 +16,32 @@ shots:
   - { src: "/images/projects/gafferscore/mobile-home.webp", alt: "GafferScore home page for the Premier League prediction game", device: mobile }
   - { src: "/images/projects/gafferscore/mobile-rules.webp", alt: "GafferScore rules page: prediction deadlines, points and leaderboard rankings", device: mobile }
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+Football fans predict results every week anyway. GafferScore turns that into a game, with points for getting it right and leaderboards to settle the arguments.
+
+## What I built
+
+GafferScore is a Premier League prediction game. Players predict the result and exact score of every fixture before kickoff, earn points for accuracy, and climb weekly and overall leaderboards. As founding full stack engineer, I built the platform: the scoring logic, the leaderboards, the prediction deadlines and the frontend.
+
+<Flow
+  steps={[
+    { label: 'Predict', note: 'result and exact score, before kickoff', mine: true },
+    { label: 'Lock', note: 'predictions close at the first kickoff of the gameweek', mine: true },
+    { label: 'Score', note: 'points for correct results and exact scores', mine: true },
+    { label: 'Leaderboards', note: 'weekly and overall rankings', mine: true },
+  ]}
+/>
+
+## Key decisions
+
+- **Leaderboards are computed in the database.** Rankings come from one database function that takes the leaderboard type and the gameweek. The ranking logic lives in one place, and pages stay fast as players are added.
+- **Deadlines are strict.** All predictions lock at the first kickoff of the matchweek, so nobody can wait for early results before predicting.
+
+## Results
+
+- Live at [gafferscore.xyz](https://gafferscore.xyz). Built in 4 days.
+- Later joined by the Gaffer, an AI agent that analyses every club each week.

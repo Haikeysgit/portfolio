@@ -13,3 +13,40 @@ shots:
   - { src: "/images/projects/tektradoor-agent/desktop-repo.webp", alt: "tektradoor-judge repository: the pre-registered strategy test rig", device: desktop }
   - { src: "/images/projects/tektradoor-agent/mobile-repo.webp", alt: "tektradoor-judge repository: the pre-registered strategy test rig", device: mobile }
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+Tektradoor's first trading bot didn't work. Too many things went wrong to patch, so we shut it down and started over, in public.
+
+The hardest problem in automated trading isn't writing a strategy. It's knowing whether a strategy really works, or whether it only looks good because someone kept adjusting it until the backtest did. A result you can tune after the fact proves nothing.
+
+## What I built
+
+Before writing a new agent, I built the test system it has to pass: `tektradoor-judge`, a pre-registered test rig.
+
+- **Write it down first.** Every candidate strategy is written down before it runs: its rules, its random seed and the exact code version.
+- **Timestamp it in public.** The file's fingerprint (sha256) is posted publicly and stamped with OpenTimestamps, which anchors it in a Bitcoin block. Anyone can check that the rules existed before the test.
+- **Test on unseen data.** The strategy then runs on data it hasn't seen, with trading costs, funding and a buy-and-hold benchmark applied the same way to every candidate.
+- **Refuse to cheat.** The judge won't run if the registered file or the judge's own code changed after registration. Results are committed and never overwritten, and the final test can run only once.
+
+<Flow
+  steps={[
+    { label: 'Write the strategy down', note: 'rules, seed, code version', mine: true },
+    { label: 'Fingerprint and timestamp', note: 'sha256, posted and stamped', mine: true },
+    { label: 'Test on unseen data', note: 'costs and benchmark applied equally', mine: true },
+    { label: 'Final run, once', note: 'results committed, never overwritten', mine: true },
+  ]}
+/>
+
+## Key decisions
+
+- **The test system comes before the agent.** A new strategy is only worth building if there's a way to judge it that can't be tuned afterwards.
+- **Every result gets posted, losses included.**
+- **The rig states its own limits.** Whoever holds a repository can rewrite its history, so the git checks only catch mistakes. The real proof is outside the repo: the public fingerprint posts, GitHub's push times and the Bitcoin-anchored timestamps.
+
+## Results
+
+- The test rig is [open source](https://github.com/Haikeysgit/tektradoor-judge).
+- The agent is being rebuilt in public on top of it.

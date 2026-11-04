@@ -19,3 +19,51 @@ shots:
   - { src: "/images/projects/chog-buddy/mobile-focus.webp", alt: "Focus Bets page where holders stake test tokens on their focus time", device: mobile }
   - { src: "/images/projects/chog-buddy/mobile-park.webp", alt: "Chog Park page listing active Chogs, their Soul axes and the focus leaderboard", device: mobile }
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+Chog Genesis NFTs are profile pictures. Chog Buddy turns one into a pixel pet that lives on your Mac or Windows screen. It walks along your taskbar, notices what you're working on, talks to you in a voice set by the NFT's traits, and writes a private diary about your day. Its "Soul" grows from how you actually work and is written onchain against the token, so it stays with the Chog forever.
+
+The pet sees how you spend your day, so every piece of that data needed a home. Some of it should be public. Most of it shouldn't.
+
+## What I built
+
+Chog Buddy was built with Farouk for Chogathon 2026. He built the desktop pet. I built the smart contracts and much of the backend behind it:
+
+- **`ChogSoul`.** It stores each Chog's four Soul traits (Night Owl, Grinder, Social, Creator) and level against the token ID.
+- **`FocusPool`.** It runs Focus Bets: you stake test tokens that you'll focus today. Hit the goal and you get your stake back plus a bonus. Miss it, and 10% is burned and 90% refills the prize pot.
+- **The web backend.** The daily Soul job, the wallet sign-in that checks you own a Chog, the focus reports and bet settlement.
+
+<Flow
+  steps={[
+    { label: 'Desktop pet', note: 'reports focus time every 30 seconds' },
+    { label: 'Backend', note: 'checks ownership, scores focus, writes Souls daily', mine: true },
+    { label: 'ChogSoul', note: 'public Soul per token ID', mine: true },
+    { label: 'FocusPool', note: 'stakes, reserved bonuses, settlement', mine: true },
+  ]}
+  caption="Diaries and chats stay on the user's computer and never touch the chain."
+/>
+
+## Key decisions
+
+- **The Soul belongs to the token, not the wallet.** If the Soul were stored by wallet, every sold Chog would arrive blank. Stored by token ID, the new owner gets a Chog with a history, but none of the old owner's private data.
+- **The blockchain only gets what must be public and permanent.** Diaries and chats never go onchain. The server writes the diary and hands it back without saving it.
+- **One writer, once a day.** A single server wallet writes all Souls in one daily batch. That keeps costs down and makes the writer easy to control, and the admin can swap the key if it ever leaks.
+- **Bonuses are set aside when you join, not when you win.** Paying bonuses from the pot at claim time means the pot can run dry if many people win at once. Setting each bonus aside up front means every win can always be paid. No single bet can reserve more than 1% of the free pot, so one person with many wallets can't lock everyone else out.
+- **Nobody's money gets stuck because of us.** If the server goes silent for two days, you can take your stake back yourself. The owner can only ever withdraw spare prize money, never a stake or a reserved bonus.
+- **Focus has to follow the clock.** The score comes from the user's own computer, so it can be faked. Your focus can never be more than the time since you staked, and each minute has to be earned as it happens. The contract adds a second lock: it won't pay a win before the goal time has passed.
+- **No scary wallet warning.** I first used a one-click signature for staking, but wallets flag that kind of signature as high risk. I switched to a normal approve-then-stake: one extra click, no warning on a user's first bet.
+
+## What went wrong
+
+One risk can't be removed: a script that reports steady focus for the whole bet. Stopping that needs trusted hardware. So I limited the damage instead, with test tokens only, a cap on every bet and a cap on every bonus, and wrote the risk down.
+
+## Results
+
+- `ChogSoul` and `FocusPool` deployed and verified on Monad testnet, an EVM chain.
+- Four rounds of security review before launch, with every issue fixed.
+- 54 automated tests, including an invariant test that runs 12,800 random actions and checks after each one that the contract's balance matches its books.
+- Real bets placed on testnet, wins and losses, all settled correctly.
+- The desktop app ships for Mac and Windows. [Try it](https://chogbuddy.vercel.app).

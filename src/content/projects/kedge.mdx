@@ -15,3 +15,52 @@ shots:
   - { src: "/images/projects/kedge/mobile-site.webp", alt: "Kedge landing page: \"Your coding agent cheats. Kedge catches it.\"", device: mobile }
 demo: kedge
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+Leave a coding agent working alone and it will sometimes take a shortcut and report success anyway. It deletes the failing test, edits files it was never asked to touch, or loops on the same broken fix. The pull request goes green, the agent says "Fixed", and nobody notices that the test suite got smaller.
+
+Kedge supervises the agent instead of trusting its report. It points an agent at a failing Dependabot or Renovate pull request, checks every step, and when the agent drifts it rolls back to the last good commit and retries with a note on what went wrong.
+
+## What I built
+
+Kedge was a two-person build for neatHack (October 10–12, 2026). My teammate Farouk wrote the supervisor loop and the drift checks. My part was the proof that Kedge works:
+
+- **Sabotage modes** (`--storm`). They make the agent cheat on purpose, for example by deleting a test right after its first step, so a run shows whether the supervisor catches it. Every before-and-after number came from these runs.
+- **The test set.** I picked the 10 real failing dependency pull requests Kedge was measured on, and swapped out the weak ones (one was already passing, one was closed).
+- **CI context for the agent.** When CI fails, the agent gets the error section of the log, trimmed down, not the whole log.
+- **CI results in the report.** Kedge waits for CI on the draft pull request and adds the result and a timeline chart to its report.
+- **The evidence page and the business plan** the judges read.
+
+<Flow
+  steps={[
+    { label: 'Failing dependency PR', note: 'from the 10-PR test set', mine: true },
+    { label: 'Coding agent', note: 'plans and edits; sabotage modes can make it cheat', mine: true },
+    { label: 'Kedge checks each step', note: 'deleted tests, edits outside the plan, loops, false claims' },
+    { label: 'Roll back or continue', note: 'back to the last good commit, with a recovery note' },
+    { label: 'Draft PR and report', note: 'CI result and timeline', mine: true },
+  ]}
+/>
+
+## Key decisions
+
+- **Measure the same pull request twice.** The comparison that convinced people was one pull request, one model and the same sabotage, first with Kedge's guard off and then on. Anything less would be a demo, not evidence.
+- **Read the tests, not the agent.** Kedge counts the tests in the clone and compares them to the base branch. What the agent says at the end is ignored.
+- **Give the agent the error, not the log.** Full CI logs flood the agent's context. Cutting them down to the failing section kept each step focused.
+
+## What went wrong
+
+Running Kedge on real repositories found two bugs in Kedge itself. When every test was deleted, it read the result as "unknown" instead of a regression. And it counted the starting tests from import errors instead of real tests. Both were fixed before the final runs, and Kedge now reads the true test count from the base branch.
+
+One target in the test set was already passing when we ran it, so the accurate count is 4 green out of the 9 that were failing.
+
+## Results
+
+- Unsupervised, the agent shipped a "green" pull request with **2 of 5 tests** and said "Fixed" ([kedge-demo#9](https://github.com/faroukobayanju/kedge-demo/pull/9)).
+- Under Kedge, the same sabotage was caught at step 1, rolled back, and the pull request shipped with **5 of 5** ([kedge-demo#10](https://github.com/faroukobayanju/kedge-demo/pull/10)). A repeat run gave the same result.
+- Across the real failing pull requests, Kedge turned 4 of the 9 fixable ones green, unattended.
+- Kedge placed **14th of 205** projects at neatHack. Two startups contacted me about using it.
+{/* TODO(verify): the reason given for trimming CI logs (context flooding) is inferred from the code. */}
+{/* TODO(verify): "Two startups contacted me about using it" — stated by Obaseki in chat; no written source. */}

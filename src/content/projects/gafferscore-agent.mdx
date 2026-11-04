@@ -13,3 +13,41 @@ shots:
   - { src: "/images/projects/gafferscore-agent/desktop-repo.webp", alt: "gaffer-engine repository: the weekly match analysis pipeline", device: desktop }
   - { src: "/images/projects/gafferscore-agent/mobile-repo.webp", alt: "gaffer-engine repository: the weekly match analysis pipeline", device: mobile }
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+GafferScore players predict the score of every Premier League match each week. The Gaffer is an AI agent inside the game that does the homework: every week it analyses each club and gives the likeliest scorelines and results, so players can see what the numbers say before they lock in.
+
+## What I built
+
+I built the engine behind the Gaffer, `gaffer-engine`, a weekly Python pipeline:
+
+1. **Fetch the fixtures** and scrape recent match data for every club.
+2. **Rate every club** on attack and defence.
+3. **Adjust for lineups**, so a missing key player moves the numbers.
+4. **Predict.** A Poisson model turns expected goals into a probability for every scoreline, and a CatBoost model adds to it.
+5. **Write the predictions and the analysis** to the game's database, where players see them in the Gaffer view.
+
+<Flow
+  steps={[
+    { label: 'Match data', note: 'fixtures and recent results' },
+    { label: 'Club ratings', note: 'attack and defence, lineup adjustments', mine: true },
+    { label: 'Poisson + CatBoost', note: 'scoreline and result probabilities', mine: true },
+    { label: 'Analysis', note: 'written for each fixture', mine: true },
+    { label: 'GafferScore', note: 'players see it before predicting' },
+  ]}
+/>
+
+## Key decisions
+
+- **A Poisson model as the base.** Football scores are low and fairly independent counts, which a Poisson model handles well. It gives a probability for every exact scoreline, which is what players are predicting.
+- **Lineups matter.** Ratings built only from past results miss the team that actually takes the pitch, so the engine adjusts for lineups before predicting.
+- **It runs on a schedule.** The pipeline runs on its own every week, so the Gaffer is always ready before the gameweek deadline.
+
+## Results
+
+- Runs weekly, and its insights go to players inside [GafferScore](https://gafferscore.xyz).
+- Code: [gaffer-engine on GitHub](https://github.com/Haikeysgit/gaffer-engine).
+{/* TODO(verify): the reasons under Key decisions are inferred from the code, not stated by Obaseki. CatBoost's exact role is a guess from catboost_model.py. Pipeline step order and "runs on a schedule" are read from the script names and the .github folder in gaffer-engine; confirm. Also need a logged-in screenshot of /gaffer. */}

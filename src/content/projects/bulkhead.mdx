@@ -13,3 +13,48 @@ cover: "/images/projects/bulkhead/cover.webp"
 shots: []
 demo: bulkhead
 ---
+
+import Flow from '../../components/Flow.astro';
+
+## The problem
+
+AI agents now hold real money, and people talk them out of it. In May 2026 a message posted on X got an agent to echo a transfer command, and its wallet automation sent about $150,000 in tokens. Prompt-injection games exist, but players have to trust that the developer runs the agent honestly, and the attack data stays private.
+
+Bulkhead is a firewall and a contract-enforced spending cap for agents that hold money. It's proven in **Drain Me**, a live arena where three AI agents guard real BTC and USDC in a NEAR vault while players try to talk them into paying out. Every attempt goes into an open dataset and is used to measure the firewall's block rate.
+
+## What I built
+
+Bulkhead is a two-person build for the NEAR Hackathon (November 1–14, 2026), still in progress. Farouk owns the agent, firewall and web app. I own the chain side:
+
+- **The vault contract** (Rust, near-sdk). It holds each tier's funds, enforces the spending cap, cooldown and number of rounds, and only accepts calls from an agent running approved code.
+- **The payout path.** The contract builds the real Bitcoin or Base USDC transaction itself and sends it to NEAR's chain signature service (MPC) to sign.
+- **Time-locked owner powers.** Approving new agent code and emergency withdrawals both wait 24 hours, and pending actions are public.
+- **Deploy scripts and the Bitcoin testnet spike** that proved the payout path end to end.
+
+<Flow
+  steps={[
+    { label: 'Player message', note: 'one attempt, up to 2,000 characters' },
+    { label: 'Agent in a TEE', note: 'firewall checks the input and the action (tier 3)' },
+    { label: 'Vault contract', note: 'spending cap, cooldown, rounds, approved code only', mine: true },
+    { label: 'Chain signatures', note: 'MPC signs the transaction the contract built', mine: true },
+    { label: 'Bitcoin or Base', note: 'payout broadcast' },
+  ]}
+/>
+
+## Key decisions
+
+- **The contract builds the transaction, not the agent.** If the agent built the transaction and the contract only signed it, a tricked agent could hide a bigger payout inside it. The contract assembles the payout itself, so the cap applies to what is actually sent.
+- **Bitcoin checks the amount for us.** An agent could lie about how much a Bitcoin input holds to sneak under the cap. Bitcoin's signature format commits to the input amount, so a signature over a false amount is invalid. I tested this on testnet: the payout signed with a false amount was rejected, and the true one went through.
+- **One asset per tier.** Each tier holds a single asset, so each release needs one transaction builder and no multi-asset payout logic.
+- **Owner powers wait 24 hours.** New agent code and emergency withdrawals are proposed first and executed a day later, so players can see any change coming.
+
+## What went wrong
+
+The plan had a hard deadline: a contract-signed Bitcoin testnet transaction by November 6, or the first working payout would move to Base. The spike met it on November 2. Getting there meant matching the exact request format the signer expects. The local test signer now rejects any other format, so tests catch the mistake.
+
+## Results
+
+- The vault contract signed a real Bitcoin testnet payout through NEAR's chain signatures ([transaction](https://mempool.space/testnet4/tx/a8ecea7c06b387f86349322cf025233c3f170e69a2a31f27e274e70ae89e8b1a)). Bitcoin rejected the same payout signed with a false input amount.
+- 77 unit tests and 7 sandbox tests pass.
+{/* TODO(verify): the reasons in Key decisions (contract builds the tx; one asset per tier) come from the spec and handoff notes; confirm they match your thinking. */}
+- The contract has not been reviewed yet, so it is not on mainnet. The code goes public when the hackathon ends on November 14.
