@@ -11,7 +11,7 @@ import { highlights } from '../data/highlights';
     <div class="ctas">
       <a class="btn btn-primary" href="#projects">See projects</a>
       <span class="resume">
-        <a class="btn resume-view" href="/Obaseki_Resume.pdf" target="_blank" rel="noopener"><span class="wide-only">View resume</span><span class="narrow-only">Resume</span></a>
+        <a class="btn resume-view" href="/Obaseki_Resume.pdf" target="_blank" rel="noopener">View resume</a>
         <a class="btn resume-dl" href="/Obaseki_Resume.pdf" download="Obaseki_Resume.pdf" aria-label="Download resume (PDF)" title="Download resume (PDF)">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11" /><path d="m7 11 5 5 5-5" /><path d="M5 20h14" /></svg>
         </a>
@@ -43,7 +43,7 @@ import { highlights } from '../data/highlights';
   </div>
 </section>
 <style>
-  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 36px 0 64px; }
+  .hero { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; padding: 20px 0 56px; }
   h1 { font-size: clamp(38px, 5.4vw, 64px); font-weight: 800; line-height: 1.04; letter-spacing: -.03em; margin: 0 0 20px; }
   .ctas { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
 
@@ -76,7 +76,7 @@ import { highlights } from '../data/highlights';
   @keyframes float { 0%, 100% { transform: translateY(0) rotate(-.6deg); } 50% { transform: translateY(-10px) rotate(.6deg); } }
 
   @media (max-width: 900px) {
-    .hero { grid-template-columns: 1fr; gap: 28px; padding: 28px 0 40px; }
+    .hero { grid-template-columns: 1fr; gap: 28px; padding: 16px 0 40px; }
     .stage { width: min(100%, 420px); }
   }
   @media (max-width: 600px) {
@@ -90,15 +90,13 @@ import { highlights } from '../data/highlights';
     .fact-2 { top: 44%; right: 0; }
     .fact-3 { bottom: 4%; left: 2%; }
   }
-  .narrow-only { display: none; }
-  /* Phones: all three buttons on one line. */
+  /* Phones: See projects, View resume and Contact stay on one line; text and padding scale with the screen. */
   @media (max-width: 600px) {
-    .ctas { flex-wrap: nowrap; gap: 8px; }
-    .ctas .btn { padding: 11px 13px; font-size: 14px; white-space: nowrap; }
-    .resume-dl { padding: 11px 11px; }
-    .wide-only { display: none; }
-    .narrow-only { display: inline; }
+    .ctas { flex-wrap: nowrap; gap: 6px; margin-top: 22px; }
+    .ctas .btn { padding: 11px clamp(8px, 2.6vw, 14px); font-size: clamp(12.5px, 3.6vw, 15px); white-space: nowrap; }
+    .resume-dl { padding: 11px clamp(8px, 2.2vw, 11px); }
+    .resume-dl svg { width: 16px; height: 16px; }
   }
-  @media (max-width: 359px) { .ctas { flex-wrap: wrap; } }
+  @media (max-width: 339px) { .ctas { flex-wrap: wrap; } }
   @media (prefers-reduced-motion: reduce) { .fact { animation: none; } }
 </style>
