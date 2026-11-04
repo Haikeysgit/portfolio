@@ -1,35 +1,32 @@
-import { SUPERVISED_STEPS, UNSUPERVISED_STEPS, type Step } from './steps';
+import { FRAME_COUNT } from './steps';
 
-export type KedgeState = { mode: 'supervised' | 'unsupervised'; index: number; playing: boolean };
+export type KedgeScreen = 'landing' | 'race' | 'how';
+export type KedgeState = { screen: KedgeScreen; shown: number; playing: boolean };
 export type KedgeAction =
+  | { type: 'OPEN'; screen: KedgeScreen }
   | { type: 'STEP' }
+  | { type: 'TICK' }
   | { type: 'PLAY' }
   | { type: 'PAUSE' }
-  | { type: 'TICK' }
-  | { type: 'TOGGLE_MODE' }
   | { type: 'RESET' };
 
-export const initialKedge: KedgeState = { mode: 'supervised', index: 0, playing: false };
+export const initialKedge: KedgeState = { screen: 'landing', shown: 0, playing: false };
 
-export const stepsFor = (s: KedgeState): Step[] => (s.mode === 'supervised' ? SUPERVISED_STEPS : UNSUPERVISED_STEPS);
-const last = (s: KedgeState) => stepsFor(s).length - 1;
-
-function advance(s: KedgeState): KedgeState {
-  return s.index >= last(s) ? { ...s, playing: false } : { ...s, index: s.index + 1 };
-}
+const advance = (s: KedgeState): KedgeState =>
+  s.shown >= FRAME_COUNT ? { ...s, playing: false } : { ...s, shown: s.shown + 1, playing: s.playing && s.shown + 1 < FRAME_COUNT };
 
 export function kedgeReducer(s: KedgeState, a: KedgeAction): KedgeState {
   switch (a.type) {
+    case 'OPEN':
+      return a.screen === 'race' ? { screen: 'race', shown: 0, playing: true } : { ...s, screen: a.screen, playing: false };
     case 'STEP':
       return advance(s);
     case 'TICK':
       return s.playing ? advance(s) : s;
     case 'PLAY':
-      return { ...s, playing: true, index: s.index >= last(s) ? 0 : s.index };
+      return { ...s, playing: true, shown: s.shown >= FRAME_COUNT ? 0 : s.shown };
     case 'PAUSE':
       return { ...s, playing: false };
-    case 'TOGGLE_MODE':
-      return { mode: s.mode === 'supervised' ? 'unsupervised' : 'supervised', index: 0, playing: false };
     case 'RESET':
       return initialKedge;
   }
