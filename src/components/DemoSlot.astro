@@ -1,0 +1,27 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import DeviceFrame from './DeviceFrame.astro';
+import Gallery from './Gallery.astro';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const p = Astro.props.project.data;
+// Demos are added here one by one (Tasks 7-10). Until a project's demo exists, its screenshots show.
+const demos: Record<string, boolean> = {};
+const hasDemo = p.demo !== undefined && demos[p.demo];
+const label = p.demo === 'kedge' ? 'Interactive demo · simulated run' : 'Interactive demo · not real money';
+---
+{hasDemo ? (
+  <div class="demo">
+    <p class="label note">{label}</p>
+    <DeviceFrame kind="auto">
+      <div class="demo-host"></div>
+    </DeviceFrame>
+  </div>
+) : (
+  <Gallery shots={p.shots} />
+)}
+<style>
+  .note { text-align: center; margin-bottom: 14px; }
+</style>

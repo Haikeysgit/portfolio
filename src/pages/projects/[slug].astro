@@ -1,0 +1,49 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import ProjectHeader from '../../components/ProjectHeader.astro';
+import DemoSlot from '../../components/DemoSlot.astro';
+import ProjectNav from '../../components/ProjectNav.astro';
+import { sortByOrder } from '../../lib/projects';
+
+export async function getStaticPaths() {
+  const all = sortByOrder(await getCollection('projects'));
+  return all.map((project, i) => {
+    const prev = all[(i - 1 + all.length) % all.length];
+    const next = all[(i + 1) % all.length];
+    return {
+      params: { slug: project.id },
+      props: { project, prev: { id: prev.id, name: prev.data.name }, next: { id: next.id, name: next.data.name } },
+    };
+  });
+}
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+  prev: { id: string; name: string };
+  next: { id: string; name: string };
+}
+const { project, prev, next } = Astro.props;
+const { Content } = await render(project);
+---
+<Base title={`${project.data.name} | Obaseki`} description={project.data.summary} image={project.data.cover}>
+  <div class="wrap">
+    <ProjectHeader project={project} />
+    <section class="ui" aria-label="Project UI"><DemoSlot project={project} /></section>
+    <article class="prose"><Content /></article>
+    <ProjectNav prev={prev} next={next} />
+  </div>
+</Base>
+<style>
+  .ui { margin: 24px 0 64px; }
+  .prose { max-width: 760px; }
+  .prose :global(h2) { font-size: 28px; font-weight: 800; letter-spacing: -.02em; margin: 48px 0 14px; }
+  .prose :global(h3) { font-size: 20px; font-weight: 800; margin: 28px 0 10px; }
+  .prose :global(p), .prose :global(li) { color: var(--dim); font-size: 17.5px; }
+  .prose :global(p + p) { margin-top: 14px; }
+  .prose :global(ul), .prose :global(ol) { padding-left: 22px; display: grid; gap: 8px; margin: 12px 0; }
+  .prose :global(strong) { color: var(--ink); }
+  .prose :global(a) { color: var(--acc); }
+  .prose :global(code) { font-family: var(--mono); font-size: .88em; background: var(--bg2); padding: 2px 6px; border-radius: 4px; color: var(--ink); }
+  .prose :global(figure) { margin: 20px 0; }
+</style>

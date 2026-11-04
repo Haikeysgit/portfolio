@@ -1,0 +1,35 @@
+---
+interface Props {
+  /** "auto" is a laptop from 768px up and a phone below. */
+  kind?: 'auto' | 'laptop' | 'phone';
+  class?: string;
+}
+const { kind = 'auto', class: cls = '' } = Astro.props;
+---
+<div class:list={['frame', `frame-${kind}`, cls]}>
+  <div class="bar" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="screen"><slot /></div>
+</div>
+<style>
+  .frame { background: var(--bg2); border: 1px solid var(--br); box-shadow: var(--shadow); margin-inline: auto; overflow: hidden; }
+  .screen { background: var(--bg); overflow: hidden; position: relative; }
+
+  /* laptop */
+  .frame-laptop, .frame-auto { border-radius: 14px; padding: 0 10px 10px; max-width: 1080px; }
+  .frame-laptop .bar, .frame-auto .bar { display: flex; gap: 6px; padding: 10px 4px; }
+  .bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--dim); opacity: .45; }
+  .frame-laptop .screen, .frame-auto .screen { border-radius: 6px; }
+
+  /* phone */
+  .frame-phone { border-radius: 38px; padding: 12px; max-width: 360px; }
+  .frame-phone .bar { display: block; width: 90px; height: 6px; border-radius: 3px; margin: 2px auto 10px; background: var(--dim); opacity: .4; }
+  .frame-phone .bar i { display: none; }
+  .frame-phone .screen { border-radius: 26px; }
+
+  @media (max-width: 767px) {
+    .frame-auto { border-radius: 32px; padding: 10px; max-width: 380px; }
+    .frame-auto .bar { display: block; width: 80px; height: 6px; border-radius: 3px; margin: 2px auto 10px; padding: 0; background: var(--dim); opacity: .4; }
+    .frame-auto .bar i { display: none; }
+    .frame-auto .screen { border-radius: 22px; }
+  }
+</style>

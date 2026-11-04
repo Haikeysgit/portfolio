@@ -1,0 +1,79 @@
+---
+import DeviceFrame from './DeviceFrame.astro';
+
+type Shot = { src: string; alt: string; device: 'desktop' | 'mobile' };
+interface Props {
+  shots: Shot[];
+}
+const { shots } = Astro.props;
+const desktop = shots.filter((s) => s.device === 'desktop');
+const mobile = shots.filter((s) => s.device === 'mobile');
+// A project with only one kind of shot shows it at every width.
+const wide = desktop.length ? desktop : mobile;
+const narrow = mobile.length ? mobile : desktop;
+const sets = [
+  { cls: 'wide', kind: wide === desktop ? 'laptop' : 'phone', items: wide },
+  { cls: 'narrow', kind: narrow === mobile ? 'phone' : 'laptop', items: narrow },
+] as const;
+---
+{shots.length > 0 && (
+  <div class="gallery">
+    {sets.map((set) => (
+      <div class={`set ${set.cls}`} data-gallery>
+        <DeviceFrame kind={set.kind}>
+          <div class="track" tabindex="0" aria-label="Screenshots">
+            {set.items.map((s, i) => (
+              <img src={s.src} alt={s.alt} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
+            ))}
+          </div>
+        </DeviceFrame>
+        {set.items.length > 1 && (
+          <div class="ctrl">
+            <button type="button" data-step="-1" aria-label="Previous screenshot">←</button>
+            <span class="count" aria-live="polite">1 / {set.items.length}</span>
+            <button type="button" data-step="1" aria-label="Next screenshot">→</button>
+          </div>
+        )}
+        <p class="cap">{set.items[0]?.alt}</p>
+      </div>
+    ))}
+  </div>
+)}
+<script>
+  document.querySelectorAll<HTMLElement>('[data-gallery]').forEach((g) => {
+    const track = g.querySelector<HTMLElement>('.track')!;
+    const imgs = [...track.querySelectorAll('img')];
+    const count = g.querySelector('.count');
+    const cap = g.querySelector('.cap');
+    const current = () => Math.round(track.scrollLeft / track.clientWidth);
+    const update = () => {
+      const i = current();
+      if (count) count.textContent = `${i + 1} / ${imgs.length}`;
+      if (cap) cap.textContent = imgs[i]?.alt ?? '';
+    };
+    g.querySelectorAll<HTMLButtonElement>('[data-step]').forEach((b) =>
+      b.addEventListener('click', () => {
+        const next = (current() + Number(b.dataset.step) + imgs.length) % imgs.length;
+        track.scrollTo({ left: next * track.clientWidth, behavior: 'smooth' });
+      }),
+    );
+    track.addEventListener('scroll', update, { passive: true });
+  });
+</script>
+<style>
+  .track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; }
+  .track::-webkit-scrollbar { display: none; }
+  .track img { flex: 0 0 100%; width: 100%; scroll-snap-align: start; object-fit: cover; object-position: top; }
+  .set.wide .track img { aspect-ratio: 16 / 10; }
+  .set.narrow .track img, .set .frame-phone .track img { aspect-ratio: 390 / 844; }
+  .ctrl { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 16px; }
+  .ctrl button { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--br); background: var(--bg1); cursor: pointer; font-size: 18px; }
+  .ctrl button:hover { border-color: var(--acc); }
+  .count { font-family: var(--mono); font-size: 13px; color: var(--dim); min-width: 52px; text-align: center; }
+  .cap { text-align: center; color: var(--dim); font-size: 15px; margin-top: 8px; }
+  .set.narrow { display: none; }
+  @media (max-width: 767px) {
+    .set.wide { display: none; }
+    .set.narrow { display: block; }
+  }
+</style>

@@ -1,0 +1,44 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { trackLabel } from '../lib/projects';
+
+interface Props {
+  project: CollectionEntry<'projects'>;
+}
+const p = Astro.props.project.data;
+---
+<header class="ph">
+  <a class="back" href="/#projects">← All projects</a>
+  <div class="tracks">{p.tracks.map((t) => <span class="track">{trackLabel(t)}</span>)}</div>
+  <h1>{p.name}</h1>
+  <p class="lead">{p.summary}</p>
+  {p.proof && <p class="proof">{p.proof}</p>}
+  <dl class="facts">
+    {p.role && (<div><dt>My part</dt><dd>{p.team ? `${p.role} ${p.team}` : p.role}</dd></div>)}
+    <div><dt>Stack</dt><dd class="stack">{p.stack.map((s) => <span class="tag">{s}</span>)}</dd></div>
+    {p.status && (<div><dt>Status</dt><dd>{p.status}</dd></div>)}
+  </dl>
+  {p.links.length > 0 && (
+    <div class="links">
+      {p.links.map((l, i) => (
+        <a class:list={['btn', i === 0 && 'btn-primary']} href={l.href} target="_blank" rel="noopener">{l.label} ↗</a>
+      ))}
+    </div>
+  )}
+</header>
+<style>
+  .ph { padding: 40px 0 32px; max-width: 820px; }
+  .back { display: inline-block; color: var(--dim); text-decoration: none; font-weight: 600; margin-bottom: 28px; }
+  .back:hover { color: var(--acc); }
+  .tracks { display: flex; gap: 6px; flex-wrap: wrap; }
+  h1 { font-size: clamp(40px, 6vw, 64px); font-weight: 800; letter-spacing: -.03em; line-height: 1.05; margin: 14px 0 14px; }
+  .proof { font-weight: 700; font-size: 18px; border-left: 3px solid var(--acc); padding-left: 14px; margin-top: 18px; }
+  .facts { display: grid; gap: 14px; margin-top: 26px; }
+  .facts div { display: grid; grid-template-columns: 110px 1fr; gap: 16px; }
+  dt { font-family: var(--mono); font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--dim); padding-top: 3px; }
+  .stack { display: flex; flex-wrap: wrap; gap: 6px; }
+  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+  @media (max-width: 600px) {
+    .facts div { grid-template-columns: 1fr; gap: 4px; }
+  }
+</style>
