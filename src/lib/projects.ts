@@ -2,7 +2,7 @@ export const TRACKS = ['ai', 'blockchain', 'app'] as const;
 export type Track = (typeof TRACKS)[number];
 export type Filter = 'all' | Track;
 
-const LABELS: Record<Track, string> = { ai: 'AI agents', blockchain: 'Blockchain', app: 'Apps' };
+const LABELS: Record<Track, string> = { ai: 'AI agents', blockchain: 'Blockchain', app: 'Web apps' };
 
 export function matchesFilter(tracks: readonly Track[], f: Filter): boolean {
   return f === 'all' || tracks.includes(f);

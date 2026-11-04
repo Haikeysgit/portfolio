@@ -6,7 +6,7 @@ export const highlights = [
     rest: 'Two startups contacted me about using it.',
   },
   {
-    track: 'Apps',
+    track: 'Web apps',
     slug: 'hsbyfiona',
     strong: 'Hsbyfiona is live and taking real payments.',
     rest: 'I built it solo, from the storefront to the owner dashboard.',

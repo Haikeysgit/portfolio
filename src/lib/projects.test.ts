@@ -10,7 +10,7 @@ describe('matchesFilter', () => {
 describe('trackLabel', () => {
   it('labels blockchain as "Blockchain"', () => expect(trackLabel('blockchain')).toBe('Blockchain'));
   it('labels ai as "AI agents"', () => expect(trackLabel('ai')).toBe('AI agents'));
-  it('labels app as "Apps"', () => expect(trackLabel('app')).toBe('Apps'));
+  it('labels app as "Web apps"', () => expect(trackLabel('app')).toBe('Web apps'));
 });
 
 describe('sortByOrder', () => {
