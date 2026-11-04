@@ -40,9 +40,16 @@ const ogImage = new URL(image, Astro.site);
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" />
     <script is:inline>
-      try {
-        if (localStorage.getItem('theme') === 'light') document.documentElement.dataset.theme = 'light';
-      } catch (e) {}
+      // Mirrors getInitialTheme in src/lib/theme.ts: a toggled choice wins, else laptops open light and phones dark.
+      (function () {
+        var stored = null;
+        try { stored = localStorage.getItem('theme'); } catch (e) {}
+        var phone = window.matchMedia('(max-width: 767px)').matches;
+        var theme = stored === 'light' || stored === 'dark' ? stored : (phone ? 'dark' : 'light');
+        document.documentElement.dataset.theme = theme;
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', theme === 'light' ? '#f4ede3' : '#17110d');
+      })();
     </script>
   </head>
   <body>
@@ -50,6 +57,9 @@ const ogImage = new URL(image, Astro.site);
     <Header />
     <main id="main"><slot /></main>
     <Footer />
+    <!-- Vercel Web Analytics: script-only setup, served by Vercel at this path once Analytics is enabled for the project. -->
+    <script is:inline>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+    <script is:inline defer src="/_vercel/insights/script.js"></script>
     <script>
       // A short buzz on demo buttons for touch phones that support it (Android). Silent everywhere else.
       const touch = window.matchMedia('(pointer: coarse)').matches;

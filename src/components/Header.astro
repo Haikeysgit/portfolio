@@ -7,12 +7,7 @@ const links = [
   { href: '/#writing', label: 'Writing' },
   { href: '/#contact', label: 'Contact' },
 ];
-const socials = [
-  { href: 'https://github.com/Haikeysgit', label: 'GitHub' },
-  { href: 'https://www.linkedin.com/in/imisioluwa-obaseki-537298318/', label: 'LinkedIn' },
-  { href: 'https://x.com/Haikeystweett', label: 'X' },
-  { href: 'mailto:imisiolwa@obaseki.dev', label: 'Email' },
-];
+import { SOCIALS } from '../data/socials';
 ---
 <header class="hdr">
   <div class="wrap row">
@@ -45,9 +40,11 @@ const socials = [
   <nav class="mm-links wrap" aria-label="Menu">
     {links.map((l, i) => (
       <a href={l.href} style={`--i:${i}`} data-menu-link data-spy={l.href.slice(2)}>
-        <span class="mm-n">0{i + 1}</span>
-        <span class="mm-t">{l.label}</span>
-        <span class="mm-arrow" aria-hidden="true">→</span>
+        {l.label}
+        <svg class="mm-ink" viewBox="0 0 100 14" preserveAspectRatio="none" aria-hidden="true">
+          <path d="M3 9.5C18 5 30 11 46 7.5S78 4 97 8.5" />
+          <path class="nav-ink-2" d="M10 12C30 9.5 55 11.5 88 10" />
+        </svg>
       </a>
     ))}
   </nav>
@@ -64,7 +61,13 @@ const socials = [
       <ThemeToggle />
     </div>
     <ul class="mm-socials">
-      {socials.map((s) => <li><a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener">{s.label}</a></li>)}
+      {SOCIALS.map((s) => (
+        <li>
+          <a href={s.href} target={s.href.startsWith('http') ? '_blank' : undefined} rel="noopener" aria-label={s.label}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d={s.path} /></svg>
+          </a>
+        </li>
+      ))}
     </ul>
   </div>
 </div>
@@ -176,35 +179,38 @@ const socials = [
   .mm-close { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid var(--br); background: var(--bg1); color: var(--ink); cursor: pointer; }
   .mm-close svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; }
 
-  .mm-links { display: grid; margin-top: 4vh; }
+  /* Centred, quiet list: the current section gets the same drawn caramel stroke as the desktop nav. */
+  .mm-links { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 30px; padding-block: 24px; }
   .mm-links a {
-    display: grid; grid-template-columns: 44px 1fr auto; align-items: baseline; gap: 6px; padding: 14px 0; border-bottom: 1px solid var(--br);
-    text-decoration: none; opacity: 0; transform: translateX(28px);
-    transition: opacity .45s ease, transform .55s cubic-bezier(.16, 1, .3, 1), color .2s; transition-delay: calc(.12s + var(--i) * 60ms);
+    position: relative; text-decoration: none; font-size: 20px; font-weight: 700; letter-spacing: -.01em; color: var(--ink);
+    opacity: 0; transform: translateY(10px);
+    transition: opacity .45s ease, transform .55s cubic-bezier(.16, 1, .3, 1), color .2s; transition-delay: calc(.12s + var(--i) * 55ms);
   }
   .mmenu.is-open .mm-links a { opacity: 1; transform: none; }
-  .mm-n { font-family: var(--mono); font-size: 13px; color: var(--acc); }
-  .mm-t { font-size: clamp(30px, 9vw, 40px); font-weight: 800; letter-spacing: -.03em; line-height: 1.1; }
-  .mm-arrow { font-size: 22px; color: var(--dim); transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), color .2s; }
-  .mm-links a:hover .mm-arrow, .mm-links a:focus-visible .mm-arrow { transform: translateX(6px); color: var(--acc); }
-  .mm-links a:active .mm-t, .mm-links a[aria-current] .mm-t { color: var(--acc); }
-  .mm-links a[aria-current] .mm-arrow { color: var(--acc); }
+  .mm-links a:active { color: var(--acc); }
+  .mm-ink { position: absolute; left: -6px; right: -6px; bottom: -11px; width: calc(100% + 12px); height: 11px; overflow: visible; pointer-events: none; opacity: 0; }
+  .mm-ink path { fill: none; stroke: var(--acc); stroke-width: 3; stroke-linecap: round; vector-effect: non-scaling-stroke; stroke-dasharray: 120; stroke-dashoffset: 120; }
+  .mm-ink .nav-ink-2 { stroke-width: 1.6; opacity: .55; }
+  .mmenu.is-open .mm-links a[aria-current] .mm-ink { opacity: 1; }
+  .mmenu.is-open .mm-links a[aria-current] .mm-ink path { animation: ink-draw .6s .5s cubic-bezier(.6, .1, .3, 1) forwards; }
+  .mmenu.is-open .mm-links a[aria-current] .mm-ink .nav-ink-2 { animation-delay: .66s; }
 
   .mm-badge { position: absolute; right: 18px; bottom: 150px; width: 104px; height: 104px; fill: var(--acc); animation: mm-spin 16s linear infinite; opacity: .85; pointer-events: none; }
   .mm-badge text { font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em; }
   .mm-star { fill: var(--ink); transform-origin: 60px 60px; animation: mm-spin 16s linear infinite reverse; }
   @keyframes mm-spin { to { transform: rotate(360deg); } }
 
-  .mm-foot { margin-top: auto; padding-top: 28px; padding-bottom: 28px; display: grid; gap: 18px; opacity: 0; transition: opacity .5s .45s; }
+  .mm-foot { padding-top: 8px; padding-bottom: 28px; display: grid; gap: 18px; opacity: 0; transition: opacity .5s .45s; }
   .mmenu.is-open .mm-foot { opacity: 1; }
   .mm-actions { display: flex; gap: 10px; align-items: center; }
   .mm-actions .btn { flex: 1; justify-content: center; }
-  .mm-socials { list-style: none; display: flex; flex-wrap: wrap; gap: 8px; }
-  .mm-socials a { display: inline-block; padding: 8px 14px; border: 1px solid var(--br); border-radius: 999px; text-decoration: none; font-weight: 600; font-size: 14px; color: var(--dim); }
-  .mm-socials a:hover { color: var(--ink); border-color: var(--acc); }
+  .mm-socials { list-style: none; display: flex; justify-content: center; gap: 12px; }
+  .mm-socials a { display: grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--br); border-radius: 50%; color: var(--dim); transition: color .2s, border-color .2s; }
+  .mm-socials a:hover, .mm-socials a:active { color: var(--ink); border-color: var(--acc); }
+  .mm-socials svg { width: 18px; height: 18px; fill: currentColor; }
   @media (prefers-reduced-motion: reduce) {
     .nav-ink { transition: none; }
-    .nav-ink.is-on path { animation: none; stroke-dashoffset: 0; }
+    .nav-ink.is-on path, .mmenu.is-open .mm-links a[aria-current] .mm-ink path { animation: none; stroke-dashoffset: 0; }
     .mmenu, .mm-links a, .mm-foot { transition: none; }
     .mm-badge, .mm-star { animation: none; }
   }
