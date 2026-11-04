@@ -1,12 +1,36 @@
 import { SAMPLE_BANDS, feeForDistance } from './pricing';
 
-// Names and prices from hsbyfiona.com on 2026-11-04.
-export const PRODUCTS = [
-  { id: 'qissa-pink', name: 'Qissa Pink', kind: 'Perfume', price: 27000, img: '/images/projects/hsbyfiona/products/qissa-pink.webp' },
-  { id: 'bond', name: 'Bond', kind: 'Perfume', price: 13000, img: '/images/projects/hsbyfiona/products/bond.webp' },
-  { id: 'cloud-candy', name: 'Cloud Candy', kind: 'Perfume', price: 46000, img: '/images/projects/hsbyfiona/products/cloud-candy.webp' },
-  { id: 'tahara', name: 'Tahara', kind: 'Perfume oil', price: 18000, img: '/images/projects/hsbyfiona/products/tahara.webp' },
-] as const;
+// Real products from hsbyfiona.com (names, brands, prices, sizes, scent profiles), all in stock on 2026-11-04.
+export type Product = {
+  id: string; name: string; brand: string; kind: string; family: string; profile: string[];
+  for: 'Her' | 'Him' | 'Everyone'; price: number; size: string; sizes?: { label: string; price: number }[]; img: string;
+};
+const img = (id: string) => `/images/projects/hsbyfiona/products/${id}.webp`;
+export const PRODUCTS: Product[] = [
+  { id: 'cloud-candy', name: 'Cloud candy', brand: 'KHADLAJ', kind: 'Perfume', family: 'Fruity', profile: ['Fruity', 'Floral', 'Sweet'], for: 'Her', price: 46000, size: '100ml', img: img('cloud-candy') },
+  { id: 'now-women', name: 'Now women', brand: 'RAVE', kind: 'Perfume', family: 'Sweet', profile: ['Sweet', 'Fruity', 'Floral'], for: 'Her', price: 29000, size: '100ml', img: img('now-women') },
+  { id: 'terra', name: 'Terra', brand: 'RAYHAAN', kind: 'Perfume', family: 'Soft & musky', profile: ['Soft & musky', 'Oud & woody'], for: 'Him', price: 50000, size: '100ml', img: img('terra') },
+  { id: 'freeze', name: 'Freeze', brand: 'RIIFFS', kind: 'Perfume', family: 'Fresh', profile: ['Fresh', 'Soft & musky'], for: 'Him', price: 56000, size: '100ml', img: img('freeze') },
+  {
+    id: 'tahara', name: 'Tahara', brand: 'MUSK TAHARA', kind: 'Perfume oil', family: 'Soft & musky', profile: ['Soft & musky'], for: 'Everyone', price: 18000, size: '20ml',
+    sizes: [{ label: '20ml', price: 18000 }, { label: '50ml', price: 25000 }, { label: '100ml', price: 40000 }], img: img('tahara'),
+  },
+];
+
+/** A cart line is one product in one size. */
+export const lineId = (productId: string, size: string) => `${productId}:${size}`;
+export function priceOf(id: string): number {
+  const [pid, size] = id.split(':');
+  const p = PRODUCTS.find((x) => x.id === pid);
+  if (!p) return 0;
+  return p.sizes?.find((s) => s.label === size)?.price ?? (size === p.size ? p.price : 0);
+}
+export const productOf = (id: string) => PRODUCTS.find((p) => p.id === id.split(':')[0]);
+
+/** Scent match: products whose real scent profile has the vibe, for the person asked about. */
+export function recommend(a: { who: 'Her' | 'Him' | 'Anyone'; vibe: string }): Product[] {
+  return PRODUCTS.filter((p) => p.profile.includes(a.vibe) && (a.who === 'Anyone' || p.for === a.who || p.for === 'Everyone'));
+}
 
 // Road distances from the store's own notes (convex/delivery/akurePricing.ts).
 export const PLACES = [
@@ -29,6 +53,7 @@ export type ShopAction =
   | { type: 'SET_QTY'; id: string; qty: number }
   | { type: 'OPEN_CART' }
   | { type: 'BACK' }
+  | { type: 'BROWSE' }
   | { type: 'CHECKOUT' }
   | { type: 'SET_KM'; km: number }
   | { type: 'PAY' }
@@ -39,7 +64,7 @@ export const initialShop: ShopState = { cart: [], km: null, phase: 'browse', ord
 
 /** Prices come from the product list, the way the server re-prices a cart. Unknown items count for nothing. */
 export function subtotal(cart: CartLine[]): number {
-  return cart.reduce((sum, l) => sum + (PRODUCTS.find((p) => p.id === l.id)?.price ?? 0) * l.qty, 0);
+  return cart.reduce((sum, l) => sum + priceOf(l.id) * l.qty, 0);
 }
 
 const setQty = (cart: CartLine[], id: string, qty: number) =>
@@ -62,6 +87,8 @@ export function shopReducer(s: ShopState, a: ShopAction): ShopState {
       return { ...s, phase: 'cart' };
     case 'BACK':
       return { ...s, phase: s.phase === 'pay' ? 'address' : s.phase === 'address' ? 'cart' : 'browse' };
+    case 'BROWSE':
+      return { ...s, phase: 'browse' };
     case 'CHECKOUT':
       return s.cart.length ? { ...s, phase: 'address' } : s;
     case 'SET_KM':
